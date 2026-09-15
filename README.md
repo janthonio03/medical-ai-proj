@@ -1,67 +1,69 @@
 # Medical AI Project
 
-Case-specific evaluation of inference-time hallucination mitigation methods for medical visual question answering (VQA).
+Research codebase for studying **case-specific effectiveness of inference-time hallucination mitigation methods in medical visual question answering (VQA)**.
 
-This repository contains the reproducibility-oriented code used to compare a shared fine-tuned LLaVA-Med baseline with Prompt Highlighter (PH), Visual Contrastive Decoding (VCD), Contrastive Region Guidance (CRG), and a controlled **LoBA-style (Oracle ROI)** variant on the closed-ended portion of the publicly available VinDr-CXR-based HEAL-MedVQA release.
+This repository is the working codebase for our medical AI research. The current study compares several inference-time interventions on a shared fine-tuned LLaVA-Med baseline and analyzes **which types of errors each method rescues, which correct predictions it harms, and why those effects differ across cases**.
 
-## Scope
+## Research questions
 
-The experiments are designed to answer two questions:
+1. How do PH, VCD, CRG, and LoBA-style interventions change the performance of the same medical VLM baseline?
+2. Which Vanilla errors are rescued by each method, and which methods introduce new errors?
+3. How are method effects related to ROI size, anatomical region, disease category, and the Vanilla model's Yes/No confidence margin?
+4. Which failure modes remain unresolved by all current interventions, and what should the next method target?
 
-1. How much does each inference-time intervention improve overall closed-ended VQA accuracy over the same Vanilla baseline?
-2. Which error cases are rescued or harmed by each method, and how do those effects relate to ROI size, anatomy, disease category, and Vanilla confidence?
+## Current experimental setting
 
-The main comparison uses 1,515 closed-ended Yes/No QA pairs (752 Yes, 763 No). All methods share the same fine-tuned `microsoft/llava-med-v1.5-mistral-7b` baseline and greedy decoding.
+- Base model: `microsoft/llava-med-v1.5-mistral-7b`
+- Fine-tuning: LoRA on the VinDr-CXR-based HEAL-MedVQA training data
+- Main evaluation: 1,515 closed-ended Yes/No QA pairs
+  - Yes: 752
+  - No: 763
+- Final comparison decoding: greedy
 
 ## Methods
 
-- **Vanilla**: fine-tuned LLaVA-Med without inference-time intervention.
-- **PH**: GT-ROI-based visual-token highlighting in the language decoder with classifier-free guidance.
-- **VCD**: contrastive decoding between clean and noisy-image branches.
-- **CRG**: contrastive decoding between the clean image and an ROI-blackout counterfactual image.
-- **LoBA-style (Oracle ROI)**: LoBA-inspired visual-backbone attention reweighting using the HEAL-MedVQA GT ROI, followed by contrastive decoding. This is a controlled mechanism study, **not an exact reproduction of the released LoBA system**.
+- **Vanilla**: fine-tuned LLaVA-Med without an inference-time intervention.
+- **Prompt Highlighter (PH)**: highlights GT-ROI-related visual tokens in the language decoder and applies classifier-free guidance.
+- **Visual Contrastive Decoding (VCD)**: contrasts predictions from clean and noisy-image branches to suppress visually unsupported language priors.
+- **Contrastive Region Guidance (CRG)**: contrasts the original image with a GT-ROI-blackout counterfactual image.
+- **LoBA-style (Oracle ROI)**: applies LoBA-inspired visual-backbone attention reweighting to GT ROI patches, then performs contrastive decoding on the same shared LLaVA-Med baseline. This is the version used in our controlled comparison.
+
+PH, CRG, and LoBA-style currently use HEAL-MedVQA ground-truth ROI masks. This removes localization error so the research can isolate and compare the behavior of the inference mechanisms themselves.
 
 ## Repository layout
 
 ```text
-configs/                 Experiment metadata and hyperparameters
-src/methods/             Inference-time intervention implementations
-scripts/                  Training, inference, and case-analysis entry points
-analysis/                 Analysis notes and expected output schema
-docs/                     Reproducibility notes, including LoBA implementation caveats
+configs/                 Current experiment settings and local-path templates
+src/methods/             Inference-time method implementations
+scripts/                 Training, inference, and analysis entry points
+analysis/                Case-level and statistical analysis code/output structure
+docs/                    Research notes and implementation decisions
 ```
 
-## Key experimental settings
+## Current observed results
 
-- Base model: `microsoft/llava-med-v1.5-mistral-7b`
-- Fine-tuning: LoRA (`r=8`, `alpha=16`, `dropout=0.05`, `q_proj`/`v_proj`)
-- Selected learning rate: `1e-4`
-- Decoding for final comparison: greedy
-- LoBA-style: `alpha=0.3`, visual attention `beta=2`
-- VCD: `alpha=1`, `beta=0.1`, `noise_step=500`
-- CRG: `alpha=1`
-- PH: attention weight `5`, CFG `2`
-
-## Main observed results
-
-| Method | Accuracy | Δ vs Vanilla | Rescue | Harm |
+| Method | Accuracy | Delta vs Vanilla | Rescue | Harm |
 |---|---:|---:|---:|---:|
-| Vanilla | 87.06% | — | — | — |
+| Vanilla | 87.06% | - | - | - |
 | PH | 87.39% | +0.33 pp | 5 | 0 |
 | VCD | 87.85% | +0.79 pp | 29 | 17 |
 | CRG | 87.99% | +0.92 pp | 22 | 8 |
 | LoBA-style (Oracle ROI) | 87.46% | +0.40 pp | 6 | 0 |
 
-The strongest case-level finding was that successful rescues were concentrated in low-confidence Vanilla errors. None of the four methods rescued errors in the upper half of the Vanilla error-margin distribution.
+The main finding so far is not simply an accuracy ranking. The methods exhibit different **rescue/harm trade-offs and case-specific behavior**. In particular, successful rescues are concentrated among low-confidence Vanilla errors, while none of the four methods rescues errors in the upper half of the Vanilla error-margin distribution.
 
-## Important LoBA note
+See `docs/current_results.md` and `RESEARCH_SCOPE.md` for the current analysis summary.
 
-The repository uses **LoBA-style (Oracle ROI)** rather than claiming an exact reproduction of the released LoBA checkpoint. The released LoBA source/config/checkpoint were found to contain architecture inconsistencies and an unpublished `post_attention` component; additionally, the public inference reweighter is effectively a no-op. Details are documented in `docs/loba_reproducibility_note.md`.
+## LoBA implementation note
 
-## Data and checkpoints
+An earlier stage attempted to run the released LoBA system directly. Public source/checkpoint inconsistencies prevented us from treating that path as a reliable end-to-end implementation. That investigation is documented only as an implementation history note in `docs/loba_implementation_note.md`.
 
-Raw datasets, model checkpoints, adapters, generated predictions, and logs are intentionally not committed. Configure local paths through `configs/paths.example.yaml`.
+For the actual comparative study, we use **LoBA-style (Oracle ROI)** on the same baseline as the other methods so the comparison focuses on the mechanism rather than differences in model architecture or localization quality.
 
-## Status
+## Data, checkpoints, and outputs
 
-This repository is being organized for paper reproducibility. Numerical outputs should be regenerated from the scripts before publication and archived separately with the final paper artifact.
+Raw datasets, model checkpoints, adapters, generated predictions, and logs are not committed to Git. Local paths should be configured using `configs/paths.example.yaml`.
+
+## Research status
+
+The current phase has completed the main comparative case analysis. The next research phase can build on these findings to design an adaptive or more robust intervention for cases that remain unresolved, especially high-confidence errors.
