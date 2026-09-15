@@ -1,0 +1,46 @@
+project:
+  name: medical-ai-proj
+  task: case-specific effectiveness analysis of medical VLM hallucination mitigation methods
+
+model:
+  base_model: microsoft/llava-med-v1.5-mistral-7b
+  conversation_mode: mistral_instruct
+  decoding: greedy
+
+lora:
+  rank: 8
+  alpha: 16
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - v_proj
+  learning_rate: 1.0e-4
+  freeze_vision_tower: true
+  freeze_mm_projector: true
+
+analysis_dataset:
+  source: MM-Hallu/HEAL-MedVQA
+  subset_description: publicly available VinDr-CXR-based HEAL-MedVQA release
+  closed_yes: 752
+  closed_no: 763
+  total_closed: 1515
+
+methods:
+  ph:
+    attention_weight: 5
+    cfg: 2
+    roi_source: gt_mask
+  vcd:
+    alpha: 1.0
+    beta: 0.1
+    noise_step: 500
+  crg:
+    alpha: 1.0
+    roi_source: gt_mask
+    counterfactual: roi_blackout
+  loba_style_oracle:
+    alpha: 0.3
+    beta_visual: 2.0
+    mask_threshold: 0.5
+    roi_source: gt_mask
+    note: controlled LoBA-style mechanism comparison on the shared LLaVA-Med baseline
