@@ -1,0 +1,14 @@
+# Copy this file to configs/paths.local.yaml and edit paths for your environment.
+# Do not commit private/local paths or model checkpoints.
+
+project_root: /path/to/heal_medvqa_case_analysis
+
+base_model: microsoft/llava-med-v1.5-mistral-7b
+adapter_checkpoint: /path/to/checkpoints/llava_med_vindr_lora_lr_1em04
+
+metadata_file: /path/to/data/processed/test_metadata.jsonl
+closed_predictions_vanilla: /path/to/outputs/vanilla/greedy/closed_predictions.jsonl
+closed_predictions_ph: /path/to/outputs/ph/attn5_cfg2/closed_predictions_greedy_baseline.jsonl
+closed_predictions_vcd: /path/to/outputs/vcd/alpha1_beta0.1_noise500/closed_predictions.jsonl
+closed_predictions_crg: /path/to/outputs/crg/alpha1/closed_predictions.jsonl
+closed_predictions_loba_style: /path/to/outputs/loba/oracle_roi_alpha0.3_beta2/closed_predictions.jsonl
