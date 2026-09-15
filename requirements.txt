@@ -1,0 +1,15 @@
+# Core versions confirmed in the experiment environment
+torch==2.1.2
+torchvision==0.16.2
+torchaudio==2.1.2
+transformers==4.36.2
+accelerate==0.21.0
+numpy==1.26.4
+
+# Additional packages used by the research code
+peft
+datasets
+pandas
+Pillow
+PyYAML
+scipy

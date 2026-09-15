@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.ipynb_checkpoints/
+
+# Environments
+.venv/
+venv/
+env/
+envs/
+
+# Model/data artifacts
+checkpoints/
+model_cache/
+data/raw/
+data/processed/
+outputs/
+logs/
+*.pt
+*.pth
+*.bin
+*.safetensors
+
+# Generated analysis artifacts
+analysis/tables/*.csv
+analysis/tables/*.json
+analysis/cases/*.jsonl
+analysis/figures/
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
