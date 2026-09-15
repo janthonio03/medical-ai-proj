@@ -52,13 +52,17 @@ docs/                    Research notes and implementation decisions
 
 The main finding so far is not simply an accuracy ranking. The methods exhibit different **rescue/harm trade-offs and case-specific behavior**. In particular, successful rescues are concentrated among low-confidence Vanilla errors, while none of the four methods rescues errors in the upper half of the Vanilla error-margin distribution.
 
+See `docs/current_results.md` and `RESEARCH_SCOPE.md` for the current analysis summary.
+
 ## LoBA implementation note
 
-An earlier stage attempted to run the released LoBA system directly. Public source/checkpoint inconsistencies prevented us from treating that path as a reliable end-to-end implementation. That investigation is retained only as an implementation history note; the actual comparative study uses **LoBA-style (Oracle ROI)** on the shared baseline.
+An earlier stage attempted to run the released LoBA system directly. Public source/checkpoint inconsistencies prevented us from treating that path as a reliable end-to-end implementation. That investigation is documented only as an implementation history note in `docs/loba_implementation_note.md`.
+
+For the actual comparative study, we use **LoBA-style (Oracle ROI)** on the same baseline as the other methods so the comparison focuses on the mechanism rather than differences in model architecture or localization quality.
 
 ## Data, checkpoints, and outputs
 
-Raw datasets, model checkpoints, adapters, generated predictions, and logs are not committed to Git. Local paths should be configured separately.
+Raw datasets, model checkpoints, adapters, generated predictions, and logs are not committed to Git. Local paths should be configured using `configs/paths.example.yaml`.
 
 ## Research status
 
