@@ -5,12 +5,12 @@ from pathlib import Path
 import signal
 import time
 import traceback
-from repro.step60c_common import read,write,validate_plan,scoped_tasks,valid_result,completion,ALLOWED
-from repro.step60c_queue import ordered_tasks,acquire,release,attempt_path,accept,mark_failed
+from repro.evaluation_common import read,write,validate_plan,scoped_tasks,valid_result,completion,ALLOWED
+from repro.evaluation_queue import ordered_tasks,acquire,release,attempt_path,accept,mark_failed
 
 def run_ticket(ticket_path):
-    from repro.step60c_submit import queue_snapshot,no_step60b
-    from repro.step60c_runtime import evaluate
+    from repro.evaluation_submit import queue_snapshot,no_step60b
+    from repro.evaluation_runtime import evaluate
     ticket=read(ticket_path);repo=Path(ticket['repo']);run=Path(ticket['run_dir'])
     plan=validate_plan(repo,ticket['plan_dir'])
     if ticket['plan_sha256']!=plan['plan_sha256']:raise ValueError('Submission plan changed')
@@ -26,7 +26,7 @@ def run_ticket(ticket_path):
     node=os.environ.get('SLURMD_NODENAME','')
     if node not in ALLOWED:raise ValueError('Node outside ariel-v6..v12')
     if ticket['scope']=='full':
-        from repro.step60c_results import verify_merge
+        from repro.evaluation_results import verify_merge
         v=verify_merge(plan,ticket['smoke_run'],'smoke',ticket['smoke_merge'])
         if v.get('GPU_execution_verified') is not True:raise ValueError('Smoke was not an actual GPU run')
     stop=[False]

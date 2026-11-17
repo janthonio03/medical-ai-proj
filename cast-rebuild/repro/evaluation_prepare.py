@@ -2,8 +2,8 @@
 import argparse
 from pathlib import Path
 import shutil
-from repro.step60c_common import read,write,sha,head,clean,make_tasks,CONDITIONS,SMOKE,PILOT,EXPECTED
-from repro.step60c_sources import source_lock,dataset,pilot59,roi60b
+from repro.evaluation_common import read,write,sha,head,clean,make_tasks,CONDITIONS,SMOKE,PILOT,EXPECTED
+from repro.evaluation_sources import source_lock,dataset,pilot59,roi60b
 
 def strict_mapper(model_path,item,roi):
     import numpy as np

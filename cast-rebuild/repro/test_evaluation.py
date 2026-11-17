@@ -14,11 +14,11 @@ import unittest
 from unittest.mock import patch
 import numpy as np
 from PIL import Image
-from repro.step60c_common import read,write,sha,digest,head,CONDITIONS,PILOT,SMOKE,make_tasks,task_key,validate_result,valid_result,completion
-from repro.step60c_sources import source_lock,dataset,pilot59,roi60b
-from repro.step60c_prepare import prepare
-from repro.step60c_queue import acquire,attempt_path,accept,release,mark_failed
-from repro.step60c_results import scan,merge,verify_merge,archive
+from repro.evaluation_common import read,write,sha,digest,head,CONDITIONS,PILOT,SMOKE,make_tasks,task_key,validate_result,valid_result,completion
+from repro.evaluation_sources import source_lock,dataset,pilot59,roi60b
+from repro.evaluation_prepare import prepare
+from repro.evaluation_queue import acquire,attempt_path,accept,release,mark_failed
+from repro.evaluation_results import scan,merge,verify_merge,archive
 
 REPO=Path(__file__).resolve().parents[1]
 
@@ -55,10 +55,10 @@ class Fixture:
         self.images=images;self.samples=samples;self.private=private
         self.oldrepo=r/'step59';self.oldrepo.mkdir();git_fixture(self.oldrepo)
         self.brepo=r/'step60b';(self.brepo/'repro').mkdir(parents=True)
-        for name in read(REPO/'repro/step60c_sources.lock.json')['STEP60B_schema_files']:
+        for name in read(REPO/'repro/evaluation_sources.lock.json')['STEP60B_schema_files']:
             # The actual untouched schema source is bundled as vendor only for common;
             # the other files are supplied alongside tests as static schema fixtures.
-            source=REPO/'repro/step60c_vendor'/Path(name).name
+            source=REPO/'repro/vendor'/Path(name).name
             shutil.copyfile(source,self.brepo/name)
         git_fixture(self.brepo)
         model=r/'fixture_model';model.mkdir();write(model/'config.json',{'vocab_size':32064})
@@ -151,7 +151,7 @@ class Fixture:
             step59_run=str(self.oldrun),step59_analysis=str(self.analysis),step60b_repo=str(self.brepo),step60b_plan=str(self.bplan),
             step60b_run=str(self.brun),slake_test_json=str(self.test),slake_root=str(self.slake))
         self.prior=prior;self.prior['plan_sha256']=oldsha
-        with patch('repro.step60c_prepare.clean',return_value=True):
+        with patch('repro.evaluation_prepare.clean',return_value=True):
             self.plan=prepare(REPO,self.args,mapper=fixture_mapper,verify_models=lambda *a:({'synthetic_fixture':True},{}))
         self.plan['plan_sha256']=sha(r/'newplan/plan.json')
 
@@ -261,21 +261,21 @@ class Step60CTests(unittest.TestCase):
         out=Path(self.t.name)/'smoke';v=merge(self.f.plan,self.run,'smoke',out)
         self.assertTrue(v['passed']);self.assertTrue(v['exact_STEP59_256_token_parity_verified'])
     def test_19_step60b_active_block_before_sbatch(self):
-        from repro.step60c_submit import submit
+        from repro.evaluation_submit import submit
         rows=[{'id':'490408_1','state':'RUNNING','name':'cast60b-full','gres':'gpu:normal:1'}]
-        with patch('repro.step60c_submit.validate_plan',return_value=self.f.plan),\
-             patch('repro.step60c_submit.queue_snapshot',return_value=rows),\
-             patch('repro.step60c_submit.command') as cmd:
+        with patch('repro.evaluation_submit.validate_plan',return_value=self.f.plan),\
+             patch('repro.evaluation_submit.queue_snapshot',return_value=rows),\
+             patch('repro.evaluation_submit.command') as cmd:
             with self.assertRaisesRegex(ValueError,'STEP60B'):submit(REPO,'fixture',self.run,'smoke',4)
             cmd.assert_not_called()
     def test_20_four_array_resource_request(self):
-        from repro.step60c_submit import array_command
+        from repro.evaluation_submit import array_command
         args=array_command(REPO,self.run,4,'batch',[])
         for item in ('--array=0-3%4','--gres=gpu:normal:1','--cpus-per-gpu=8','--mem-per-gpu=32G','--time=3-00:00:00',
                 '--account=ugrad','--qos=qos_janthonio03_2026_2'):self.assertIn(item,args)
         self.assertFalse(any(a.startswith('--nodelist=') for a in args))
     def test_21_stale_claim_reclaim_requires_inactive(self):
-        from repro.step60c_submit import prior_jobs_inactive,reclaim
+        from repro.evaluation_submit import prior_jobs_inactive,reclaim
         task=self.f.plan['tasks'][0]
         with patch.dict(os.environ,{'SLURM_ARRAY_JOB_ID':'999'}):acquire(self.f.plan,self.run,task,'old',0)
         with self.assertRaises(ValueError):prior_jobs_inactive(self.run,[{'id':'999_0','name':'x'}])
@@ -288,35 +288,35 @@ class Step60CTests(unittest.TestCase):
         out=Path(self.t.name)/'out';out.mkdir();z=Path(self.t.name)/'out.zip';archive(self.f.plan,self.run,out,z)
         with zipfile.ZipFile(z) as f:self.assertFalse(any('secret' in n or 'isolated_model' in n for n in f.namelist()))
     def test_23_stealing_covers_all_tasks(self):
-        from repro.step60c_queue import ordered_tasks
+        from repro.evaluation_queue import ordered_tasks
         tasks=self.f.plan['tasks'];ordered=ordered_tasks(self.f.plan,tasks,0,4)
         self.assertEqual({t['task_key'] for t in ordered},{t['task_key'] for t in tasks})
         preferred=[t for t in ordered if t['preferred_worker']==0];self.assertEqual(ordered[:len(preferred)],preferred)
     def test_24_test_only_failure_no_retry_or_gpu_reduction(self):
-        from repro.step60c_submit import submit
+        from repro.evaluation_submit import submit
         policy={'excluded_nodes':[]}
-        with patch('repro.step60c_submit.validate_plan',return_value=self.f.plan),patch('repro.step60c_submit.queue_snapshot',return_value=[]),\
-                patch('repro.step60c_submit.cluster_policy',return_value=policy),patch('repro.step60c_submit.command',side_effect=RuntimeError('QoS rejects')) as cmd:
+        with patch('repro.evaluation_submit.validate_plan',return_value=self.f.plan),patch('repro.evaluation_submit.queue_snapshot',return_value=[]),\
+                patch('repro.evaluation_submit.cluster_policy',return_value=policy),patch('repro.evaluation_submit.command',side_effect=RuntimeError('QoS rejects')) as cmd:
             with self.assertRaises(RuntimeError):submit(REPO,'fixture',self.run,'smoke',4)
             self.assertEqual(cmd.call_count,1);self.assertIn('--test-only',cmd.call_args.args[0]);self.assertIn('--array=0-3%4',cmd.call_args.args[0])
     def test_25_paper_runtime_guard_is_not_an_operator(self):
         import inspect
-        from repro.step60c_runtime import paper
+        from repro.evaluation_runtime import paper
         source=inspect.getsource(paper)
         self.assertIn('original.evaluate_paper(plan,sid,condition)',source)
         self.assertNotIn('roi_attention_mask(',source);self.assertNotIn('lite_rollout(',source)
     def test_26_all_original_files_still_identical(self):
-        expected=read(REPO/'repro/step60c_sources.lock.json')['inherited_STEP59_files']
+        expected=read(REPO/'repro/evaluation_sources.lock.json')['inherited_STEP59_files']
         self.assertTrue(all(sha(REPO/name)==h for name,h in expected.items()))
 
     def test_27_public_K16_validation_shim_preserves_child_dispatch(self):
         from types import SimpleNamespace
-        from repro.step60c_runtime import public
+        from repro.evaluation_runtime import public
         out=Path(self.t.name)/'attempt';out.mkdir()
         plan={'model_path':'fixture_model','tokens':256,'K':16,'samples':{'sid':{'candidate_count':20,
             'question':'q','answer':'yes','answer_type':'CLOSED'}}}
         def child(argv,**kwargs):
-            self.assertEqual(argv[argv.index('-m')+1],'repro.step60c_public_entry')
+            self.assertEqual(argv[argv.index('-m')+1],'repro.evaluation_public_entry')
             dest=Path(argv[argv.index('--output-dir')+1])
             write(dest/'runtime_trace.json',{'summary':{'provider_called':True,'proposal_cache_used':True,
                 'scored_proposals':16,'gt_answer_passed_to_roi_selector':True},'generation_calls':[{'token_ids':[32000],
@@ -328,23 +328,23 @@ class Step60CTests(unittest.TestCase):
             return SimpleNamespace(returncode=0,stdout='STEP58_PUBLIC_AUTO_COMPLETED',stderr='')
         with patch('repro.step58_run.cache_from_verified_proposals',return_value=out/'cache.npz'),\
              patch('repro.step57c_patch.build_private_model',return_value={}),patch('repro.step57c_patch.verify_private_model'),\
-             patch('repro.step60c_runtime.subprocess.run',side_effect=child) as run:
+             patch('repro.evaluation_runtime.subprocess.run',side_effect=child) as run:
             result=public(REPO,plan,'sid','public-auto',out)
         self.assertEqual(run.call_count,1);self.assertEqual(result['token_ids'],[32000])
         self.assertIn('K16',result['trace_acceptance_compatibility'])
 
     def test_28_synthetic_cpu_smoke_cannot_unlock_GPU_full(self):
-        from repro.step60c_submit import submit
+        from repro.evaluation_submit import submit
         for t in self.f.plan['tasks']:
             if t['sample_id'] in SMOKE:self._complete(t)
         out=Path(self.t.name)/'smoke';v=merge(self.f.plan,self.run,'smoke',out)
         self.assertFalse(v['GPU_execution_verified'])
-        with patch('repro.step60c_submit.validate_plan',return_value=self.f.plan),patch('repro.step60c_submit.queue_snapshot') as queue:
+        with patch('repro.evaluation_submit.validate_plan',return_value=self.f.plan),patch('repro.evaluation_submit.queue_snapshot') as queue:
             with self.assertRaisesRegex(ValueError,'GPU parity'):submit(REPO,'fixture',Path(self.t.name)/'full','full',4,smoke_run=self.run,smoke_merge=out)
             queue.assert_not_called()
 
     def test_29_cluster_policy_readonly_gates_and_excludes_drain(self):
-        from repro.step60c_submit import cluster_policy
+        from repro.evaluation_submit import cluster_policy
         def cmd(argv):
             if argv[:3]==['scontrol','show','partition']:return 'PartitionName=batch_ugrad State=UP MaxTime=6-00:00:00 AllowAccounts=ugrad AllowQos=qos_janthonio03_2026_2'
             if argv[:3]==['scontrol','show','config']:return 'MaxArraySize = 1001'
@@ -352,7 +352,7 @@ class Step60CTests(unittest.TestCase):
             if 'qos' in argv:return 'qos_janthonio03_2026_2|6-00:00:00|gres/gpu=4|gres/gpu=4|'
             if 'assoc' in argv:return 'ugrad|qos_janthonio03_2026_2|qos_janthonio03_2026_2|'
             raise AssertionError(argv)
-        with patch('repro.step60c_submit.command',side_effect=cmd):v=cluster_policy(4)
+        with patch('repro.evaluation_submit.command',side_effect=cmd):v=cluster_policy(4)
         self.assertEqual(v['eligible_nodes'],['ariel-v7']);self.assertEqual(v['excluded_nodes'],['ariel-h1','ariel-v12'])
 
     def test_30_manifest_duplicate_and_GT_use_fail_closed(self):

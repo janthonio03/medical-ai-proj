@@ -4,10 +4,10 @@
 
 ## Included (source files only)
 
-- `repro/step60c_*.py`, `repro/step60c_job.sh`: full SLAKE evaluation orchestration (4-condition setup, four-GPU submission/worker, preflight, queue/resume, merge/validation). The underlying model inference/decoding routines are **imported** from older stages, not reimplemented here.
-- `repro/step60c_vendor/step60b_*.py`: copies of four STEP60B adapter modules bundled inside the STEP60C distribution. **Not** the complete original STEP60B worktree.
-- `repro/test_step60c.py`: original synthetic CPU-fixture regression test with recorded receipt-schema correction.
-- `repro/step60c_sources.lock.json`: inherited source hashes from the distributed ZIP. Hashes are provenance, **not replacements for the missing source files**.
+- `repro/evaluation_*.py`, `repro/evaluation_job.sh`: full SLAKE evaluation orchestration (4-condition setup, four-GPU submission/worker, preflight, queue/resume, merge/validation). The underlying model inference/decoding routines are **imported** from older stages, not reimplemented here.
+- `repro/vendor/step60b_*.py`: copies of four STEP60B adapter modules bundled inside the STEP60C distribution. **Not** the complete original STEP60B worktree.
+- `repro/test_evaluation.py`: original synthetic CPU-fixture regression test with recorded receipt-schema correction.
+- `repro/evaluation_sources.lock.json`: inherited source hashes from the distributed ZIP. Hashes are provenance, **not replacements for the missing source files**.
 
 ## Confirmed post-distribution edits reapplied
 
@@ -32,4 +32,4 @@
 
 ## File provenance
 
-`SOURCE_MANIFEST.json` records each recovered file's SHA256. No synthetic replacements were created for missing inference routines. Earlier project files in the parent repository are intentionally untouched.
+`SOURCE_MANIFEST.json` records the SHA256 of renamed files plus their original paths and hashes. The filenames are normalized for public presentation; internal `STEP60C` audit labels remain unchanged to preserve experiment traceability. No synthetic replacements were created for missing inference routines. Earlier project files in the parent repository are intentionally untouched.

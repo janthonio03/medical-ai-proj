@@ -13,7 +13,7 @@ import time
 import types
 from pathlib import Path
 from unittest.mock import patch
-from repro.step60c_common import read,write,sha
+from repro.evaluation_common import read,write,sha
 
 def public(repo,plan,sid,condition,out):
     from repro import step59_worker as original
@@ -21,7 +21,7 @@ def public(repo,plan,sid,condition,out):
     def observed_run(argv,**kwargs):
         argv=list(argv)
         if '-m' not in argv or argv[argv.index('-m')+1]!='repro.step58_entry':raise ValueError('Unexpected public child dispatch')
-        argv[argv.index('-m')+1]='repro.step60c_public_entry'
+        argv[argv.index('-m')+1]='repro.evaluation_public_entry'
         return original_run(argv,**kwargs)
     # Clone only the GLOBAL subprocess binding; the original function code is identical.
     namespace=dict(original.run_public.__globals__);namespace['subprocess']=types.SimpleNamespace(run=observed_run)

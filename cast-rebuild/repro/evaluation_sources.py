@@ -4,11 +4,11 @@ Never invoke step60b_verify.verify(): it writes full_validation/manifest files.
 """
 from pathlib import Path
 import statistics
-from repro.step60c_common import read,sha,head,clean,PILOT,CONDITIONS,EXPECTED
-from repro.step60c_vendor.step60b_common import english_records,verify_receipt
+from repro.evaluation_common import read,sha,head,clean,PILOT,CONDITIONS,EXPECTED
+from repro.vendor.step60b_common import english_records,verify_receipt
 
 def source_lock(repo):
-    repo=Path(repo);lock=read(repo/'repro/step60c_sources.lock.json');observed={}
+    repo=Path(repo);lock=read(repo/'repro/evaluation_sources.lock.json');observed={}
     for name,expected in lock['inherited_STEP59_files'].items():
         if sha(repo/name)!=expected:raise ValueError('Inherited STEP59/model code differs: '+name)
         observed[name]=expected
@@ -68,7 +68,7 @@ def roi60b(repo,plan_dir,run_dir,test,images,samples,baseline):
         v.get('plan_sha256')!=key or not plan['selection_ready'] or plan['missing_image_keys'] or
         plan['test_json_sha256']!=sha(test) or set(plan['samples'])!=set(samples)):
         raise ValueError('STEP60B source/ready-plan/dataset mismatch')
-    lock=read(Path(__file__).parents[1]/'repro/step60c_sources.lock.json')
+    lock=read(Path(__file__).parents[1]/'repro/evaluation_sources.lock.json')
     for name,h in lock['STEP60B_schema_files'].items():
         if sha(repo/name)!=h:raise ValueError('STEP60B schema implementation changed: '+name)
     final=read(run_dir/'full_validation.json')

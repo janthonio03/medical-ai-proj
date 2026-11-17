@@ -6,7 +6,7 @@ import math
 from pathlib import Path
 import time
 import zipfile
-from repro.step60c_common import (read,write,sha,atomic_bytes,completion,scoped_tasks,valid_result,
+from repro.evaluation_common import (read,write,sha,atomic_bytes,completion,scoped_tasks,valid_result,
     validate_plan,CONDITIONS,EXPECTED)
 
 def scan(plan,run,scope):

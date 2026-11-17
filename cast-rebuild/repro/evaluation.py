@@ -2,7 +2,7 @@
 import argparse
 import json
 from pathlib import Path
-from repro.step60c_common import validate_plan
+from repro.evaluation_common import validate_plan
 
 def main(argv=None):
     p=argparse.ArgumentParser(description=__doc__);sub=p.add_subparsers(dest='action',required=True)
@@ -17,16 +17,16 @@ def main(argv=None):
     a=p.parse_args(argv);repo=Path(__file__).resolve().parents[1]
     try:
         if a.action in ('submit','resume'):
-            from repro.step60c_submit import submit
+            from repro.evaluation_submit import submit
             value=submit(repo,a.plan_dir,a.run_dir,a.scope,a.workers,smoke_run=a.smoke_run,smoke_merge=a.smoke_merge,
                 resume=a.action=='resume',check_only=a.check_only)
         else:
-            from repro.step60c_results import status,merge,verify_merge,archive
+            from repro.evaluation_results import status,merge,verify_merge,archive
             plan=validate_plan(repo,a.plan_dir)
             if a.action=='status':
                 value=status(plan,a.run_dir,a.scope)
                 # Full detail stays in JSON (including errors/workers), console remains concise.
-                from repro.step60c_common import write
+                from repro.evaluation_common import write
                 snapshot=Path(a.run_dir)/'status.json';write(snapshot,value)
                 value={k:value[k] for k in ('scope','expected','completed','missing','passed','active_claim_files','actual_worker_count')}
                 value['detail_file']=str(snapshot)

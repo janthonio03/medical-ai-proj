@@ -5,8 +5,8 @@ import platform
 from pathlib import Path
 import time
 import unittest
-from repro.step60c_common import read,write,sha,head,clean
-from repro.step60c_sources import source_lock
+from repro.evaluation_common import read,write,sha,head,clean
+from repro.evaluation_sources import source_lock
 
 def main(argv=None):
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output-dir',required=True);p.add_argument('--source-only',action='store_true')
@@ -22,8 +22,8 @@ def main(argv=None):
             'STEP59_decoding_files_modified':False,'source_origin':'supplied implementation packages; live Ariel commit checked at install/prepare'})
         if a.source_only:report.update(passed=True,tests_run=0,mode='source-only')
         else:
-            from repro import test_step60c
-            suite=unittest.defaultTestLoader.loadTestsFromModule(test_step60c)
+            from repro import test_evaluation
+            suite=unittest.defaultTestLoader.loadTestsFromModule(test_evaluation)
             with (out/'cpu_unittest.log').open('w') as log,contextlib.redirect_stdout(log),contextlib.redirect_stderr(log):
                 result=unittest.TextTestRunner(stream=log,verbosity=2).run(suite)
             report.update(passed=result.wasSuccessful(),tests_run=result.testsRun,failures=len(result.failures),errors=len(result.errors),

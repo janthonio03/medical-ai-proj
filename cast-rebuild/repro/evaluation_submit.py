@@ -8,7 +8,7 @@ import shlex
 import subprocess
 import time
 import uuid
-from repro.step60c_common import read,write,validate_plan,scoped_tasks,valid_result,completion,ALLOWED
+from repro.evaluation_common import read,write,validate_plan,scoped_tasks,valid_result,completion,ALLOWED
 
 def command(argv):
     p=subprocess.run(argv,text=True,capture_output=True,timeout=60)
@@ -122,7 +122,7 @@ def array_command(repo,run,workers,batch,exclude):
         '--export=ALL,STEP60C_TICKET='+str(Path(run)/'batches'/(batch+'.json'))]
     if exclude:argv.append('--exclude='+','.join(exclude))
     # The same working-directory assumption as the user's --wrap examples.
-    argv.append('--wrap=exec '+shlex.join(['bash',str(Path(repo)/'repro/step60c_job.sh')]))
+    argv.append('--wrap=exec '+shlex.join(['bash',str(Path(repo)/'repro/evaluation_job.sh')]))
     return argv
 
 def reclaim(run):
@@ -133,7 +133,7 @@ def reclaim(run):
     return len(files)
 
 def submit(repo,plan_dir,run,scope,workers,*,smoke_run=None,smoke_merge=None,resume=False,check_only=False):
-    from repro.step60c_results import scan,verify_merge
+    from repro.evaluation_results import scan,verify_merge
     repo=Path(repo).resolve();plan_dir=Path(plan_dir).resolve();run=Path(run).resolve()
     plan=validate_plan(repo,plan_dir)
     if not 1<=workers<=4:raise ValueError('Explicit Worker count must be 1..4; default is4')

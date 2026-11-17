@@ -1,95 +1,137 @@
 {
+  "schema": "renamed-source-snapshot-v1",
   "files": {
     ".gitignore": {
       "bytes": 123,
-      "sha256": "c2874e7be90ee82178d39b102901e5e8e909aad50ca4fbd2a9da2b7e7e8b359d"
+      "sha256": "c2874e7be90ee82178d39b102901e5e8e909aad50ca4fbd2a9da2b7e7e8b359d",
+      "original_path": ".gitignore",
+      "original_sha256": "c2874e7be90ee82178d39b102901e5e8e909aad50ca4fbd2a9da2b7e7e8b359d"
     },
     "README.md": {
-      "bytes": 3428,
-      "sha256": "b4154bec7232085371355b4939018f2a72698eae3796bdb7cef1ad8cdd5798d9"
+      "bytes": 3608,
+      "sha256": "f33756771b2dbfeedaa1749056d14584bbf10bbf1d4ed524ab237fe03f3cb4a0",
+      "original_path": "README.md",
+      "original_sha256": "b4154bec7232085371355b4939018f2a72698eae3796bdb7cef1ad8cdd5798d9"
     },
     "repro/__init__.py": {
       "bytes": 86,
-      "sha256": "cbc969802e3a83c0c7bf7ecc8f253ccff81dda6467071528c3c959937b0c97bb"
+      "sha256": "cbc969802e3a83c0c7bf7ecc8f253ccff81dda6467071528c3c959937b0c97bb",
+      "original_path": "repro/__init__.py",
+      "original_sha256": "cbc969802e3a83c0c7bf7ecc8f253ccff81dda6467071528c3c959937b0c97bb"
     },
-    "repro/step60c.py": {
-      "bytes": 2766,
-      "sha256": "f5816472d1cb0b2ab8fa339280807eb04f996d468e10b19e1748ef47e104a8fc"
+    "repro/evaluation.py": {
+      "bytes": 2778,
+      "sha256": "8aa7d1fab7f57d83c03b3a907f7e63fb5e1f6042d769efbd8d071b7adfceb9d7",
+      "original_path": "repro/step60c.py",
+      "original_sha256": "f5816472d1cb0b2ab8fa339280807eb04f996d468e10b19e1748ef47e104a8fc"
     },
-    "repro/step60c_common.py": {
+    "repro/evaluation_common.py": {
       "bytes": 10134,
-      "sha256": "33e12e104bf042dd387feddac586d3ce3e645f2c577a950dd455ade503ecd55d"
+      "sha256": "33e12e104bf042dd387feddac586d3ce3e645f2c577a950dd455ade503ecd55d",
+      "original_path": "repro/step60c_common.py",
+      "original_sha256": "33e12e104bf042dd387feddac586d3ce3e645f2c577a950dd455ade503ecd55d"
     },
-    "repro/step60c_cpu.py": {
-      "bytes": 2570,
-      "sha256": "0256104e748a30d80b07e366f328fde084493bb789c4b757d02779de5cb26e10"
+    "repro/evaluation_cpu.py": {
+      "bytes": 2582,
+      "sha256": "dd1a3dabe46310caa35e5f574b2f72d5073fbc588658fb945d7c2ead24f1bca6",
+      "original_path": "repro/step60c_cpu.py",
+      "original_sha256": "0256104e748a30d80b07e366f328fde084493bb789c4b757d02779de5cb26e10"
     },
-    "repro/step60c_job.sh": {
-      "bytes": 737,
-      "sha256": "87ebb44855315ba22df90967e9b11d8fa9411b72e904bf593c96ac11d385823c"
+    "repro/evaluation_job.sh": {
+      "bytes": 743,
+      "sha256": "dfcde1d5ff3447d97429275cc2d08fe038a4efad30033b5efd9e76019e25390a",
+      "original_path": "repro/step60c_job.sh",
+      "original_sha256": "87ebb44855315ba22df90967e9b11d8fa9411b72e904bf593c96ac11d385823c"
     },
-    "repro/step60c_prepare.py": {
-      "bytes": 8849,
-      "sha256": "7333bb8a775e69e80003a23856d0ef6174fda38b9eab01e305dc70d265215b7e"
+    "repro/evaluation_prepare.py": {
+      "bytes": 8855,
+      "sha256": "aadb7a25352c864fb4bf20e95eaff34770eb369e19b16be5c7a4d84e2bd332bb",
+      "original_path": "repro/step60c_prepare.py",
+      "original_sha256": "7333bb8a775e69e80003a23856d0ef6174fda38b9eab01e305dc70d265215b7e"
     },
-    "repro/step60c_public_entry.py": {
-      "bytes": 1214,
-      "sha256": "ca196e65e18e6aaf3eed8631378e60b901c23e4704b8e85de85251a9fa006b75"
+    "repro/evaluation_public_entry.py": {
+      "bytes": 1217,
+      "sha256": "6dc55e63e10ac0f6ee57c848d141f5cbeb55a4f996f4656f2683bc75fbc724b2",
+      "original_path": "repro/step60c_public_entry.py",
+      "original_sha256": "ca196e65e18e6aaf3eed8631378e60b901c23e4704b8e85de85251a9fa006b75"
     },
-    "repro/step60c_queue.py": {
-      "bytes": 2870,
-      "sha256": "709300353c943f5914b8a35e99a6fd2a492f42718b62133e0b840a60c23c6309"
+    "repro/evaluation_queue.py": {
+      "bytes": 2876,
+      "sha256": "940c21ec7713f599638016bce9b03d8523b3c8b3ca906015e3945834d229bd9a",
+      "original_path": "repro/step60c_queue.py",
+      "original_sha256": "709300353c943f5914b8a35e99a6fd2a492f42718b62133e0b840a60c23c6309"
     },
-    "repro/step60c_results.py": {
-      "bytes": 10131,
-      "sha256": "ddfe17b382b574b29adffd1a7c518826af35c0c6842f50fe9f16a18a6ce348ec"
+    "repro/evaluation_results.py": {
+      "bytes": 10134,
+      "sha256": "5ac5a79aafcd3ac8bf4e96adfce07d8a8ccbf65dcdf4ad00d368782a0aaca1d4",
+      "original_path": "repro/step60c_results.py",
+      "original_sha256": "ddfe17b382b574b29adffd1a7c518826af35c0c6842f50fe9f16a18a6ce348ec"
     },
-    "repro/step60c_runtime.py": {
-      "bytes": 9384,
-      "sha256": "af757a9b32ebd2a6cb216d60cf27638b74b118e2fd5bc33dd31cdd0cb39f2016"
+    "repro/evaluation_runtime.py": {
+      "bytes": 9390,
+      "sha256": "b58d3869cfaeb7cbc3feb288aeff06c0bff7774cf00893b4f4119189267f896e",
+      "original_path": "repro/step60c_runtime.py",
+      "original_sha256": "af757a9b32ebd2a6cb216d60cf27638b74b118e2fd5bc33dd31cdd0cb39f2016"
     },
-    "repro/step60c_sources.lock.json": {
+    "repro/evaluation_sources.lock.json": {
       "bytes": 17754,
-      "sha256": "b5d54c83c7ed8a5404e8cdfb5e7780c254b830507dc94ed1765aa2de617ce0e0"
+      "sha256": "b5d54c83c7ed8a5404e8cdfb5e7780c254b830507dc94ed1765aa2de617ce0e0",
+      "original_path": "repro/step60c_sources.lock.json",
+      "original_sha256": "b5d54c83c7ed8a5404e8cdfb5e7780c254b830507dc94ed1765aa2de617ce0e0"
     },
-    "repro/step60c_sources.py": {
-      "bytes": 13121,
-      "sha256": "93e768f32db33d6e5db25b49812994dd6c01b5f070788efe134c9c06ede2efac"
+    "repro/evaluation_sources.py": {
+      "bytes": 13122,
+      "sha256": "118eb5ce5fc662b31c4373871d0ed7c9b6f228e24f0dba685118950f16603e03",
+      "original_path": "repro/step60c_sources.py",
+      "original_sha256": "93e768f32db33d6e5db25b49812994dd6c01b5f070788efe134c9c06ede2efac"
     },
-    "repro/step60c_submit.py": {
-      "bytes": 11412,
-      "sha256": "20ff7758c4c4987fe10f567188420363f2b338176c1ac61e7c88056207565386"
+    "repro/evaluation_submit.py": {
+      "bytes": 11421,
+      "sha256": "8798982883bfe3291fcdd864c891400e7e09d2a8c6ca900ff1106bfd5a446bc3",
+      "original_path": "repro/step60c_submit.py",
+      "original_sha256": "20ff7758c4c4987fe10f567188420363f2b338176c1ac61e7c88056207565386"
     },
-    "repro/step60c_vendor/__init__.py": {
+    "repro/vendor/__init__.py": {
       "bytes": 0,
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_path": "repro/step60c_vendor/__init__.py",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
-    "repro/step60c_vendor/step60b_common.py": {
+    "repro/vendor/step60b_common.py": {
       "bytes": 6051,
-      "sha256": "d6b6534bebc0d79187b60a20d007697c981b47399efbf98c2811e49ccab3e9ca"
+      "sha256": "d6b6534bebc0d79187b60a20d007697c981b47399efbf98c2811e49ccab3e9ca",
+      "original_path": "repro/step60c_vendor/step60b_common.py",
+      "original_sha256": "d6b6534bebc0d79187b60a20d007697c981b47399efbf98c2811e49ccab3e9ca"
     },
-    "repro/step60c_vendor/step60b_prepare.py": {
+    "repro/vendor/step60b_prepare.py": {
       "bytes": 11287,
-      "sha256": "5f2ae314217c250036599c8d8be2fc151e4177345bffe88aace0d1f52e733cd8"
+      "sha256": "5f2ae314217c250036599c8d8be2fc151e4177345bffe88aace0d1f52e733cd8",
+      "original_path": "repro/step60c_vendor/step60b_prepare.py",
+      "original_sha256": "5f2ae314217c250036599c8d8be2fc151e4177345bffe88aace0d1f52e733cd8"
     },
-    "repro/step60c_vendor/step60b_select.py": {
+    "repro/vendor/step60b_select.py": {
       "bytes": 10463,
-      "sha256": "086e062e61d7ac3cf0a9cc28a574e881df92fcf591edaae6de7ad719c817a098"
+      "sha256": "086e062e61d7ac3cf0a9cc28a574e881df92fcf591edaae6de7ad719c817a098",
+      "original_path": "repro/step60c_vendor/step60b_select.py",
+      "original_sha256": "086e062e61d7ac3cf0a9cc28a574e881df92fcf591edaae6de7ad719c817a098"
     },
-    "repro/step60c_vendor/step60b_verify.py": {
+    "repro/vendor/step60b_verify.py": {
       "bytes": 4917,
-      "sha256": "accd5664fd90a0a4a606e787827655ae63c492f2e607421efeadd1a3cf4710ef"
+      "sha256": "accd5664fd90a0a4a606e787827655ae63c492f2e607421efeadd1a3cf4710ef",
+      "original_path": "repro/step60c_vendor/step60b_verify.py",
+      "original_sha256": "accd5664fd90a0a4a606e787827655ae63c492f2e607421efeadd1a3cf4710ef"
     },
-    "repro/step60c_worker.py": {
-      "bytes": 5474,
-      "sha256": "a2db15fd8ebcfcf33e483d66fc8f1047d7296a4ea31509efab94046b6324568b"
+    "repro/evaluation_worker.py": {
+      "bytes": 5489,
+      "sha256": "67a8d0e68051fa0385898999feba1bdc55c2902ac7ee5ee944979d2b987bfe3a",
+      "original_path": "repro/step60c_worker.py",
+      "original_sha256": "a2db15fd8ebcfcf33e483d66fc8f1047d7296a4ea31509efab94046b6324568b"
     },
-    "repro/test_step60c.py": {
-      "bytes": 28080,
-      "sha256": "1685e4d5ed58bc51615583db1bf0fafa9f5a0873b63cad2e1a2818a14b742cb9"
+    "repro/test_evaluation.py": {
+      "bytes": 28159,
+      "sha256": "553a7cac962726e4a6f9e33034ed363e56ac1397f9124cbb115620fed8762b76",
+      "original_path": "repro/test_step60c.py",
+      "original_sha256": "1685e4d5ed58bc51615583db1bf0fafa9f5a0873b63cad2e1a2818a14b742cb9"
     }
-  },
-  "server_supplement": "conversation-recorded STEP52 receipt and Slurm QoS fixes",
-  "source": "CAST_STEP60C_4GPU_Ariel83402c_repin.zip",
-  "status": "partial_recovery"
+  }
 }

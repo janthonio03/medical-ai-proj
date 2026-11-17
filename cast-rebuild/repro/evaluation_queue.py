@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 import time
 import uuid
-from repro.step60c_common import read,write,valid_result,completion
+from repro.evaluation_common import read,write,valid_result,completion
 
 def ordered_tasks(plan,tasks,index,workers):
     # Preserve four-way LPT preferences; dynamic stealing prevents slow-condition tails.
@@ -35,7 +35,7 @@ def attempt_path(run,task,owner):
     return Path(run)/'samples'/task['sample_id']/task['condition']/'attempts'/owner['nonce']
 
 def accept(plan,run,task,owner,result_path):
-    from repro.step60c_common import sha,validate_result
+    from repro.evaluation_common import sha,validate_result
     validate_result(plan,task,read(result_path));file=completion(run,task)
     if file.exists():raise FileExistsError('A completion already exists; never overwrite successful results')
     relative=str(Path(result_path).relative_to(run))
