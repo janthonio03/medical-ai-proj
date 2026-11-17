@@ -1,17 +1,11 @@
 {
-  "schema": "renamed-source-snapshot-v1",
+  "schema": "renamed-source-snapshot-v2-with-restored-ROI-primitives",
   "files": {
     ".gitignore": {
       "bytes": 123,
       "sha256": "c2874e7be90ee82178d39b102901e5e8e909aad50ca4fbd2a9da2b7e7e8b359d",
       "original_path": ".gitignore",
       "original_sha256": "c2874e7be90ee82178d39b102901e5e8e909aad50ca4fbd2a9da2b7e7e8b359d"
-    },
-    "README.md": {
-      "bytes": 3608,
-      "sha256": "f33756771b2dbfeedaa1749056d14584bbf10bbf1d4ed524ab237fe03f3cb4a0",
-      "original_path": "README.md",
-      "original_sha256": "b4154bec7232085371355b4939018f2a72698eae3796bdb7cef1ad8cdd5798d9"
     },
     "repro/__init__.py": {
       "bytes": 86,
@@ -132,6 +126,204 @@
       "sha256": "553a7cac962726e4a6f9e33034ed363e56ac1397f9124cbb115620fed8762b76",
       "original_path": "repro/test_step60c.py",
       "original_sha256": "1685e4d5ed58bc51615583db1bf0fafa9f5a0873b63cad2e1a2818a14b742cb9"
+    },
+    "cast/__init__.py": {
+      "bytes": 919,
+      "sha256": "9118f958fe0236208337bc85aa77f42fcbae42bd4bd22ce24c68d1412eb39166",
+      "original_path": "cast/__init__.py",
+      "original_sha256": "9118f958fe0236208337bc85aa77f42fcbae42bd4bd22ce24c68d1412eb39166",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "cast/cache.py": {
+      "bytes": 4616,
+      "sha256": "fe1ddf6a423bcf37ad233b56d0af2a8004a5d8497af04fdf2f0857632f1ba285",
+      "original_path": "cast/cache.py",
+      "original_sha256": "fe1ddf6a423bcf37ad233b56d0af2a8004a5d8497af04fdf2f0857632f1ba285",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "cast/guidance.py": {
+      "bytes": 1034,
+      "sha256": "1a8f20c880d2010239ec476053825fb1bb13e05a72d3f27009065b888c4fd155",
+      "original_path": "cast/guidance.py",
+      "original_sha256": "1a8f20c880d2010239ec476053825fb1bb13e05a72d3f27009065b888c4fd155",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "cast/mask_provider.py": {
+      "bytes": 11582,
+      "sha256": "fd24e76166d5bf28ffcb0b4e7140d94e056f409e0d01d6701e2c9fea0071792e",
+      "original_path": "cast/mask_provider.py",
+      "original_sha256": "fd24e76166d5bf28ffcb0b4e7140d94e056f409e0d01d6701e2c9fea0071792e",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "cast/proposal_generator.py": {
+      "bytes": 18495,
+      "sha256": "651554558ed786c523610dc09b89c34ba1d71e8aa916b984c14b8604be6fc10a",
+      "original_path": "cast/proposal_generator.py",
+      "original_sha256": "651554558ed786c523610dc09b89c34ba1d71e8aa916b984c14b8604be6fc10a",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "cast/roi_selection.py": {
+      "bytes": 13229,
+      "sha256": "c25050c6a0b7d7f03088c0725b86c9f86645a0071d047794f953c8951add2749",
+      "original_path": "cast/roi_selection.py",
+      "original_sha256": "c25050c6a0b7d7f03088c0725b86c9f86645a0071d047794f953c8951add2749",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "cast/utils.py": {
+      "bytes": 1546,
+      "sha256": "6cc99274244abf4d6638d293108581b5c1f9b932254264ce29f651c66e4c8812",
+      "original_path": "cast/utils.py",
+      "original_sha256": "6cc99274244abf4d6638d293108581b5c1f9b932254264ce29f651c66e4c8812",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "repro/arcd_generation.py": {
+      "bytes": 21013,
+      "sha256": "aeb2c68273005da0f5d7b71bc3f05b9922f7cb4b13584c0bc45def0ac72a793e",
+      "original_path": "repro/arcd_generation.py",
+      "original_sha256": "aeb2c68273005da0f5d7b71bc3f05b9922f7cb4b13584c0bc45def0ac72a793e",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "repro/arcd_probe.py": {
+      "bytes": 7970,
+      "sha256": "9ce1a2a31c803640b6d718920ba81161fb6deefe099a7c8c243e7dd2e2c9cc24",
+      "original_path": "repro/arcd_probe.py",
+      "original_sha256": "9ce1a2a31c803640b6d718920ba81161fb6deefe099a7c8c243e7dd2e2c9cc24",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "repro/arcd_runtime.py": {
+      "bytes": 3100,
+      "sha256": "fc7623784778aecb562f1f5e457aace638f31713d9c7bf94d5a8e919e176b304",
+      "original_path": "repro/arcd_runtime.py",
+      "original_sha256": "fc7623784778aecb562f1f5e457aace638f31713d9c7bf94d5a8e919e176b304",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "repro/arcd_sequential.py": {
+      "bytes": 15019,
+      "sha256": "a88416edf5db19bf7e4297b35f54ffab184eba7dbaeb4a435835956a242646a4",
+      "original_path": "repro/arcd_sequential.py",
+      "original_sha256": "a88416edf5db19bf7e4297b35f54ffab184eba7dbaeb4a435835956a242646a4",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "repro/audit_environment.py": {
+      "bytes": 2323,
+      "sha256": "2e48c5bef87e6441ce02ac54ca8fb9e48ed4cd22389d4ceabeeafddfd750648c",
+      "original_path": "repro/audit_environment.py",
+      "original_sha256": "2e48c5bef87e6441ce02ac54ca8fb9e48ed4cd22389d4ceabeeafddfd750648c",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "repro/baseline.py": {
+      "bytes": 10637,
+      "sha256": "01bb14518ba17814e89adf1818e64d7d6ef79f40ebc1753e81b3d382632c2c94",
+      "original_path": "repro/baseline.py",
+      "original_sha256": "01bb14518ba17814e89adf1818e64d7d6ef79f40ebc1753e81b3d382632c2c94",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "repro/mask_transport.py": {
+      "bytes": 3714,
+      "sha256": "3e5f690630d95ddb5da55392eff98396aefee87b7649671b1c78bc6c3788b69f",
+      "original_path": "repro/mask_transport.py",
+      "original_sha256": "3e5f690630d95ddb5da55392eff98396aefee87b7649671b1c78bc6c3788b69f",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "repro/phase2_common.py": {
+      "bytes": 6180,
+      "sha256": "384b952d332dfaa904961e62fd090d87fe2f2ee2f2c0a649316f439b38416c31",
+      "original_path": "repro/phase2_common.py",
+      "original_sha256": "384b952d332dfaa904961e62fd090d87fe2f2ee2f2c0a649316f439b38416c31",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "repro/probe_identity.py": {
+      "bytes": 6954,
+      "sha256": "b587eb648a6521a69f5755bc21c3aae76ba0fe41fead4f3a8b2d4f6894536949",
+      "original_path": "repro/probe_identity.py",
+      "original_sha256": "b587eb648a6521a69f5755bc21c3aae76ba0fe41fead4f3a8b2d4f6894536949",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "repro/proposal_store.py": {
+      "bytes": 2376,
+      "sha256": "5171ab16cd3580db8d44539c2558cd01e1febfbed685e3a0027d8875c91669f0",
+      "original_path": "repro/proposal_store.py",
+      "original_sha256": "5171ab16cd3580db8d44539c2558cd01e1febfbed685e3a0027d8875c91669f0",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "repro/run_arcd_1gpu.py": {
+      "bytes": 6742,
+      "sha256": "a301ee9770704890eadc10e10195e58ff715cdabe7f77b81f3114b6ecfdbcd9e",
+      "original_path": "repro/run_arcd_1gpu.py",
+      "original_sha256": "a301ee9770704890eadc10e10195e58ff715cdabe7f77b81f3114b6ecfdbcd9e",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "repro/run_cast_roi_arcd.py": {
+      "bytes": 9089,
+      "sha256": "4916923b1339fd692e1993623807e1bc3c78172cc09a9af7f9b46da08402965a",
+      "original_path": "repro/run_cast_roi_arcd.py",
+      "original_sha256": "4916923b1339fd692e1993623807e1bc3c78172cc09a9af7f9b46da08402965a",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "repro/step52_selection.py": {
+      "bytes": 21234,
+      "sha256": "89446510b5103900b92fafaec7a2ac7ad42bc6a538ab88f5bbae0cc80f4c892c",
+      "original_path": "repro/step52_selection.py",
+      "original_sha256": "89446510b5103900b92fafaec7a2ac7ad42bc6a538ab88f5bbae0cc80f4c892c",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "repro/step51_operators.py": {
+      "bytes": 10161,
+      "sha256": "5368e4111cd97bef00c93838620569431fd812d519dd10caf190824dbca7da65",
+      "original_path": "repro/step51_operators.py",
+      "original_sha256": "5368e4111cd97bef00c93838620569431fd812d519dd10caf190824dbca7da65",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "repro/step53_temporal.py": {
+      "bytes": 3376,
+      "sha256": "ba17422c1e5186e15f26833a9be69351761566f4cf08e8f0fb6de370275e3b48",
+      "original_path": "repro/step53_temporal.py",
+      "original_sha256": "ba17422c1e5186e15f26833a9be69351761566f4cf08e8f0fb6de370275e3b48",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "step59_source_lock_sha256_match": true
+    },
+    "cast/LICENSE": {
+      "bytes": 1069,
+      "sha256": "321442e88f5f38f6e7a99aaee3316becc64231ba92bfadb89b299e76f05bc76b",
+      "original_path": "LICENSE",
+      "original_sha256": "321442e88f5f38f6e7a99aaee3316becc64231ba92bfadb89b299e76f05bc76b",
+      "source_zip": "CAST_STEP53_Temporal_Integration.zip",
+      "license_scope": "upstream CAST code"
+    },
+    "repro/test_roi_scoring.py": {
+      "bytes": 2490,
+      "sha256": "2c7a56846ca9b7f502143ef4c2d5be3f714da067449ba8f5290bd7fb0db85265",
+      "original_path": null,
+      "source_zip": null,
+      "purpose": "CPU-only test of restored score math (new test)"
     }
-  }
+  },
+  "recovered_source_archive": {
+    "name": "CAST_STEP53_Temporal_Integration.zip",
+    "source_dir": "source/",
+    "validated_against": "repro/evaluation_sources.lock.json::inherited_STEP59_files",
+    "note": "Restored original source bytes without modifying imports or scoring. No GPU runtime verification on extracted snapshot."
+  },
+  "note": "README.md excluded from self-consistency manifest because it is documentation; all original source paths are SHA256-pinned."
 }
