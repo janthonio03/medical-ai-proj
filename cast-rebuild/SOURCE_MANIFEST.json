@@ -1,0 +1,95 @@
+{
+  "files": {
+    ".gitignore": {
+      "bytes": 123,
+      "sha256": "c2874e7be90ee82178d39b102901e5e8e909aad50ca4fbd2a9da2b7e7e8b359d"
+    },
+    "README.md": {
+      "bytes": 3428,
+      "sha256": "b4154bec7232085371355b4939018f2a72698eae3796bdb7cef1ad8cdd5798d9"
+    },
+    "repro/__init__.py": {
+      "bytes": 86,
+      "sha256": "cbc969802e3a83c0c7bf7ecc8f253ccff81dda6467071528c3c959937b0c97bb"
+    },
+    "repro/step60c.py": {
+      "bytes": 2766,
+      "sha256": "f5816472d1cb0b2ab8fa339280807eb04f996d468e10b19e1748ef47e104a8fc"
+    },
+    "repro/step60c_common.py": {
+      "bytes": 10134,
+      "sha256": "33e12e104bf042dd387feddac586d3ce3e645f2c577a950dd455ade503ecd55d"
+    },
+    "repro/step60c_cpu.py": {
+      "bytes": 2570,
+      "sha256": "0256104e748a30d80b07e366f328fde084493bb789c4b757d02779de5cb26e10"
+    },
+    "repro/step60c_job.sh": {
+      "bytes": 737,
+      "sha256": "87ebb44855315ba22df90967e9b11d8fa9411b72e904bf593c96ac11d385823c"
+    },
+    "repro/step60c_prepare.py": {
+      "bytes": 8849,
+      "sha256": "7333bb8a775e69e80003a23856d0ef6174fda38b9eab01e305dc70d265215b7e"
+    },
+    "repro/step60c_public_entry.py": {
+      "bytes": 1214,
+      "sha256": "ca196e65e18e6aaf3eed8631378e60b901c23e4704b8e85de85251a9fa006b75"
+    },
+    "repro/step60c_queue.py": {
+      "bytes": 2870,
+      "sha256": "709300353c943f5914b8a35e99a6fd2a492f42718b62133e0b840a60c23c6309"
+    },
+    "repro/step60c_results.py": {
+      "bytes": 10131,
+      "sha256": "ddfe17b382b574b29adffd1a7c518826af35c0c6842f50fe9f16a18a6ce348ec"
+    },
+    "repro/step60c_runtime.py": {
+      "bytes": 9384,
+      "sha256": "af757a9b32ebd2a6cb216d60cf27638b74b118e2fd5bc33dd31cdd0cb39f2016"
+    },
+    "repro/step60c_sources.lock.json": {
+      "bytes": 17754,
+      "sha256": "b5d54c83c7ed8a5404e8cdfb5e7780c254b830507dc94ed1765aa2de617ce0e0"
+    },
+    "repro/step60c_sources.py": {
+      "bytes": 13121,
+      "sha256": "93e768f32db33d6e5db25b49812994dd6c01b5f070788efe134c9c06ede2efac"
+    },
+    "repro/step60c_submit.py": {
+      "bytes": 11412,
+      "sha256": "20ff7758c4c4987fe10f567188420363f2b338176c1ac61e7c88056207565386"
+    },
+    "repro/step60c_vendor/__init__.py": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "repro/step60c_vendor/step60b_common.py": {
+      "bytes": 6051,
+      "sha256": "d6b6534bebc0d79187b60a20d007697c981b47399efbf98c2811e49ccab3e9ca"
+    },
+    "repro/step60c_vendor/step60b_prepare.py": {
+      "bytes": 11287,
+      "sha256": "5f2ae314217c250036599c8d8be2fc151e4177345bffe88aace0d1f52e733cd8"
+    },
+    "repro/step60c_vendor/step60b_select.py": {
+      "bytes": 10463,
+      "sha256": "086e062e61d7ac3cf0a9cc28a574e881df92fcf591edaae6de7ad719c817a098"
+    },
+    "repro/step60c_vendor/step60b_verify.py": {
+      "bytes": 4917,
+      "sha256": "accd5664fd90a0a4a606e787827655ae63c492f2e607421efeadd1a3cf4710ef"
+    },
+    "repro/step60c_worker.py": {
+      "bytes": 5474,
+      "sha256": "a2db15fd8ebcfcf33e483d66fc8f1047d7296a4ea31509efab94046b6324568b"
+    },
+    "repro/test_step60c.py": {
+      "bytes": 28080,
+      "sha256": "1685e4d5ed58bc51615583db1bf0fafa9f5a0873b63cad2e1a2818a14b742cb9"
+    }
+  },
+  "server_supplement": "conversation-recorded STEP52 receipt and Slurm QoS fixes",
+  "source": "CAST_STEP60C_4GPU_Ariel83402c_repin.zip",
+  "status": "partial_recovery"
+}
