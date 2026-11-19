@@ -3,7 +3,7 @@
 > **Last documented:** 2026-11-19 (Asia/Seoul)  
 > **Project:** MICCAI 2026 CAST reproduction and investigation of the differences between its paper and public implementation  
 > **GitHub branch:** `paper_vs_open-source` (separate from `main`)  
-> **Status:** STEP 61, 62, 63 verified at their stated scope; STEP 64A multimodal preflight passed, GPU validation **not yet confirmed here**. **No new experiment code is released until GPU validation and final review.**
+> **Status:** STEP 61, 62, 63 verified at their stated scope; STEP 64A multimodal GPU audit **CONFIRMED (Job 495057)** in the stated structural scope. **No new experiment code is released until GPU validation and final review.**
 
 **NEW CHAT / NEW RESEARCHER: Start with [docs/CONTINUATION.md](docs/CONTINUATION.md), then [docs/EXPERIMENT_LOG.md](docs/EXPERIMENT_LOG.md).** This branch is the durable project handoff. Do **not** assume a locally existing Ariel script was uploaded simply because the path is documented. To get the current operational state, check Slurm and the reports as directed below.
 
@@ -70,12 +70,14 @@ Eight named tests passed, including conditional unchanged, unconditional ROI/non
 - Five structural checks all true; `status=CONFIRMED`. Report `results/step63-official/step63-495028.json`.
 - **Do not infer** from a text-only test that all multimodal Official CAST runs behave identically. STEP 64A exists to test that boundary.
 
-### STEP 64A — real SLAKE multimodal Official-path probe (in progress)
-- Intended sample `slake-en-test-0318`, image + previously saved strict ROI, BF16/FA2 Official-style positive masks.
-- CPU preflight was reported **PASS** after fixing the import from invalid `step59_paper.load_processor` to **`from repro.phase2_common import load_processor`** by adding `CAST-step60c-eval` (not its `repro` subdir) to `sys.path`.
-- Local code `CAST-step64a-official/probe.py`, local results `results/step64a-official`, Job ID recorded at `latest_jobid.txt` **only if GPU was submitted**.
-- **GPU submission/completion/results NOT established at this documentation checkpoint.** Do not mark the experiment passed or upload its implementation as stable until the actual report/Slurm evidence is reviewed.
-- Important caution: STEP 64A is a structural test with a cached strict ROI; **it does not rerun the Official GT-answer ROI Selection**. The local processor is a documented compatibility substitution, not unmodified stock Official.
+### STEP 64A — real SLAKE multimodal Official-path probe (**GPU CONFIRMED**)
+- Actual **GPU Job 495057**, sample `slake-en-test-0318`; CPU preflight PASS after correcting the processor import to `from repro.phase2_common import load_processor`.
+- BF16 / **actual `flash_attention_2`**, NVIDIA RTX A5000, **32/32 FA2 layers** called; GPU peak allocated **9.489 GiB**. Sequence length **2,527**; negative image tokens **2,509**, highlighted ROI tokens **129**; image crops `[1,17,3,336,336]`. Weighted mask `[2,2527]` float32 with **no zeros**, values approximately `0.01…3.0`.
+- First FA2 layer received `attention_mask=None`. With identical inputs and **explicitly fixed position IDs**, branch max/mean logits difference **0.0**, argmax **[3869,3869]**. **Observed: no effect from the positive mask weights on logits in this controlled direct-forward probe.**
+- Preparation of generation position IDs differed between branches: **2,527/2,527** unconditional positions mismatched the binary-mask baseline (conditional 0 mismatches); example first 12 unconditional IDs `[2,5,8,...,35]`, last position **7193** instead of **2526**. Standard `model.generate` path raised `ValueError` mentioning `padding_side='right'` (nonbinary-mask guard; not proof tokenizer used actual right-padding).
+- Six checks true and `STEP64A_STATUS=CONFIRMED`; JSON: `results/step64a-official/step64a-495057.json`; stdout/stderr: `results/step64a-official/slurm-495057.{out,err}`. Error JSON list was empty; `generate` failure was **expected and separately captured**. Job exit code from `sacct` was **not supplied**, so do not claim accounting-confirmed exit=0.
+- **Boundary:** Structural Official-style path using a cached strict ROI and **ARegionCD-derived processor compatibility substitution**; no re-execution of author's GT-answer ROI Selection, no full Official SLAKE generate evaluation. This confirms the STEP63 structural issue in a **multimodal** test, not full performance or exact unmodified Official evaluation.
+- **Release gate:** Actual final Ariel source contents, source SHA256, and Slurm terminal exit remain unverified here. Therefore experiment `probe.py` has **not** yet been copied to this GitHub branch. Preserve the proven report and perform exact-source review first.
 
 ## 4. Historical work not to mislabel
 
@@ -128,9 +130,9 @@ Documentation may be updated while experiments are underway; **unverified source
 
 Read [docs/CONTINUATION.md](docs/CONTINUATION.md) for exact commands and a first-10-minutes checklist; then consult [docs/EXPERIMENT_LOG.md](docs/EXPERIMENT_LOG.md).
 
-1. Check `results/step64a-official/latest_jobid.txt` **if it exists**, `squeue`, `sacct`, `step64a-<job>.json`, and `slurm-<job>.{out,err}`; confirm the **GPU** outcome; never infer from CPU preflight.
-2. Inspect STEP 64A first FA2 attention masks, branch position mismatch, explicit position-controlled logits delta, generate guard, real image token/ROI highlight counts. Compare only within its stated test scope.
-3. If valid, move to **STEP 64B**: test a *minimal, mathematically verified* way to apply ROI/non-ROI token-specific additive attention bias in BF16 **while retaining the actual FA2 kernel**. First inspect installed Phi and FlashAttention APIs and available hardware; don't assume stock FA2 supports arbitrary 4D bias. If impossible, document infeasibility and separate BF16/Eager alternative; never mislabel.
+1. STEP64A **GPU evidence is available** from Job 495057; verify the terminal `sacct` state, exact on-disk source SHA and report, and only then consider source promotion after code review. Do not infer the missing exit code.
+2. Preserve STEP64A findings (FA2 mask `None`, controlled logits delta 0, all 2527 unconditional position IDs altered, expected `generate` guard); do **not** equate structural success with full Official reproduction.
+3. Move to **STEP 64B**: test a *minimal, mathematically verified* way to apply ROI/non-ROI token-specific additive attention bias in BF16 **while retaining the actual FA2 kernel**. First inspect installed Phi and FlashAttention APIs and available hardware; don't assume stock FA2 supports arbitrary 4D bias. If impossible, document infeasibility and separate BF16/Eager alternative; never mislabel.
 4. Only after **GPU-verified stable** STEP 64B: integrate minimal paper-aligned changes with Official architecture; implement strict Draft ROI Selection and Temporal Contrast; verify paired pilots; perform full 2×2×2 ablation if feasible.
 5. Update README + experiment log on every **verified research milestone**; commit vetted source only after the release gate above.
 
