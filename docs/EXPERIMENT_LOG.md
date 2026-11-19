@@ -109,3 +109,10 @@ Investigate candidate ways to implement a genuinely additive ROI score bias with
 - `d=96` to `D=104` Q/K/V augmented rank-one log(key-weight) mechanism uses actual unmodified flash-attn 2.5.8; **feasibility proven for tested synthetic shapes only**. Mass checks use FP32 reference probabilities and are not FA2 internal direct attention capture.
 - **Frozen code published** unchanged as [`experiments/step64b/probe.py`](../experiments/step64b/probe.py); [test/reproduction notes](../experiments/step64b/README.md). No new file requested from user; local authoring source was compared to the report SHA and remote Git blob.
 - Next: **STEP64C**, actual Phi-3.5V BF16/FA2 attention modules, RoPE, image/ROI token alignment and past-KV branch correctness. No full model/CAST performance claims from STEP64B.
+
+### STEP64C — authored and CPU-math checked, GPU pending
+
+- Candidate source: `step64c_phi_fa2_probe.py`, SHA256 `9105fe10673f2c29bee012e8cc9739ccd631e23af11481e21e49789181320003`. Local syntax compilation and synthetic float64 Q/K identity check passed (max score error ~1.78e-15). **No Ariel CPU preflight/GPU results yet; source not committed.**
+- Design: intercept `Phi3FlashAttention2._flash_attention_forward` at post-RoPE/post-cache boundary; preserve actual `flash_attn_func` and call signature; augment BF16 head dimension 96→104 only for weighted branch, with alpha=.01 on highlighted negative image placeholders, beta=3 on other negative image placeholders, text key weight 1.
+- Use same `slake-en-test-0318` image/strict ROI and model/LoRA plan as STEP64A, plus exact STEP64B code hash. Test native neutral vs wrapper neutral parity; augmented FA2 calls and change in logits; first layer QKV output vs FP32 explicit-bias reference; one-token neutral/weighted KV-cache continuation; cached decode vs full re-evaluation of same prefix/next token.
+- Caution: reference attention mass measurements do not directly capture FA2 softmax; image-key partition uses negative token-ID placeholders from the pinned compatible processor and must be rechecked against actual source. This experiment does not prove final CAST paper fidelity or accuracy.
