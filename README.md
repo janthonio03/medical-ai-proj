@@ -1,9 +1,9 @@
 # CAST: Paper vs Open Source — Fidelity Audit & Controlled Ablation
 
-> **Last documented:** 2026-11-19 (Asia/Seoul)  
+> **Last documented:** 2026-11-20 (Asia/Seoul)  
 > **Project:** MICCAI 2026 CAST reproduction and investigation of the differences between its paper and public implementation  
 > **GitHub branch:** `paper_vs_open-source` (separate from `main`)  
-> **Status:** STEP 61, 62, 63 verified at their stated scope; STEP 64A multimodal GPU audit **CONFIRMED (Job 495057)** in the stated structural scope. **No new experiment code is released until GPU validation and final review.**
+> **Status:** STEP 61, 62, 63 verified at their stated scope; STEP 64A multimodal GPU audit **CONFIRMED (Job 495057)** in the stated structural scope. **New source is released only after GPU validation and final review; STEP64C Projection Shape diagnostic is now frozen and published.**
 
 **NEW CHAT / NEW RESEARCHER: Start with [docs/CONTINUATION.md](docs/CONTINUATION.md), then [docs/EXPERIMENT_LOG.md](docs/EXPERIMENT_LOG.md).** This branch is the durable project handoff. Do **not** assume a locally existing Ariel script was uploaded simply because the path is documented. To get the current operational state, check Slurm and the reports as directed below.
 
@@ -102,6 +102,18 @@ Eight named tests passed, including conditional unchanged, unconditional ROI/non
 - **Strict Cache/Full parity still fails even for native unpatched model**: native and neutral have identical max/mean logits drift `0.375/0.068097`; weighted has `0.250/0.043118`; all three retain argmax `29892`. First-layer mean last-token attention output drift `0.000014` neutral/`0.000012` weighted, growing to `0.008862`/`0.007740` by layer 31; first mean above 0.001 at layer 8 in both. **Cause not yet isolated to numerical precision/FA2/cache design**, and cannot claim strict equality.
 - **Next:** before paper-vs-official accuracy, build a controlled small multi-token paired **cached Conditional/Unconditional CFG decoder** using the same model, masks, token step, and actual FA2. Optional native Cache/Full numerical study from layer 0 remains separate. **Keep this STEP64C diagnostic frozen**.
 
+## Latest verified — STEP64C Projection Shape Control (GPU Job 495526)
+
+**Ariel Job 495526:** Slurm `COMPLETED (0:0)`, 2m14s, 9/9 stages and 8/8 diagnostic checks passed, GPU peak **10.723 GiB**. Exact source SHA256 **`5bf26619d4ecd70852d4645dcfce9d16d00e34634db904576971a26ff220bc57`**, Git Blob SHA1 **`6c4451a0883e21ba3c3ffe9f67750dea80a0ec7e`**.
+
+**Validated file:** [`experiments/step64c/projection_shape_probe.py`](experiments/step64c/projection_shape_probe.py). [Evidence, protocol and limits](experiments/step64c/PROJECTION_SHAPE.md). Report on Ariel: `results/step64c-projection-shape/step64c-proj-495526.json`.
+
+Under a **controlled experimental Full-Recompute intervention**, the final token's QKV Projection is recomputed with the same **one-token input shape** as Cached Decode (entire original LoRA/base projection module). **Layer-0 QKV max error fell 0.015625 → 0**, while Cached vs experimental Full next-token logits errors fell **max 0.375 → 0.250** (33.33%) and **mean 0.0680967 → 0.0281727** (58.63%). This now passes the predeclared **max≤0.30, mean≤0.035** criteria **for this one sample/token**. All earlier tokens' QKV projections remain unchanged; hooks restore the untouched Full model output.
+
+**Important:** This does **not** repair native, unmodified Phi's Cache/Full discrepancy. Native remains **max 0.375 / mean 0.0680967**, and *even experimental Full is not bitwise equal* (`0.250/0.0281727`). At layers 8 and 31, QKV max difference is still 0.0625; downstream numerical/path effects may persist. This is a successful **mechanistic causal probe**, not a released CAST model implementation or full-evaluation pass.
+
+**Next controlled decision:** verify shape-dependent QKV and residual error on additional real SLAKE samples/decoding steps, then proceed to independently cached Conditional/Unconditional spatial decoding with strict alignment and a native baseline; **do not** silently alter the Official BF16/FA2 production path or call a one-token numerical tolerance pass general equivalence.
+
 ## 4. Historical work not to mislabel
 
 - **STEP 60B:** selection manifest reportedly completed at **1,061 records**; local `results/step60b-selection/` and `full_roi_manifest.jsonl`, verify full manifests/receipts before reuse.
@@ -188,4 +200,4 @@ The branch was created from `main`, which documented an earlier KSC ROI robustne
 - **Job 495463 `COMPLETED (0:0)`**, 9/9 observational checks PASS; source SHA256 `8c40aa8d2bc2c3f378e159088c8f4c4aa8e5d8fd16dea477f03259573d6953c8`. Frozen GPU-validated code [`experiments/step64c/cache_debug_probe.py`](experiments/step64c/cache_debug_probe.py), [detailed findings](experiments/step64c/CACHE_DEBUG.md), exact Git blob `eec739585b53191359715f9e7a8d8119837e8375`.
 - **New mechanism evidence**: at layer 0 cached/full final-token hidden state is exactly equal (max 0), but QKV Projection differs (max **0.015625**); cached prefix K/V is exactly equal to full prefix at layers 0/8/31, so no observed prior-token cache corruption. Identical Q(last)/K/V passed through full-query vs one-query FA2 differs only **0.000244** at layer 0. Shape-sensitive BF16/LoRA QKV GEMM is the **first observable difference**, not yet a proven sole cause of final logits drift.
 - **Still not repaired**: native logits cache-vs-full max/mean **0.375/0.0680967**, same argmax `29892`; original strict limits **0.30/0.035** are exceeded. Instrumentation is non-invasive: traced vs wholly unpatched cached/full logits delta **0.0**.
-- **Prepared next intervention**, SHA256 **`5bf26619d4ecd70852d4645dcfce9d16d00e34634db904576971a26ff220bc57`**, local `step64c_projection_shape_probe.py`, to recompute **only the newest Full token's QKV Projection using the same 1-token shape** as Cached Decode while preserving prefix QKV, LoRA module, BF16 and actual FA2. Local syntax and CPU mocked-LoRA hook tests pass; **GPU not run; source not committed**. This is a mechanistic diagnostic, **not** a released model fix or official matched benchmark.
+- **Prepared next intervention**, SHA256 **`5bf26619d4ecd70852d4645dcfce9d16d00e34634db904576971a26ff220bc57`**, local `step64c_projection_shape_probe.py`, to recompute **only the newest Full token's QKV Projection using the same 1-token shape** as Cached Decode while preserving prefix QKV, LoRA module, BF16 and actual FA2. Local syntax and CPU mocked-LoRA hook tests passed; subsequently **GPU verified in Job 495526 and source published unchanged** (see latest section). This is a mechanistic diagnostic, **not** a released model fix or official matched benchmark.
