@@ -100,3 +100,11 @@ Investigate candidate ways to implement a genuinely additive ROI score bias with
 3. Stock Phi3 FA2 does not automatically treat a nonbinary 2D padding mask as arbitrary additive attention bias. Demonstrate actual kernel path and equivalence to Eager reference before using "paper-aligned FA2".
 4. The older full-run "paper-spatial-temporal" 1,061 sample files are not final paper fidelity: beta3 wasn't separately applied, and backend/precision differed from public. Sample counts from prior user report: paper spatial temporal 1061, paper neutral 843, public-auto 447, public-null 265.
 5. No new source committed merely because written or CPU checked. Promote only after actual GPU evidence, final scientific review and no further fixes required. Document source SHA, backend, precision, model/LoRA, job ID, compatibility patches and exact result scope. Never upload datasets, weights, secrets or bulky medical outputs.
+
+### STEP64B — candidate awaiting GPU validation
+
+- Design: augment BF16 Q/K/V 96 → 104 dimensions; append one rank-one Q/K score-bias coordinate with `q_extra=sqrt(104)`, `k_extra=log(w_j)`; original Q scaled by `sqrt(104/96)`, V appended with zeros, then final output cropped. No FlashAttention2 kernel modifications; mathematical score identity holds in exact arithmetic.
+- CPU `float64` identity test passed with max absolute error `2.6645352591003757e-15`.
+- Candidate script SHA256 `1acde6b58605b9e2626c692deb77a1b856347c28f6673b6958180b37e2515ba9`, **not yet published to GitHub** and not yet verified on Ariel GPU.
+- GPU tests planned: 32-head MHA causal prefill, 1-token Decode, 32/8-head GQA causal prefill, packed-varlen path; native BF16 FA2 neutral and float32 explicit-bias reference comparisons, numeric error thresholds, bias-effect directional checks, kernel/symbol provenance. The model's attention modules, position IDs, RoPE, and cross-step KV cache are **not** audited by this standalone test.
+- User publishing policy clarified: when the GPU result is valid and no further source changes are needed, the assistant should **commit the already preserved exact source directly** on `paper_vs_open-source`; never demand re-upload merely as a procedural step.
