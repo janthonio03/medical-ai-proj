@@ -15,7 +15,7 @@
 | STEP61 | CPU unit tests 8/8 PASS | Candidate score bias: unconditional ROI visual +log(.01), nonROI visual +log(3), text unchanged. Exact paper token partition unproven. |
 | STEP62 | GPU PASS | Slurm 494996, FP32/Eager, 1-token on real Phi-3.5V, 32 layers; ROI/nonROI softmax effect in some heads; logits max diff 1.2394787, both argmax 3869. NOT FA2. |
 | STEP63 | GPU CONFIRMED | Slurm 495028, BF16/FA2 text-only positive-mask probe, 32 layers. Mask reaching first FA2 layer None; controlled-position logits delta 0; nonbinary mask distorted position IDs; original generate padding-guard failure. NOT a real-image CAST run. |
-| STEP64A | **GPU CONFIRMED**, Job **495057** | Actual SLAKE image/ROI, BF16/FA2, 32 layers; positive mask discarded before FA2, controlled-position max logits diff 0, **2527/2527** unconditional position IDs differ, original generate guard raised. All 6 structural checks true. **NOT full Official evaluation**; source SHA256 recorded; sacct accounting timed out, actual source body not yet reviewed before code release. |
+| STEP64A | **GPU CONFIRMED**, Job **495057** | Actual SLAKE image/ROI, BF16/FA2, 32 layers; positive mask discarded before FA2, controlled-position max logits diff 0, **2527/2527** unconditional position IDs differ, original generate guard raised. All 6 structural checks true. **NOT full Official evaluation**; frozen source uploaded as `experiments/step64a/probe.py` with SHA256 checked; `sacct` accounting timed out. |
 
 Prior STEP60C full evaluation was **user canceled**; not a valid causal comparison (public BF16/FA2 and former paper FP32/Eager differed, old paper path missed beta=3). STEP60B full selection manifest was reported 1,061 rows; validate local receipt.
 
@@ -34,7 +34,7 @@ CAST-step60c-eval/repro/step53_temporal.py      temporal candidate code
 CAST-step61-paper-audit/step61_spatial.py       candidate alpha=.01, beta=3 CPU reference
 CAST-step62-phi-probe/step62_probe_fixed.py     GPU-proven FP32/Eager mechanistic probe
 CAST-step63-official/step63_official_probe.py   GPU-proven text-only BF16/FA2 structural probe
-CAST-step64a-official/probe.py                  multimodal candidate; CPU passed, GPU unknown
+CAST-step64a-official/probe.py                  multimodal GPU-verified Job 495057, source frozen on GitHub under experiments/step64a/probe.py
 ```
 Model plan: `results/step60c-plan-full-256-receiptfix/plan.json`. For tested image sample `slake-en-test-0318`, exact ROI image files and SHA are in plan/JSON, not GitHub.
 
@@ -66,7 +66,7 @@ else
     echo "NO RECORDED STEP64A SLURM JOB: GPU submission unconfirmed"
 fi
 ```
-Reported GPU audit `step64a-495057.json` has `status=CONFIRMED`, six true checks, no top-level errors, and reached stage 9/9. Earlier CPU preflight is not a substitute. **`sacct` terminal exit/actual final source contents and SHA256 have not been supplied**; check these before publishing code.
+Reported GPU audit `step64a-495057.json` has `status=CONFIRMED`, six true checks, no top-level errors, and reached stage 9/9. Earlier CPU preflight is not a substitute. **`sacct` terminal exit remains unknown due to accounting DB timeout**, but actual source was uploaded and byte identity verified by SHA256 and Git blob SHA1; code is archived in `experiments/step64a/probe.py`. Do not mistake this for full Official execution.
 
 ### Validate source / progress when coding
 ```bash
@@ -80,11 +80,11 @@ GPU jobs: **only ariel-v6…ariel-v12**; choose earliest available *allowed* nod
 **Every GPU experiment answer must include an immediately pasteable status command**: Slurm state, stages or per-sample completed/remaining, error count, stdout/stderr, recent rate and ETA when meaningful; single-sample probes should show exact stages without misleading time percentages. Use `python -u` / flushed log stages.
 
 ## Required follow-up work (in order)
-1. STEP64A GPU audit complete at structural-scope level: **Job 495057**, `CONFIRMED`, 32/32 FA2, positive mask removed to `None`, controlled-position logits diff `0.0`, position mismatch `[0,2527]`, `generate` guard `ValueError`. Final Ariel source reported SHA256 `61594d6192088ffcf932475cc740948e8be06f70487d909f464864dec85c8c2c` and passed `py_compile`; `sacct` accounting connection timed out, so exit is unknown. Obtain actual source bytes for independent review; do not rerun GPU to fix an accounting outage. Processor compatibility is a **patch**, not stock Official.
+1. STEP64A GPU audit complete at structural-scope level: **Job 495057**, `CONFIRMED`, 32/32 FA2, positive mask removed to `None`, controlled-position logits diff `0.0`, position mismatch `[0,2527]`, `generate` guard `ValueError`. Final Ariel source SHA256 `61594d6192088ffcf932475cc740948e8be06f70487d909f464864dec85c8c2c`, `py_compile` PASS, and GitHub archived source matches exactly. `sacct` accounting timed out, so exit remains unknown; no rerun merely for accounting. See `experiments/step64a/README.md` for source caveats. Processor compatibility is a **patch**, not stock Official.
 2. STEP64B: inspect *installed* Phi3 FlashAttention2 and flash-attn API, identify whether arbitrary per-key multiplicative weights can be implemented as mathematically verified score bias **without replacing actual FA2**. Verify kernel path, masked-key behavior and numerical agreement with Eager reference. If not feasible, document impossibility and separate BF16/Eager matched ablation from Official fidelity.
 3. With source/backend verified, implement original-architecture minimal diffs for Draft ROI Selection and temporal contrast; independently verify no GT leakage.
 4. Pilot paired samples, then only if trustworthy perform full up-to-8-cell factorial design, consistent token limits/metrics/ROI proposals; no broad GPU jobs while structural validity unresolved.
 5. After GPU verification and final review, commit frozen stable source to this branch with SHA256, environment, Slurm job ID, scope, tests, and source diff; do not ship works-in-progress.
 
 ## New-chat prompt (copy if needed)
-> Continue the CAST paper-vs-official-source medical VLM research from GitHub branch `janthonio03/medical-ai-proj:paper_vs_open-source`. Read `README.md`, `docs/CONTINUATION.md` and `docs/EXPERIMENT_LOG.md` first; STEP64A multimodal GPU Job 495057 confirmed the FA2 mask/position issues; next inspect uploaded/local STEP64A source against recorded SHA and evaluate STEP64B (sacct DB timeout is not a GPU failure) BF16/FlashAttention2 paper-aligned suppression feasibility. Keep Official CAST architecture with minimal documented changes, use only ariel-v6–v12 nodes dynamically, provide all Ariel commands as full copy-paste scripts with a status command, and publish experiment code only after full relevant GPU verification and a stable no-further-fixes decision.
+> Continue the CAST paper-vs-official-source medical VLM research from GitHub branch `janthonio03/medical-ai-proj:paper_vs_open-source`. Read `README.md`, `docs/CONTINUATION.md` and `docs/EXPERIMENT_LOG.md` first; STEP64A multimodal GPU Job 495057 confirmed the FA2 mask/position issues; STEP64A frozen source is uploaded and verified; next evaluate STEP64B BF16/FA2 bias feasibility (sacct DB timeout is not a GPU failure) BF16/FlashAttention2 paper-aligned suppression feasibility. Keep Official CAST architecture with minimal documented changes, use only ariel-v6–v12 nodes dynamically, provide all Ariel commands as full copy-paste scripts with a status command, and publish experiment code only after full relevant GPU verification and a stable no-further-fixes decision.
