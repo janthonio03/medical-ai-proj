@@ -1,180 +1,139 @@
-# Localization-Error Sensitivity in Region-Guided Medical VLM Inference
+# CAST: Paper vs Open Source — Fidelity Audit & Controlled Ablation
 
-Code for the KSC paper:
+> **Last documented:** 2026-11-19 (Asia/Seoul)  
+> **Project:** MICCAI 2026 CAST reproduction and investigation of the differences between its paper and public implementation  
+> **GitHub branch:** `paper_vs_open-source` (separate from `main`)  
+> **Status:** STEP 61, 62, 63 verified at their stated scope; STEP 64A multimodal preflight passed, GPU validation **not yet confirmed here**. **No new experiment code is released until GPU validation and final review.**
 
-**의료 시각언어모델의 영역 기반 추론 방법에 따른 위치 추정 오류 민감도 분석**  
-**Effects of Analyzing Sensitivity to Localization Errors in Region-Guided Inference for Medical Vision-Language Models**
+**NEW CHAT / NEW RESEARCHER: Start with [docs/CONTINUATION.md](docs/CONTINUATION.md), then [docs/EXPERIMENT_LOG.md](docs/EXPERIMENT_LOG.md).** This branch is the durable project handoff. Do **not** assume a locally existing Ariel script was uploaded simply because the path is documented. To get the current operational state, check Slurm and the reports as directed below.
 
-This repository contains only the paper-specific analysis, statistics, perturbation, and figure-generation code used in the final study.
+## 1. Assignment and primary research question
 
-## Study overview
+Professor-assigned task: **Compare CAST's paper claims with the author's published open-source implementation, identify discrepancies, implement a minimally modified paper-aligned version, and evaluate how the discrepancies affect SLAKE performance.** This is *not* a request to train a new model.
 
-We analyze how localization errors affect two region-guided inference methods for medical VLMs:
+Keep three concepts strictly separate:
+1. **Official-source fidelity:** What does the unmodified author source specify? If it cannot run as written with the released processor, document required compatibility patches separately.
+2. **Paper-aligned candidate implementation:** Keep the official evaluation architecture wherever feasible; change only details required by the published method; distinguish an interpretation of an ambiguous paper specification from proven original author behavior.
+3. **Controlled causal ablations:** Attribute differences to ROI Selection, Attention Suppression, or Temporal Contrast with the checkpoint, precision, backend, processor, input, decoding settings and metrics held constant.
 
-- **Contrastive Region Guidance (CRG)**
-- **Prompt Highlighter (PH)**
+Reference links:
+- [CAST official GitHub](https://github.com/csyifan/CAST)
+- [Official SLAKE evaluator](https://github.com/csyifan/CAST/blob/main/evaluate_slake.py)
+- [Official MIMIC evaluator](https://github.com/csyifan/CAST/blob/main/evaluate_mimic.py)
+- [ARegionCD reference implementation](https://github.com/ecoxial2007/ARegionCD)
+- Phi-3.5-vision-instruct base and Phi-3.5V-Med LoRA used in the Ariel run (exact local checkpoints, revisions and hashes are recorded/checked in local plans and reports).
 
-The main evaluation uses the VinDr-based HEAL-MedVQA training split and the same **3,706 open-abnormal questions** for all paired comparisons.
+**Source-fidelity caveat:** Official `evaluate_slake.py` explicitly loads the model with `torch_dtype=torch.bfloat16` and `_attn_implementation='flash_attention_2'`. This was also **dynamically verified** in STEP 63 for the installed Phi-3.5V model. Do not call FP32/Eager an "official" execution.
 
-The study has two parts:
+## 2. Suspected paper/source discrepancies
 
-1. **GT ROI -> MAIRA-2 predicted ROI replacement**
-2. **Controlled GT-ROI area perturbation**
+| Factor | Public source path / observation | Paper-aligned target | Current evidence |
+|---|---|---|---|
+| **ROI Selection** | Public selection path accesses the dataset **GT answer text** to rank candidate masks (this is distinct from a GT ROI mask). | Produce a **Draft Answer** from image + question without GT, then select among the **same cached MedSAM3 candidate masks**. | Previous STEP 52 / 60B audits; full performance attribution pending. |
+| **Spatial Attention Suppression** | Public mask construction uses 0.01 on highlighted positions and 3.0 elsewhere as a **2D mask** passed through Phi FlashAttention2. | Ensure weights truly act on **attention scores**, with ROI / non-ROI visual-token scope and text unaffected, unless the original paper/source establishes otherwise. | STEP 61 CPU candidate audit, STEP 62 FP32/Eager mechanistic GPU test, STEP 63 Official BF16/FA2 structural GPU test. |
+| **Temporal Contrast** | Not found on Official SLAKE evaluation generation path in the inspected public source. | Apply paper's temporal logit correction after CFG: `l_final(t) = 1.0*l_CFG(t) - 0.5*l_CFG(t-1)`; define first-step behavior and token alignment explicitly. | STEP 53/59 candidate implementation exists locally; final controlled performance validation pending. |
+| **Processor** | Official evaluator asks for ROI-specific processor kwargs/fields absent from stock Phi Processor. | Retain author's processor call interface; document minimal ARegionCD-derived compatibility substitution and prove token/highlight alignment. | STEP 57 compatibility audit and STEP 62/64A local processor path. |
+| **Evaluation/score accounting** | Potential inconsistencies in overall aggregation and exact reproducer setup. | Match dataset split, 1,061 SLAKE evaluation samples where applicable, decoding limits, metrics, checkpoints, and preprocessing. | Audit before final comparisons. |
 
-For MAIRA-2 localization, the final anatomical queries are:
+### Spatial operator currently validated only as a *candidate*
 
-- Aorta -> `Thoracic aorta.`
-- Heart -> `Cardiomediastinal silhouette.`
-
-Controlled ROI area ratios are:
-
-`0.25, 0.5, 1, 1.5, 2, 3, 5`
-
-For ratio < 1, the perturbation keeps the deepest GT pixels, so IoP = 1 and IoG decreases.  
-For ratio > 1, the perturbation preserves all GT pixels and adds nearby background, so IoG = 1 and IoP decreases.
-
-## ROI metrics
-
-For GT ROI `G` and comparison ROI `R`:
-
-- Area ratio: `|R| / |G|`
-- IoG: `|R ∩ G| / |G|`
-- IoP: `|R ∩ G| / |R|`
-- IoU: `|R ∩ G| / |R ∪ G|`
-
-IoG corresponds to ROI recall, while IoP corresponds to ROI precision.
-
-## Main results
-
-### GT ROI vs MAIRA-term ROI
-
-| Method | ROI | Precision | Recall | micro-F1 | Delta F1 |
-|---|---|---:|---:|---:|---:|
-| CRG | GT | 0.670 | 0.417 | 0.514 | - |
-| CRG | MAIRA-term | 0.670 | 0.426 | 0.521 | +0.709 pp |
-| PH | GT | 0.638 | 0.459 | 0.534 | - |
-| PH | MAIRA-term | 0.621 | 0.449 | 0.521 | -1.248 pp |
-
-Paired-bootstrap interaction:
-
-`DeltaDelta F1 = +1.957 pp, 95% CI [+1.200, +2.715]`
-
-### Controlled 5x ROI expansion
-
-- CRG: `+0.210 pp`, 95% CI `[-0.402, +0.821]`
-- PH: `-8.489 pp`, 95% CI `[-9.365, -7.618]`
-- Interaction: `+8.699 pp`, 95% CI `[+7.631, +9.776]`
-
-CRG remains relatively stable over ROI enlargement, while PH degrades strongly under over-localization.
-
-## Repository structure
-
+In STEP 61/62 the proposed unconditional-branch additive bias was:
 ```text
-.
-├── README.md
-├── requirements.txt
-├── .gitignore
-└── scripts/
-    ├── roi_geometry.py
-    ├── evaluate_open.py
-    ├── statistics.py
-    ├── maira_term_analysis.py
-    ├── select_qualitative_cases.py
-    ├── plot_roi_scale.py
-    └── make_qualitative_figure.py
+valid ROI visual key:         + log(0.01)
+valid non-ROI visual key:     + log(3.0)
+text / other valid key:          0
+padding / blocked key:       preserve blocking
+conditional branch:          unchanged
 ```
+This is a **specific proposed reading of the paper**, not proof that the authors used exactly this token partition. Original STEP 59/60C paper-style path applied ROI-only `log(0.01)` and **did not implement separate beta=3.0**: do not present it as a complete paper-aligned performance measurement. Prior user decision: do **not** add an unrelated beta=1 comparator solely for its own sake.
 
-## Scripts
+## 3. Critical verified findings — with boundaries
 
-### `roi_geometry.py`
+### STEP 61 — CPU unit audit (passed)
+Eight named tests passed, including conditional unchanged, unconditional ROI/non-ROI bias, no generated-text-key modification, input validation, padding/position preservation, text highlights excluded, expected softmax direction, and degenerate ROI/non-ROI partition. Local source: `CAST-step61-paper-audit/step61_spatial.py`. This does **not** validate FA2.
 
-Implements:
+### STEP 62 — model-level mechanistic GPU audit (passed)
+- Ariel Slurm Job **494996**, sample `slake-en-test-0318`.
+- **FP32 / Eager** on NVIDIA RTX A5000, 32 decoder layers, 1 generation-token step; 129 ROI visual tokens and 2,380 non-ROI visual tokens.
+- Conditional mask unchanged at all 32 layers; unconditional mask changed at all 32; padding mask and position IDs equal across branches; GT answer / dataset annotations not passed to the decoder.
+- Same-score softmax comparisons recorded a ROI-mass decrease and non-ROI visual mass increase in **some heads**. Beware that strict head-count comparisons can count float roundoff; measure deltas with tolerances before strong magnitude claims.
+- Max absolute branch logits delta **1.2394787073135376**; both argmax token IDs **3869**; peak GPU allocation **21.252 GiB**.
+- Report: `results/step62-phi-audit/step62-494996.json`. **Mechanistic test only, not official/paper reproduction and not BF16/FA2 verification.**
+- Initial STEP 62 launch (Job 494678) hung due to incorrect SHA256 iterator EOF sentinel `''` vs `b''`; canceled. Subsequent fixed script passed: `CAST-step62-phi-probe/step62_probe_fixed.py`. Preserve this incident as an anti-regression check.
 
-- RLE mask decoding
-- area ratio
-- IoG
-- IoP
-- IoU
-- controlled ROI shrinking/expansion
+### STEP 63 — public-path structural GPU audit (confirmed)
+- Ariel Slurm Job **495028**, **BF16 / FlashAttention2**, torch 2.3.0+cu121, transformers 4.43.0, RTX A5000; 32 FA2 layers.
+- **Text-only, positive-mask structural test**, not actual SLAKE image/ROI evaluation.
+- Weighted mask of shape `[2,8]`, values `0.01..3.0`, all positive, reached first FA2 layer as **`None`**.
+- With identical token inputs and controlled positions, **max/mean logits delta = 0.0**; both argmax token IDs 32007.
+- Nonbinary weighted mask changed generated `position_ids` for one branch; `generate()` raised the Phi FA2 padding-side guard `ValueError` despite tokenizer configured left-padding. The actual issue is nonbinary mask semantics, not evidence that the tokenizer was right-padded.
+- Five structural checks all true; `status=CONFIRMED`. Report `results/step63-official/step63-495028.json`.
+- **Do not infer** from a text-only test that all multimodal Official CAST runs behave identically. STEP 64A exists to test that boundary.
 
-This is the core implementation for the controlled perturbation experiment.
+### STEP 64A — real SLAKE multimodal Official-path probe (in progress)
+- Intended sample `slake-en-test-0318`, image + previously saved strict ROI, BF16/FA2 Official-style positive masks.
+- CPU preflight was reported **PASS** after fixing the import from invalid `step59_paper.load_processor` to **`from repro.phase2_common import load_processor`** by adding `CAST-step60c-eval` (not its `repro` subdir) to `sys.path`.
+- Local code `CAST-step64a-official/probe.py`, local results `results/step64a-official`, Job ID recorded at `latest_jobid.txt` **only if GPU was submitted**.
+- **GPU submission/completion/results NOT established at this documentation checkpoint.** Do not mark the experiment passed or upload its implementation as stable until the actual report/Slurm evidence is reviewed.
+- Important caution: STEP 64A is a structural test with a cached strict ROI; **it does not rerun the Official GT-answer ROI Selection**. The local processor is a documented compatibility substitution, not unmodified stock Official.
 
-### `evaluate_open.py`
+## 4. Historical work not to mislabel
 
-Computes:
+- **STEP 60B:** selection manifest reportedly completed at **1,061 records**; local `results/step60b-selection/` and `full_roi_manifest.jsonl`, verify full manifests/receipts before reuse.
+- **STEP 60C:** prior 4-GPU evaluation array was **user-canceled** because public vs paper paths were confounded by precision/backend and incomplete method fidelity. Partial outputs remain under `results/step60c-full-256-slurmfix/`; **do not compare their accuracies causally**.
+- Previous reported per-path counts: paper-spatial-temporal **1,061/1,061**, paper-neutral **843/1,061**, public-auto **447/1,061**, public-null **265/1,061** (recorded historical counts, not a live status).
+- Old "paper-spatial-temporal" used **FP32/Eager, Draft ROI, ROI-only alpha bias (no beta=3 non-ROI), and temporal**. Public run used **BF16/FA2** with documented compatibility/guard patches. This is **not** a matched paper-vs-open-source benchmark.
+- Other worktrees and STEP 49–59 are described in [experiment log](docs/EXPERIMENT_LOG.md).
 
-- precision
-- recall
-- micro-F1
-- exact-set accuracy
+## 5. Experimental comparison design
 
-Input JSONL rows must contain:
+**Primary design target (subject to engineering feasibility):**
+- Official-source fidelity baseline: follow published BF16/FlashAttention2 code; record every compatibility patch explicitly rather than silently changing algorithm.
+- Paper-aligned: **same model/LoRA, BF16, actual FA2 backend, processor/input construction, candidate proposals, token budget, metric and dataset**; modify only the paper/source-discrepant steps.
+- If exact ROI bias cannot be realized by the installed FA2 kernel, **do not label Eager or another kernel as FA2**. Investigate an explicit alternative or report a BF16/Eager controlled study **separately**, not as exact Official parity.
+- Controlled factorial design: ROI target `GT answer / Draft answer` × Attention `public behavior / verified paper candidate` × Temporal `off/on` (up to 8 conditions when both levels can run in the **same backend/precision**). Preserve candidate masks and sample IDs across conditions; include interaction effects and per-sample paired outputs.
+- The term "annotation-free" must apply to the **whole path**. GT may be used for scoring, never for draft generation, proposal ranking, decoder inputs or hidden shortcuts in the paper-aligned strict run.
+- Keep a small 1-GPU multimodal audit/pilot before any 1,061-sample full run. Verify exact per-token behavior and output parity where expected.
 
-```text
-question_id
-gt_labels
-pred_labels
-```
+## 6. Ariel infrastructure and paths
 
-### `statistics.py`
+- **Ariel working directory**: `/nas2/data/janthonio03/maip/cast-rebuild`. Shell commands assume this is `$PWD`; do not introduce a `ROOT` variable, prefix files with `~/`, or move paths unexpectedly.
+- **Python**: `.envs/cast-phi/bin/python` (Python 3.11; system `python3` is not this environment).
+- **Hardware**: ariel-v6 to ariel-v12 **only**, 1 GPU per exploratory job, RTX A5000-class 24 GiB observed; partition `batch_ugrad`; prefer first feasible available **allowed** node. Do **not** use `--nodes=1 --nodelist='ariel-v[6-12]'`: on this cluster it led Slurm to require 7 nodes. Use dynamically computed `--exclude` for non-allowed nodes, or an administrator-confirmed compatible node feature.
+- **Typical Slurm resources**: `--gres=gpu:normal:1 --cpus-per-gpu=8 --mem-per-gpu=32G` when eligible; adjust walltime for audit scale and QoS.
+- **Progress reporting is mandatory with future GPU experiment code**: supplied command must show job state, completed vs total records or named steps, remaining work, failure counts, recent throughput and ETA **when meaningful**, stdout/stderr and output report paths. Use unbuffered `python -u`, emit flushable `STEPxx_STAGE` markers; an N-stage counter is **not** a fraction of elapsed time.
+- **No additional full-evaluation GPU submissions** without confirming a small pilot, resource feasibility and user's intended comparison design.
+- **Server root is not itself a Git repository**. Code lives in several nested worktrees:
+  - `CAST-repro/` (historical base)
+  - `CAST-spatial-step51/`
+  - `CAST-step59-eval/`
+  - `CAST-step60c-eval/` — contains `repro/phase2_common.py`, `repro/step53_inputs.py`, `repro/step59_paper.py`, etc.
+  - `CAST-step61-paper-audit/`, `CAST-step62-phi-probe/`, `CAST-step63-official/`, `CAST-step64a-official/` (standalone local audit directories)
+- Do not assume this GitHub branch is checked out in any of those worktrees; this is a separate GitHub research repository until explicitly cloned/pulled.
 
-Implements:
+## 7. GitHub governance — mandatory release gate
 
-- paired bootstrap with 20,000 resamples
-- paired permutation test with 10,000 permutations
-- CRG-vs-PH interaction bootstrap
+**User instruction:** **Do not commit/push experiment source code immediately after writing it.** Source code may be added to this branch **only after**:
+1. CPU syntax/unit tests and source/processor/checkpoint validation pass.
+2. Intended **actual GPU dynamic verification** finishes (Slurm terminal state + report + stdout/stderr reviewed); experiments that intentionally only test CPU behavior must be labeled as such, never silently promoted.
+3. Scientific validity and source fidelity are reviewed (dtype/backend actually observed; no accidental GT leakage; positional/padding behavior; same-input controls and expected invariants).
+4. No additional code modification is judged necessary for the release candidate.
+5. Version is frozen: record exact source SHA256, dependency versions, model/LoRA hashes or manifest IDs, Slurm Job IDs, immutable report/evidence pointer, and a concise Official-vs-modified diff rationale.
 
-### `maira_term_analysis.py`
+Documentation may be updated while experiments are underway; **unverified source stays on Ariel and does not enter the GitHub branch.** Never upload model weights, large images, medical datasets, user/secret tokens, private file contents, or raw personally sensitive logs. Preserve external licenses and provenance; do not silently vendor/copy the entire Official CAST or ARegionCD repository.
 
-Summarizes MAIRA-2 detection rate and bbox IoU for the terminology analysis.
+**Current branch code-publication status:** no new CAST experiment source has been published on this branch at this handoff; this is intentional pending release review. Existing `main` KSC study code was inherited on branch creation and is unrelated to the CAST audit.
 
-### `select_qualitative_cases.py`
+## 8. Next actions / resume without conversation history
 
-Filters the clean qualitative failure cases used for Section 4.3:
+Read [docs/CONTINUATION.md](docs/CONTINUATION.md) for exact commands and a first-10-minutes checklist; then consult [docs/EXPERIMENT_LOG.md](docs/EXPERIMENT_LOG.md).
 
-- both CRG and PH are correct with the GT ROI
-- CRG remains correct after ROI replacement/perturbation
-- PH becomes incorrect
+1. Check `results/step64a-official/latest_jobid.txt` **if it exists**, `squeue`, `sacct`, `step64a-<job>.json`, and `slurm-<job>.{out,err}`; confirm the **GPU** outcome; never infer from CPU preflight.
+2. Inspect STEP 64A first FA2 attention masks, branch position mismatch, explicit position-controlled logits delta, generate guard, real image token/ROI highlight counts. Compare only within its stated test scope.
+3. If valid, move to **STEP 64B**: test a *minimal, mathematically verified* way to apply ROI/non-ROI token-specific additive attention bias in BF16 **while retaining the actual FA2 kernel**. First inspect installed Phi and FlashAttention APIs and available hardware; don't assume stock FA2 supports arbitrary 4D bias. If impossible, document infeasibility and separate BF16/Eager alternative; never mislabel.
+4. Only after **GPU-verified stable** STEP 64B: integrate minimal paper-aligned changes with Official architecture; implement strict Draft ROI Selection and Temporal Contrast; verify paired pilots; perform full 2×2×2 ablation if feasible.
+5. Update README + experiment log on every **verified research milestone**; commit vetted source only after the release gate above.
 
-The paper qualitatively inspects 10 representative cases:
-5 real MAIRA-ROI cases and 5 controlled 5x-ROI cases.
+## 9. Previous repository research
 
-### `plot_roi_scale.py`
-
-Reproduces the ROI-area robustness curve used in Figure 2.
-
-### `make_qualitative_figure.py`
-
-Creates the representative GT / MAIRA / controlled-5x qualitative visualization used in Figure 3.
-
-## Environment
-
-Install the analysis dependencies with:
-
-```bash
-pip install -r requirements.txt
-```
-
-The final VLM experiments used:
-
-- `microsoft/llava-med-v1.5-mistral-7b`
-- VinDr LoRA checkpoint used in the project
-- CRG alpha = 1
-- PH attention weight = 5
-- PH CFG scale = 2
-- PH perturbation weight = 0.01
-- greedy decoding
-- max generation length = 128
-- seed = 0
-
-Open-ended generations were mapped to 14 finding labels with `Llama-3.1-8B-Instruct` before metric computation.
-
-## Data and checkpoints
-
-Raw HEAL-MedVQA / VinDr-CXR data, MAIRA-2 outputs, model checkpoints, LoRA weights, generated predictions, and experiment logs are not committed.
-
-The scripts operate on locally prepared JSONL prediction/localization files.
-
-## Scope
-
-CRG, Prompt Highlighter, LLaVA-Med, MAIRA-2, and the Llama label extractor are external methods/models. This repository keeps only the code required for the final paper-specific localization-error analysis and figure reproduction.
+The branch was created from `main`, which documented an earlier KSC ROI robustness paper. Its README is preserved at [docs/PREVIOUS_KSC_README.md](docs/PREVIOUS_KSC_README.md). Keep that project distinct from this CAST assignment.
