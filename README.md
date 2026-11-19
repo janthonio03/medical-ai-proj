@@ -87,6 +87,14 @@ Eight named tests passed, including conditional unchanged, unconditional ROI/non
 - **Scope limit:** these are synthetic Q/K/V kernel tests; **not** the Phi-3.5V model's projection, RoPE, per-token ROI mapping, KV cache, Official/CAST inference, or SLAKE metric verification. ROI/non-ROI probability mass checks were computed from explicit FP32 reference probabilities, while FA2 numerical outputs were tested against that reference; no FA2 internal attention matrix was captured.
 - **Next STEP64C:** integrate an auditable **BF16/actual FA2** ROI bias in the Phi-3.5V unconditional Attention path, preserving source structure and correct RoPE/KV cache/positions/padding; validate on real SLAKE image before any full inference.
 
+### STEP 64C — real-Phi BF16/FA2 model-integration probe (**GPU pending**)
+
+- **Prepared local experiment only; source NOT committed yet.** Artifact `step64c_phi_fa2_probe.py` (Ariel destination `CAST-step64c-phi-fa2/probe.py`), authored SHA256 `9105fe10673f2c29bee012e8cc9739ccd631e23af11481e21e49789181320003`. Local Python syntax and standalone CPU float64 QK identity tests pass (maximum identity error ~1.78e-15); **Ariel CPU preflight and actual GPU execution not yet performed**.
+- Loads exactly the same real SLAKE sample `slake-en-test-0318`, model/LoRA plan and ARegionCD-derived processor compatibility loader as STEP64A; uses explicit binary attention mask and shared position IDs.
+- Patch point: `Phi3FlashAttention2._flash_attention_forward`, **after** original QKV projection, RoPE, and KV cache updates. Neutral branch calls original function unchanged; paper-candidate weighted branch augments Q/K/V from 96→104 and passes explicit softmax scale to the same real FA2 function. Key partition: negative image-token placeholders & ROI highlight = 0.01; remaining negative image placeholders = 3.0; textual positions = 1.0.
+- GPU tests planned: 32-layer native FA2/neutral parity, 32-layer augmented FA2 calls, nonzero modified branch logits, first-layer real post-RoPE QKV vs FP32 explicit score-bias reference, reference-only ROI/nonROI attention mass direction, one-token cached decode, cache length, cache-vs-full-recomputation logits parity.
+- **Important:** Layer-0 reference mass is calculated from FP32 reference attention, **not read from the FA2 kernel**. This is a **single sample / single decode token integration probe**, not end-to-end CAST generation or a full performance comparison. If GPU report identifies bugs or unacceptable error, revise and rerun before GitHub code promotion.
+
 ## 4. Historical work not to mislabel
 
 - **STEP 60B:** selection manifest reportedly completed at **1,061 records**; local `results/step60b-selection/` and `full_roi_manifest.jsonl`, verify full manifests/receipts before reuse.
