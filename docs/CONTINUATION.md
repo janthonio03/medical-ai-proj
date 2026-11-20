@@ -252,7 +252,7 @@ Next gates: inspect NPZ metadata/phase2 producer trace without executing generat
 
 ## STEP66 candidate prepared — real zero-ROI Native vs Spatial CFG BF16/FA2 pilot, GPU pending
 
-A new user-facing script step66_zero_roi_cfg_probe.py was created at SHA256 c85b35e6dc8621126891be884b8dd9f5c7fbc9e0532f8f9c1b6bd5fe2e79570f. Python compile and offline CPU synthetic selftest passed, but **Ariel plan/ROI preflight and GPU execution are not yet run; source is intentionally NOT committed as verified**.
+A new user-facing script step66_zero_roi_cfg_probe.py was created at SHA256 880d478d4eebd6e011b4002b579e794a4137485f9655038bdfd079368657ca03. Python compile and offline CPU synthetic selftest passed, but **Ariel plan/ROI preflight and GPU execution are not yet run; source is intentionally NOT committed as verified**.
 
 The candidate checks exact frozen STEP64D/V3 source SHAs plus both source STEP60B plan SHA (1643e0846e560ce67f651b03fcc1e7196f74161635c6528778d224115b2088dd) and STEP60C plan SHA (7de204c98ccfbb41cbd10d73ae0c0e7af42c94127d09822649b564dfc8e84403), STEP60B manifest SHA, original zero-cache NPZ bytes, and zero-pixel ROI. The frozen model, cached branch, and QK attention bias remain unchanged. Only a module-local replacement inputs_for prepares true empty-mask processor input with mask_values=[0], zero bbox, no highlights, weights beta=3 on all image keys, 1 on text, and no alpha=0.01 ROI keys.
 
