@@ -238,3 +238,13 @@ Investigate candidate ways to implement a genuinely additive ROI score bias with
 - 9 inherited STEP52 pilot: 8 selected, 1 skipped; 1052 new STEP60B: 946 selected, 106 skipped. This resolves earlier 214 raw issue labels as two expected missing-target checks on each of 107 skipped cases, not evidence of hidden GT ranking.
 - Prior STEP65D: 1061/1061 final ROI content and .npy-file SHA linkage, all manifest GT use flags false (declarations not executable proof).
 - **Pending:** Link 107 question IDs to unique original-image hashes and actual proposal cache/candidate postfilter records; determine whether detector failed or upstream/downstream suppression occurred; run separate zero-mask decoder test before full SLAKE eval. No change to ROI files or selection source from this audit.
+
+## STEP65F — question-level skips resolve to exactly nine fully skipped images (read-only)
+
+User-run 96-image, 1,061-question cross-tab:
+- All 1,061 rows carry an original image SHA (0 missing). **96 unique image SHA256**, **96 unique proposal-cache SHA256**. Within each image SHA group, **proposal cache SHA is constant** (0 image groups have >1 cache SHA).
+- **Exactly 9 / 96 unique images (9.375%)** have one or more skipped questions; **all 9 have every question skipped**, **0 mixed-status images**.
+- These 9 images account for **107 / 1,061 questions (10.085%)** with zero scored proposals and zero ROI from STEP65E. Distribution of skipped question counts by image: 5×1 image; 9×1; 10×2; 11×1; 14×3; 20×1; sum 107.
+- Correspondingly 87/96 images have successful Draft-based ROI candidate selection across their 954 linked questions. This pattern strongly suggests an **image-level candidate supply/pre-filter failure**, not an independent question-level scorer failure; **does not yet distinguish raw MedSAM3 yielded zero vs filters eliminated all masks**, or identify a causal model failure.
+- **Critical next gates:** inspect the stored proposal-cache file and generator/postfilter trace for these 9 images (read-only) to distinguish raw vs retained candidate counts and causes; ensure `proposal_cache_sha256` is actually tied to proposal data. Then test **zero ROI decoding** with the already validated frozen paired-cache CFG engine, since a zero ROI does **not imply vanilla/no-guidance** if background visual tokens retain non-unit attention scaling.
+- Do not equate the 107/1,061 **question-level** failure percentage with 9/96 **image-level** percentage; do not claim annotation-free fully established or paper metrics reproduced from these audits.
