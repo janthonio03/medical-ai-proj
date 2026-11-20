@@ -1,5 +1,12 @@
 # Continuation / New-chat runbook — CAST paper vs open source
 
+## Latest completed analysis — historical ROI-stratified paired scores
+
+Empty ROI (107): CLOSED +6.38 points, OPEN +8.25; mixed +7.43. Nonempty ROI (954): CLOSED +5.15, OPEN -2.92; mixed +0.20. Empty-ROI questions contribute about **80.67% of the overall net mixed-score gain** (arithmetic accounting, not causal attribution).
+This does not prove ROI grounding or hallucination mitigation. Do not apply the later beta-only explanation to the historical ROI-only-alpha implementation. Detailed values/limits: [paired metrics](../experiments/step68/PAIRED_METRICS.md).
+Historical aggregation and ROI stratification are complete. Next gate is a small controlled BF16/actual FA2 end-to-end pilot with matched Neutral / Spatial-only / Temporal-only / Spatial+Temporal; source integration and verification precede new full inference. No new job submitted. Earlier ROI-stratification-pending notes are superseded.
+
+
 ## Latest metrics — STEP68 paired aggregation complete
 
 The 1061-question paired historical cohort has been scored. CLOSED substring success: **67.55 → 72.84 (+5.29 points; n=416)**. OPEN reference-token recall: **44.01 → 42.13 (-1.88 points; n=645)**. Overall mixed score: **53.24 → 54.17 (+0.93 points)**. ST-higher/tie/Neutral-higher: CLOSED 30/378/8; OPEN 66/494/85; overall 96/872/93.

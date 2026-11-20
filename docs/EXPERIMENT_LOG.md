@@ -382,3 +382,40 @@ The 1061-question paired historical cohort has been scored. CLOSED substring suc
 **OPEN is token-set recall, not F1; CLOSED is substring inclusion, not strict semantic accuracy.** No hallucination-reduction claim follows from these scores. Historical FP32/Eager and joint spatial+temporal caveats remain.
 Complete semantics, exact values, limits and next ROI-stratification step: [paired metric record](../experiments/step68/PAIRED_METRICS.md). This supersedes earlier 'aggregation pending' notes; ROI-stratified metrics remain pending.
 
+
+## Latest completed analysis — historical ROI-stratified paired scores
+
+Empty ROI (107): CLOSED +6.38 points, OPEN +8.25; mixed +7.43. Nonempty ROI (954): CLOSED +5.15, OPEN -2.92; mixed +0.20. Empty-ROI questions contribute about **80.67% of the overall net mixed-score gain** (arithmetic accounting, not causal attribution).
+This does not prove ROI grounding or hallucination mitigation. Do not apply the later beta-only explanation to the historical ROI-only-alpha implementation. Detailed values/limits: [paired metrics](../experiments/step68/PAIRED_METRICS.md).
+Historical aggregation and ROI stratification are complete. Next gate is a small controlled BF16/actual FA2 end-to-end pilot with matched Neutral / Spatial-only / Temporal-only / Spatial+Temporal; source integration and verification precede new full inference. No new job submitted. Earlier ROI-stratification-pending notes are superseded.
+
+
+## ROI-stratified paired metrics — completed (user Ariel output)
+
+CPU-only read of existing strict ROI artifacts and stored result receipts completed with **STEP68_ROI_STRATIFIED_METRICS_COMPLETE**. Coverage exactly **107 empty ROI + 954 nonempty ROI = 1061**. The supplied script required a current mask-file/raw-array/binary-array SHA to match a declared ROI/mask-related hash in each plan sample and validated both completion receipts per question. This is hash/coverage evidence for the grouping; it does not alone establish a newly executed attention trace or absence of all upstream annotation leakage.
+
+Scores are stored means ×100; OPEN is reference-token recall and CLOSED is substring success.
+
+| ROI group | Type | n | Neutral | Spatial+Temporal | Delta points | ST higher | Tie | Neutral higher |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| Empty | Mixed | 107 | 50.2180685358 | 57.6479750779 | +7.4299065421 | 14 | 86 | 7 |
+| Empty | CLOSED | 47 | 72.3404255319 | 78.7234042553 | +6.3829787234 | 3 | 44 | 0 |
+| Empty | OPEN | 60 | 32.8888888889 | 41.1388888889 | +8.2500000000 | 11 | 42 | 7 |
+| Nonempty | Mixed | 954 | 53.5773162896 | 53.7770108997 | +0.1996946101 | 82 | 786 | 86 |
+| Nonempty | CLOSED | 369 | 66.9376693767 | 72.0867208672 | +5.1490514905 | 27 | 334 | 8 |
+| Nonempty | OPEN | 585 | 45.1500166500 | 42.2278092278 | -2.9222074222 | 55 | 452 | 78 |
+
+Checks reconcile exactly: subgroup n sum to overall and answer-type coverage; higher/tie/lower counts sum to 96/872/93 overall, 30/378/8 CLOSED and 66/494/85 OPEN.
+Weighted contributions to the overall +0.9288488765-point mixed-score difference:
+- Empty ROI: 107/1061 × 7.4299065421 = **+0.7492931197 points**, about **80.67% of net gain**.
+- Nonempty ROI: 954/1061 × 0.1996946101 = **+0.1795557568 points**.
+This is an arithmetic decomposition of this mixed score, not a causal effect decomposition.
+
+## Updated interpretation and next experiment gate
+
+CLOSED improves in both groups. OPEN improves on empty ROI but worsens on nonempty ROI; the overall OPEN decline is concentrated in the latter. The nonempty group's mixed gain is only +0.20 points, as CLOSED gains offset OPEN losses.
+Improvement on empty masks cannot demonstrate useful selected-anatomy grounding. Temporal correction, CFG execution/numerical paths and scoring behavior remain candidate explanations; these aggregate data do not isolate any one of them. In the **historical STEP60C ROI-only-alpha implementation**, separate beta=3 was absent: **do not transfer the later STEP66 BF16/FA2 beta-only empty-ROI explanation to this historical run**.
+Earlier provenance work maps 107 empty-ROI questions to nine images. Questions share images; do not treat them as 107 independent image failures, attribute the group difference causally to mask emptiness, or assert significance without an appropriate paired/image-cluster uncertainty analysis.
+CLOSED substring success and OPEN token recall cannot establish hallucination mitigation. The selected/nonempty group result also does not establish that all masks selected clinically correct anatomy.
+
+Historical paired aggregate and ROI-stratified analysis are now complete at the documented scope; do not rerun this cohort or resume public arms just to fill the table. Current next gate: inspect/integrate the frozen GPU-validated BF16/actual FA2 paired-cache engine and temporal candidate into a controlled small end-to-end pilot. Keep model, dtype/backend, prompt, processor, ROI files, token budget and scoring fixed; compare Neutral / Spatial-only / Temporal-only / Spatial+Temporal, including empty and nonempty masks, before any new full cohort. Keep GT-target vs Draft-target ROI selection as a separately controlled factor using the same candidate masks. Author/source compatibility patches and remaining strict selection lineage limitations must remain explicit. No new GPU job has been submitted for this next gate.
