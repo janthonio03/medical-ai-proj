@@ -1,5 +1,29 @@
 # Continuation / New-chat runbook — CAST paper vs open source
 
+## CURRENT: STEP69 v1 failed; v2 decoder-case contract fix prepared (GPU PENDING)
+
+Actual user Slurm evidence: array **496880_0..3 all FAILED (1:0)** after **12/13/24/11 seconds**, nodes v8/v12/v8/v8. Each loaded checkpoint/model and then failed on its first Neutral condition in frozen STEP64D `run_case()` at `case['prefix_length']`. Worker first sample IDs 0004/0015/0025/0031. Final status **0/32 completions, four ERROR reports, no awaiting receipts**. `verify` correctly refused the failed pilot. The FA2 CPU-initialization warning is not the observed exception cause. No decoder forward/token generation was reached in these attempts.
+
+**Root cause is the newly authored adapter schema:** preflight stored prefix_length in `selection.inputs`, but worker passed the smaller cohort entry from `selection.cases` to the frozen decoder. This was an adapter omission, not evidence of an upstream model/FA2 failure. Original v1 outputs/logs at `results/step69-factorial-pilot/` and original source `CAST-step69-factorial-pilot/` must be preserved.
+
+New artifact **CAST_STEP69_Factorial_Pilot_v2.zip**, ZIP SHA256 **da3ad0e7a0d119b189dbe55d065b9d64556cab566e84b3d46ddfd5eb27e515da**, driver SHA256 **04507ca9eb20206c0cff46a07552d25ae59a52d06ac8fa99ab4ef3254985302d**. New install `CAST-step69-factorial-pilot-v2/`, new output `results/step69-factorial-pilot-v2/`, job name cast69-factorial-v2. V2 is not a resume of v1 and does not alter its source or frozen experiment manifest.
+
+Fix: normalize decoder cases using processed input identity (id/image SHA/ROI SHA/prefix_length); preflight stores the full normalized case. Check all literal case fields used by frozen run_case/native_greedy via AST; repeat before GPU model loading and at the run_case call boundary. No frozen decoder/attention/score/ROI-method changes. Conditions, 8 distinct-image balanced questions, four workers, max256-token cap and evidence checks remain unchanged.
+
+Local checks passed: Python/Bash syntax; original stdlib tests; literal-case contracts **d.py: id/image_sha256/prefix_length/roi_sha256**, **zero.py: id**; reproduced original KeyError using the actual frozen decoder's first guard expression, then passed it with normalized case; rejected missing prefix, mismatched prefix, invalid length and image identity. **Actual Ariel CPU Processor/tensor preflight and GPU re-execution remain pending. New driver source is NOT published as verified.**
+
+Next commands from cast-rebuild after v2 ZIP hash-check/extraction:
+```bash
+.envs/cast-phi/bin/python -B -u CAST-step69-factorial-pilot-v2/pilot.py selftest
+.envs/cast-phi/bin/python -B -u CAST-step69-factorial-pilot-v2/pilot.py preflight
+.envs/cast-phi/bin/python -B -u CAST-step69-factorial-pilot-v2/pilot.py submit
+squeue -u "$USER" -o "%.18i %.28j %.12T %.24R"
+.envs/cast-phi/bin/python -B -u CAST-step69-factorial-pilot-v2/pilot.py status
+.envs/cast-phi/bin/python -B -u CAST-step69-factorial-pilot-v2/pilot.py verify
+```
+Require `STEP69_DECODER_INPUT_CONTRACT_PASS` and `STEP69_PREFLIGHT_PASS` before submission. Collect returned Job ID, all four accounting State/ExitCode rows and job stdout/stderr before result promotion; final marker remains STEP69_FACTORIAL_PILOT_GPU_VERIFIED only after actual technical/receipt/native/t0 checks and scoring. Earlier v1 launch instructions are historical; do not retry v1 or use its --resume for this fix.
+
+
 ## STEP69 prepared — matched BF16/actual FA2 2x2 pilot, GPU PENDING
 
 New candidate artifact `CAST_STEP69_Factorial_Pilot.zip` was authored; ZIP SHA256 **5d332453c1155583c48efc94b607dba269f983f67bb38b5432344ab411117413**, driver `pilot.py` SHA256 **6e10f6c6fc73da957fa67517a86cc04771b13baef75fd0d2955c31894180d2e2**. Intended Ariel install: `CAST-step69-factorial-pilot/`; outputs: `results/step69-factorial-pilot/`. **No Ariel CPU preflight or GPU job has yet been observed. No new driver source is published here.**
