@@ -8,7 +8,7 @@ Each Neutral and Spatial-Temporal completion was checked with the original valid
 
 The user printed the actual installed `repro.step58_common.normalize_score` source:
 - CLOSED: `float(gt.lower() in pred.lower())` — case-insensitive substring inclusion; not strict exact match, negation-aware correctness, or semantic/clinical correctness.
-- OPEN: lowercase regex `\\b\\w+\\b` token sets; `len(reference & predicted) / len(reference)`. Empty reference returns 1 only when predicted set is empty.
+- OPEN: lowercase regex `\b\w+\b` token sets; `len(reference & predicted) / len(reference)`. Empty reference returns 1 only when predicted set is empty.
 - OPEN is **unique reference-token recall**, not F1, precision or exact-match accuracy. Extra predicted tokens are not penalized; duplicates/order are discarded.
 - Its source comment calls this the public CAST metric; this aggregation step did not independently re-fetch/pin public source to establish exact official equivalence.
 
