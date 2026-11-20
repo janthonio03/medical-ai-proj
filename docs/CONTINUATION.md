@@ -237,3 +237,15 @@ User-run 96-image, 1,061-question cross-tab:
 - User-provided direct nine-image `result.json` traces: `candidate_count=0`, `candidate_count_scored=0`, `selection.control=zero_candidate`, `selector_skipped=true`, policy `all candidates (<=16)`. Their proposal-file SHA strings match per-manifest cache SHA strings. One image was smoke mode (11 questions); eight full mode (96 questions). Counterfactual Scoring was bypassed; **not evidence that raw MedSAM3 outputs were zero**.
 - Local source to inspect: `CAST-step60b-roi/repro/step60b_medsam.py` and `CAST-step60b-roi/cast/proposal_generator.py` `filter_proposals`, plus `step60b_select.py`. Find actual source-plan JSON via `submission_ledger.json.source_plan_sha256`, compare per-image proposal_inventory and source/cache bytes before classifying generator vs filtering failure.
 - Current denominator: 9 of 96 *images*; 107 of 1061 *questions*. Zero ROI must be tested with frozen cached BF16+real FA2 CFG separately, not assumed to equal Vanilla.
+
+## STEP65H — nine zero-proposal cached artifacts, generator-internal cause not yet determined
+
+User-provided read-only Ariel audit matched source plan results/step60b-plan-initial/plan.json SHA256 1643e0846e560ce67f651b03fcc1e7196f74161635c6528778d224115b2088dd with submission_ledger.source_plan_sha256. Plan has 96 proposal inventory entries.
+
+All 9 skipped-image inventory references match existing phase2-cache-485291 .npz files, their SHA256 matches the plan and manifest, and their masks arrays have exactly shape (0,512,512). The empty proposal arrays therefore predate the STEP60B strict Draft-answer Selection and explain 107 no-ROI question fallbacks.
+
+Exact Ariel source SHA256 for step60b_medsam.py: 60e1a5590beeb327e5cb165adf5369a3b7ebda1cc481209b12c331500aee20fd; step60b_select.py: 086e062e61d7ac3cf0a9cc28a574e881df92fcf591edaae6de7ad719c817a098; cast/proposal_generator.py: 651554558ed786c523610dc09b89c34ba1d71e8aa916b984c14b8604be6fc10a.
+
+STEP60B medsam source calls gen.generate(image) and saves returned masks. The MedSAM3ProposalGenerator.generate code performs internal proposal filtering: area ratio 0.001..0.6, NMS threshold 0.9 and morphology. Current evidence CANNOT distinguish zero raw network output from all original masks being filtered. Proposal NPZ metadata and source generation logs have not yet been inspected.
+
+Next gates: inspect NPZ metadata/phase2 producer trace without executing generator; if raw counts unavailable, report undetermined cause or run a narrowly-scoped fresh GPU trace with no overwrite. Separately GPU-validate the frozen BF16/FA2 decoder on a REAL zero-ROI sample: empty ROI need not be native/vanilla decoding because beta non-ROI visual bias can remain. No full SLAKE accuracy or paper-aligned claim yet.
