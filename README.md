@@ -7,6 +7,8 @@
 
 **NEW CHAT / NEW RESEARCHER: Start with [docs/CONTINUATION.md](docs/CONTINUATION.md), then [docs/EXPERIMENT_LOG.md](docs/EXPERIMENT_LOG.md).** This branch is the durable project handoff. Do **not** assume a locally existing Ariel script was uploaded simply because the path is documented. To get the current operational state, check Slurm and the reports as directed below.
 
+**Persistent user operating rules:** [docs/OPERATING_RULES.md](docs/OPERATING_RULES.md) — mandatory completion-result commands, validated-milestone GitHub updates, complete handoff records, up to four concurrent GPUs, and no user-imposed runtime cap.
+
 ## 1. Assignment and primary research question
 
 Professor-assigned task: **Compare CAST's paper claims with the author's published open-source implementation, identify discrepancies, implement a minimally modified paper-aligned version, and evaluate how the discrepancies affect SLAKE performance.** This is *not* a request to train a new model.
@@ -262,3 +264,15 @@ The branch was created from `main`, which documented an earlier KSC ROI robustne
 - **Read-only CPU Job `496252 COMPLETED (0:0)`**; exact [`experiments/step65/provenance_audit.py`](experiments/step65/provenance_audit.py) source SHA256 `b42cd5ebfad13626375c20de186ebc4b8acbdff99e24ef7d51cf846fbb0074f3`, verified blob `b46f687edc01142f04f769e000e738638e0932a5`; details [`experiments/step65/README.md`](experiments/step65/README.md).
 - Actual STEP60B selection manifest **1,061 valid rows** SHA256 `0184ee6f5ac30dbf338acf7cdeadefae9c39518928732cee2895da9beee93692`; STEP60C plan 1,061 samples SHA256 `7de204c98ccfbb41cbd10d73ae0c0e7af42c94127d09822649b564dfc8e84403`. Six prior-pinned real SLAKE images all exist, have strict ROI files, and each match **one** manifest record. All six records **self-report `GT_answer_used=false`** but **none explicitly identify a Draft target**.
 - Audit classification **`PROVENANCE_UNKNOWN_NO_EXPLICIT_TARGET_DECLARATION`**, end-to-end annotation-free **`NOT_PROVEN_BY_STATIC_PROVENANCE_AUDIT`**; metadata is not executed provenance. Official auto use of dataset GT answer was separately verified from public source. **Next:** inspect exact STEP60B producer code/job/ROI-selection receipts and candidate mask hashes. No GT-vs-Draft experiment executed yet.
+
+## Latest handoff correction — STEP68 resume inspection (2026-11-20)
+
+User-provided read-only Ariel output established that the actual existing run's latest ticket is `results/step60c-full-256-slurmfix/batches/4e67ae3a4db94791a365ade68d21ade7.json` (array 491654). Its **actual plan directory is `results/step60c-plan-full-256-slurmfix`**, plan identity `4fb7dbc47e6cb6a84fff5efafa8684c1e9bf3e372db40508a7a42d7835b35608`. Do not substitute the separately documented receiptfix plan when resuming this run.
+
+- Observed source SHA256: common `33e12e104bf042dd387feddac586d3ce3e645f2c577a950dd455ade503ecd55d`; results `ddfe17b382b574b29adffd1a7c518826af35c0c6842f50fe9f16a18a6ce348ec`; submit `20ff7758c4c4987fe10f567188420363f2b338176c1ac61e7c88056207565386`; worker `a2db15fd8ebcfcf33e483d66fc8f1047d7296a4ea31509efab94046b6324568b`. These are user-provided server-source observations; source itself has not been promoted here.
+- `scoped_tasks()` supports only smoke/full. `run_ticket()` independently obtains that full scope before `ordered_tasks()`. Filtering only the submitter cannot restrict workers to paper-neutral. Preserve original plan/source and existing outputs; a condition-restricted resume must enforce the selection in actual workers.
+- The supplied squeue snapshot was empty at inspection time; this is not a live guarantee. Previous raw-output coverage: neutral 960, spatial-temporal 1061, public-auto 529, public-null 352. Missing neutral 101 = 84 nonempty ROI + 17 empty ROI. **Receipt-valid counts are still pending.**
+- Two read-only helper errors occurred: directly executing step60c_submit.py lacked the repro package path; a later helper accessed raw plan.json['plan_sha256'] and raised KeyError. Neither submitted GPU jobs. Original submitter uses `validate_plan()` and its normalized return; do not assume the raw plan JSON has identical fields.
+- Latest revised command, supplied in conversation but **not yet confirmed executed**, first prints `validate_plan/validate_result`, `step60c_job.sh` and `step60c_queue.py`; then calls original `validate_plan(repo, plan_dir, assets=False)`, checks ticket/run identity, and scans existing full completion receipts. Await this output before constructing Neutral-only submission. No new GPU experiment or resume source is validated/released yet.
+- Completing the historical FP32/Eager Neutral cohort remains a historical paired comparison; it does not turn STEP60C into the later BF16/FA2 paper-candidate implementation or isolate spatial vs temporal effects.
+
