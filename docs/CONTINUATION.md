@@ -1,5 +1,18 @@
 # Continuation / New-chat runbook — CAST paper vs open source
 
+## CURRENT — STEP70 CPU input audit PASS; STEP71 full matched run prepared, GPU PENDING
+
+User supplied **STEP70_INPUT_AUDIT_STATUS=CPU_PASS** from `results/step70-input-audit/audit-1795184682346197747.json`: **1061 inputs, empty107/nonempty954, failure_count0**, first_10_failures empty. This completes the full input gate following verified STEP69v3 Job496912. It does not establish a full-cohort GPU result.
+
+Next candidate: **STEP71**, 1061 questions × Neutral/Spatial/Temporal/Spatial+Temporal = **4244 condition outputs**, using four one-GPU workers and fixed BF16/actual FA2, existing strict Draft/empty ROI artifacts, max256, tokenizer EOS32000. The first8 questions are the frozen v3 pilot; all32 exact token comparisons and four worker gates must pass before the remaining1053 are processed. Every question also retains native greedy, paired t0, temporal/cache/attention/input identity checks. Non-canary questions have reference_parity.measured=false.
+
+Artifact `CAST_STEP71_Full_Factorial.zip`, ZIP SHA256 **ea5c005f8c6ac714c9cf4f52cca1c3f0e01555afc89701b73dde298dc9c6a411**; `full.py` SHA256 **67eb04b8ac37609d953bb9b9e26e797c619d818a45f1108ca771a72fbcddc733**. Install `CAST-step71-factorial-full/`; output `results/step71-factorial-full/`. Library file ID `libfile_91496c1c87f881918e05911c44691007`. Local stdlib/concurrent-claim/audit-contract/failure-preservation/dispatch tests and Python/Bash syntax passed. **Ariel prepare, new GPU canary and full results remain unobserved; new STEP71 source is not published as verified.** Original STEP69v3 source and evidence remain unchanged.
+
+Atomic question claims, dynamic stealing, one-case CPU tensor cache, immutable per-condition receipts and sample commitments; valid partial conditions can be reused with explicit --resume. Normal four-condition pairs share an allocation; interrupted/resumed pairs can span allocations and record this per condition. First failure/partial evidence is retained. No automatic retry, overwrite, ROI fallback or regenerated proposals. Submission checks original cluster_policy(4), all user jobs inactive, and sbatch --test-only before a four-element array. Final CPU verification rechecks all4244 outputs,1061 paired commitments, four successful latest workers, canary equality, checkpoint bytes, inputs/logs and stop/control evidence before scoring.
+
+**Next commands and completion evidence:** see [STEP71 runbook](STEP71_RUNBOOK.md). Read the current section before historical pending instructions below. Scores retain CLOSED substring/OPEN reference-token recall; this study isolates spatial/temporal effects conditional on fixed ROI selection, not GT-vs-Draft selection, official unmodified CAST reproduction, or hallucination reduction.
+
+
 ## CURRENT verified — STEP69 v3 Job496912 EOS fix and exact-prefix GPU PASS
 
 User supplied all4 Slurm workers **COMPLETED 0:0**, elapsed **4m48s / 2m31s / 4m03s / 1m51s**, nodes v8/v7/v8/v7. Each worker completed8 conditions; **32/32, errors0**, both markers **STEP69_FACTORIAL_PILOT_GPU_VERIFIED** and **STEP69_V3_TOKENIZER_EOS_AND_PREFIX_VERIFIED**. Selection SHA256 **46f01174097fcde28dec52da441bc36ff215f2cdcd414e427436cb2b61d4b020**.
