@@ -1,5 +1,16 @@
 # Continuation / New-chat runbook — CAST paper vs open source
 
+## Latest observed — STEP69 v2 Job496886 technical GPU PASS; stopping/scoring audit pending
+
+User supplied the actual v2 completion output in an attachment; it has now been read. **496886_0..3 COMPLETED (0:0)**, elapsed **6m06s / 6m40s / 8m56s / 6m08s**, nodes v8/v12/v8/v8. All four workers **GPU_PASS, 8 condition completions each**, total **32/32**, errors0, no awaiting receipts. Final marker **STEP69_FACTORIAL_PILOT_GPU_VERIFIED** and selection identity **1bda5d103e45163596d6929a2dc41fa45336e5c3a01c25c537b348720cec20e7**. The prefix_length integration failure in Job496880 was overcome.
+
+Important anomaly requiring review: **every one of the32 trajectories used256 tokens and eos_reached=false; every stored score=1.0; all paired score contrasts/interaction=0**. This is not evidence of100% clinical accuracy, equivalent trajectories, no decoding intervention, or a successful performance benchmark. Metrics are CLOSED substring and OPEN reference-token recall, potentially saturated by long responses. Supplied log tails show the token32007 predicted as conditional/unconditional argmax at one point while generation continued; this alone is not proof of an incorrect stop rule, especially for temporal output where selected token can differ. Inspect the actual generated token IDs and model/config/tokenizer/generation-config stop definitions before assigning cause.
+
+Technical checks cover real BF16/FA2 paths, native cached shadow, independent caches, neutral-vs-unpatched greedy and temporal alignment as implemented; they do not prove the custom decoder matches the checkpoint's full intended stopping policy. **Hold new driver source promotion/full expansion until stopping/decoding semantics and score saturation are reviewed.** Keep v2 source/results unchanged; no rerun is currently necessary for the CPU audit.
+
+Next read-only step: compare model-config, generation-config and tokenizer EOS/special token IDs; locate them in each stored generated_ids; inspect escaped raw decoded prefixes and first assistant-turn boundary without using labels. Then recompute current scorer on appropriate output boundaries only after the stop policy is justified. Preserve original outputs/scores and record any changed scoring as a separate analysis. Do not silently replace successful raw receipts or classify the current technical PASS as a general quality PASS.
+
+
 ## CURRENT: STEP69 v1 failed; v2 decoder-case contract fix prepared (GPU PENDING)
 
 Actual user Slurm evidence: array **496880_0..3 all FAILED (1:0)** after **12/13/24/11 seconds**, nodes v8/v12/v8/v8. Each loaded checkpoint/model and then failed on its first Neutral condition in frozen STEP64D `run_case()` at `case['prefix_length']`. Worker first sample IDs 0004/0015/0025/0031. Final status **0/32 completions, four ERROR reports, no awaiting receipts**. `verify` correctly refused the failed pilot. The FA2 CPU-initialization warning is not the observed exception cause. No decoder forward/token generation was reached in these attempts.
