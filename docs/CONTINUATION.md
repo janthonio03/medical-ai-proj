@@ -1,5 +1,35 @@
 # Continuation / New-chat runbook — CAST paper vs open source
 
+## CURRENT — STEP69 CPU stop audit confirmed; v3 tokenizer-EOS fix prepared, GPU PENDING
+
+User-supplied completed CPU audit **STEP69_STOP_SCORE_AUDIT_COMPLETE**:
+- Local model config EOS=2; checkpoint generation-config EOS=2; tokenizer EOS=**32000 <|endoftext|>**; chat-end=**32007 <|end|>**.
+- Frozen custom loop reads model.config.eos_token_id and saw no2 in32 trajectories. All32 ran256 tokens. **28/32 contain tokenizer EOS32000 and chat-end32007** before the cap; four contain neither. Raw prefixes confirm post-answer special-token repetition/extra text in examples.
+- Cutting before any inspected first boundary changed **zero scores**; all32 remain1.0. Thus continuation is a real termination defect, but these data do NOT support the hypothesis that it caused the score100 ceiling. Four CLOSED items are Yes/No, four OPEN items are imaging modality (X-Ray/MRI/CT); technical purposive selection and permissive score remain interpretation limits.
+- Official CAST evaluator was freshly inspected and commit-pinned: [evaluate_slake.py lines342–356](https://github.com/csyifan/CAST/blob/9f709e4dce7aa1812a1dc292ed527766b609199f/evaluate_slake.py#L342), Git blob **885ee045c3935f637e32c9a2edcb3d6b311f347f**. It explicitly supplies **eos_token_id=processor.tokenizer.eos_token_id**, and decoded prediction uses **.strip().strip('.')**. Our custom loop's reliance on model EOS2 omitted this explicit override: this is a local reproduction bug, not evidence of a CAST paper/source discrepancy.
+- Public Microsoft [generation_config.json](https://huggingface.co/microsoft/Phi-3.5-vision-instruct/raw/main/generation_config.json) also declares EOS2/pad32000. Do not claim local checkpoint corruption from the config/tokenizer discrepancy. Public model config.json was not retrieved successfully in this inspection.
+
+New candidate **CAST_STEP69_Factorial_Pilot_v3.zip**; ZIP SHA256 **9f1340b07c899c5f382361c37fee6e33a2c4d8ace360f00e325f4844df7e539d**; driver SHA256 **a266802b42a3339a325be52a3ebb0e25c3354923f1b6d5431482f16ac089cec2**. Install `CAST-step69-factorial-pilot-v3/`; output `results/step69-factorial-pilot-v3/`. **CPU local regression passed; Ariel preflight and GPU v3 are not yet observed. New driver source remains unpublished.**
+
+V3 derives EOS from actual Processor and pins32000; **does not add chat-end32007** to the stop set. The unchanged frozen loop/native control read an in-memory model.config EOS shim; original field restored at worker exit, no checkpoint config/source file edits. All four conditions and256-token cap otherwise retained. Official dot-strip decode added. V2 source/results must remain intact for reference.
+
+Preflight verifies preserved v2 source hash **04507ca9...** and selection **1bda5d103e45163596d6929a2dc41fa45336e5c3a01c25c537b348720cec20e7**, identical eight cases and prior processed-input identities, all32 old result receipts; freezes their file hashes and derives expected28 EOS/4 caps. Every v3 condition must **exactly match the corresponding v2 generated token prefix through the first32000 inclusive**, or all256 if absent. This is checked before accepting a new result and again in final validation. Native greedy/t0/cache/FA2 checks remain. Requiring prefix parity is a controlled stop-only test, not a general model-quality claim.
+
+Local tests: syntax/Bash/stdlib selection suite; tokenizer EOS first occurrence including first-token/repeated-EOS cases;32007 and2 do not terminate under32000; token-cap case; invalid EOS rejection; wrong/trailing/early prefix and stop-flag rejection; changed v2 reference-file rejection; execution of actual frozen EOS-reader AST before/after runtime shim (2→32000). No local torch runtime exists, so Ariel CPU tensor/Processor preflight is still required. No v3 GPU job has been submitted here.
+
+Next from cast-rebuild, after verified v3 extraction:
+```bash
+.envs/cast-phi/bin/python -B -u CAST-step69-factorial-pilot-v3/pilot.py selftest
+.envs/cast-phi/bin/python -B -u CAST-step69-factorial-pilot-v3/pilot.py preflight
+.envs/cast-phi/bin/python -B -u CAST-step69-factorial-pilot-v3/pilot.py submit
+squeue -u "$USER" -o "%.18i %.28j %.12T %.24R"
+.envs/cast-phi/bin/python -B -u CAST-step69-factorial-pilot-v3/pilot.py status
+.envs/cast-phi/bin/python -B -u CAST-step69-factorial-pilot-v3/pilot.py verify
+```
+Preflight should emit STEP69_V2_REFERENCE_PREFIX_PASS with derived counts. Collect new Job ID and all4 accounting status/exit rows, slurm logs and final evidence. Additional final marker **STEP69_V3_TOKENIZER_EOS_AND_PREFIX_VERIFIED**. Expected efficiency gain from early termination is not measured yet. Only after GPU review/prefix verification consider publishing frozen new source and expanding the matched study. Do not rerun or rewrite earlier historical1061 metrics under a new stopping rule without a separately labeled analysis.
+
+
+
 ## Latest observed — STEP69 v2 Job496886 technical GPU PASS; stopping/scoring audit pending
 
 User supplied the actual v2 completion output in an attachment; it has now been read. **496886_0..3 COMPLETED (0:0)**, elapsed **6m06s / 6m40s / 8m56s / 6m08s**, nodes v8/v12/v8/v8. All four workers **GPU_PASS, 8 condition completions each**, total **32/32**, errors0, no awaiting receipts. Final marker **STEP69_FACTORIAL_PILOT_GPU_VERIFIED** and selection identity **1bda5d103e45163596d6929a2dc41fa45336e5c3a01c25c537b348720cec20e7**. The prefix_length integration failure in Job496880 was overcome.
