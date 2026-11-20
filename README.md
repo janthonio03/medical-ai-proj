@@ -316,7 +316,7 @@ Next: user transfers ZIP to cast-rebuild, extracts into a new directory, runs `.
 
 ## STEP69 prepared — matched BF16/actual FA2 2x2 pilot, GPU PENDING
 
-New candidate artifact `CAST_STEP69_Factorial_Pilot.zip` was authored; ZIP SHA256 **539d9fadd425be27938ccf6a241225437142ef73dfd6d7ad80337b4fbb0e11ec**, driver `pilot.py` SHA256 **5e5ec9df7aaab9c7b635798fa109482e1d14abc74027a99ade10a936349977d4**. Intended Ariel install: `CAST-step69-factorial-pilot/`; outputs: `results/step69-factorial-pilot/`. **No Ariel CPU preflight or GPU job has yet been observed. No new driver source is published here.**
+New candidate artifact `CAST_STEP69_Factorial_Pilot.zip` was authored; ZIP SHA256 **5d332453c1155583c48efc94b607dba269f983f67bb38b5432344ab411117413**, driver `pilot.py` SHA256 **6e10f6c6fc73da957fa67517a86cc04771b13baef75fd0d2955c31894180d2e2**. Intended Ariel install: `CAST-step69-factorial-pilot/`; outputs: `results/step69-factorial-pilot/`. **No Ariel CPU preflight or GPU job has yet been observed. No new driver source is published here.**
 
 Design: 8 distinct underlying images, 2 questions in each empty/nonempty ROI × CLOSED/OPEN cell, deterministic selection from pinned existing plan/manifest. Four conditions per question: Neutral, Spatial-only, Temporal-only, Spatial+Temporal; **max256 tokens or model-config EOS**; 32 trajectories. Four fixed array shards, 2 questions each, all four conditions for a question on the same GPU. This is a balanced technical pilot, not a population performance estimate.
 
@@ -339,3 +339,5 @@ Preflight must pass before submit; checkpoint hashing may take time and emits fi
 
 Completion evidence to collect: Slurm all four State/ExitCode, `slurm/<job>_<index>.{out,err}`, `workers/<job>/*.json`, all32 condition receipts, 8 pair receipts, and `verified_metrics.json`. Native conditional cached shadow must match; Neutral full trajectory must equal independent entirely unpatched native greedy; initial Neutral/Temporal and Spatial/Spatial+Temporal tokens must match; previous-base hashes must align. Final marker **STEP69_FACTORIAL_PILOT_GPU_VERIFIED**. Score semantics remain CLOSED substring and OPEN reference-token recall; outputs include token counts/EOS and paired conditional effects/interaction, with n2/cell and no hallucination/population claim. Once GPU/result review succeeds, freeze and publish the exact candidate driver with execution evidence; until then publish documentation only.
 
+
+STEP69 candidate final local review: progress ignores in-flight JSON files until their receipt is installed, reports awaiting receipts, and resume ETA counts only completions from the current job. Candidate hashes above identify this final pre-delivery version. No Ariel/GPU validation yet.
