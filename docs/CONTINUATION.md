@@ -1,5 +1,18 @@
 # Continuation / New-chat runbook — CAST paper vs open source
 
+## CURRENT verified milestone — STEP68 Neutral resume, GPU Job 496821
+
+User supplied actual Slurm accounting, all four worker logs and successful final verification. Array workers 0/1/2/3: **COMPLETED 0:0**; elapsed **00:53:42 / 00:52:52 / 00:50:27 / 00:01:24**; nodes **ariel-v8 / ariel-v8 / ariel-v12 / ariel-v8**. New Neutral completions **39 + 27 + 35 + 0 = 101**, each worker failed=0, all finished. Worker 3's zero completions are not failure; this run did not distribute useful work evenly across four workers. Do not claim fourfold speedup or four distinct GPU nodes.
+
+Final output **STEP68_NEUTRAL_RESUME_VERIFIED** confirms selected 101/101 valid new completions, no batch failures, four successful finished worker reports, unchanged pre-existing completion receipt bytes, no unexpected new completions, full receipt validation without invalid/extra entries, and both paper cohorts complete. Valid totals: **paper-neutral 1061; paper-spatial-temporal 1061; public-auto 529; public-null 352** (3003 total). Public missing work remains 532/709, excluded from this resume.
+
+Frozen reviewed code is now released at [experiments/step68/resume.py](../experiments/step68/resume.py) and [experiments/step68/job.sh](../experiments/step68/job.sh); source SHA256 **4b59af7783d281fd7a88e243d09c531302c42fbad4ef395a09f0f3f9fedfe5ff**, original distribution ZIP SHA256 **ab18e878d1dceb7a465ec4bee1556bc957e53659cc8d1b5b7297d26aba3ac861**. Evidence/protocol and source-layout caveat: [experiments/step68/README.md](../experiments/step68/README.md). Release follows completed GPU/result review; no original STEP60C runner/model code was changed.
+
+**Next: CPU-only paired score aggregation of the 1061 identical sample IDs**, first exposing the exact normalize_score implementation and score scale; report each answer_type and overall with paired deltas/win-tie-loss. Then stratify by 954 selected/nonempty ROI versus 107 empty-ROI questions using the existing audited manifest/actual input mapping, without recomputing masks or inference. Preserve full results. A complete four-condition merge is still inappropriate because public paths remain incomplete.
+
+**Scientific boundary:** historical FP32/Eager neutral vs old ROI-only-alpha spatial+temporal candidate. Both interventions change jointly; the old candidate lacks separate non-ROI beta=3.0. This cohort is not the later BF16/FA2 candidate and not a matched official-source causal benchmark. Do not infer published CAST reproduction or hallucination reduction from completion or generic VQA scores alone. Earlier 'resume pending' sections are historical and superseded by this milestone.
+
+
 **As of 2026-11-20 KST.** Read [the branch README](../README.md) for the full research design and policy, and [experiment history](EXPERIMENT_LOG.md) for receipts. This is the project handoff for an AI assistant/new researcher without prior chat history.
 
 **Read and apply [OPERATING_RULES.md](OPERATING_RULES.md) in every continuation.**
