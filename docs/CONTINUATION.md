@@ -1,5 +1,31 @@
 # Continuation / New-chat runbook — CAST paper vs open source
 
+## STEP69 prepared — matched BF16/actual FA2 2x2 pilot, GPU PENDING
+
+New candidate artifact `CAST_STEP69_Factorial_Pilot.zip` was authored; ZIP SHA256 **539d9fadd425be27938ccf6a241225437142ef73dfd6d7ad80337b4fbb0e11ec**, driver `pilot.py` SHA256 **5e5ec9df7aaab9c7b635798fa109482e1d14abc74027a99ade10a936349977d4**. Intended Ariel install: `CAST-step69-factorial-pilot/`; outputs: `results/step69-factorial-pilot/`. **No Ariel CPU preflight or GPU job has yet been observed. No new driver source is published here.**
+
+Design: 8 distinct underlying images, 2 questions in each empty/nonempty ROI × CLOSED/OPEN cell, deterministic selection from pinned existing plan/manifest. Four conditions per question: Neutral, Spatial-only, Temporal-only, Spatial+Temporal; **max256 tokens or model-config EOS**; 32 trajectories. Four fixed array shards, 2 questions each, all four conditions for a question on the same GPU. This is a balanced technical pilot, not a population performance estimate.
+
+Reuses exact unchanged published project diagnostic files STEP64D (47af7a8...), STEP64E (52d00dc...), STEP66 v2 (4e96fb8...), STEP64C v3 (b3dff3c...). Bundled copies are SHA-pinned; runtime path references/input dispatch/score-combiner references are scoped overrides. Original attention, RoPE, projection and independent-cache engine remain frozen. **Spatial OFF selects conditional logp only**; unused weighted unconditional forward is still computed for path diagnostics and cannot contribute to selected scores. Spatial ON uses official-order CFG scale1.5 and alpha .01/beta3/text1 augmented-QK real FA2. Temporal ON uses previous **base** score (conditional logp when Spatial OFF, spatial CFG when ON), weights1/.5, explicit t0=current-base assumption. No forced output change is a pass requirement.
+
+Uses frozen BF16 probe plan `results/step60c-plan-full-256-receiptfix/plan.json`, SHA **7de204c98ccfbb41cbd10d73ae0c0e7af42c94127d09822649b564dfc8e84403**, intentionally distinct from historical STEP68 slurmfix plan. Empty inputs use frozen foreground-match1 loader with zero selected keys and remaining visual beta3, not public literal mask0 mapping. Reuses proposal/selected-mask artifacts; no reranking or fresh annotation-free lineage claim. Labels' answer type is used for stratification; GT answer is excluded from decoder and only read for post-generation scoring.
+
+Local validation passed: Python syntax of driver/frozen files; Bash syntax; balanced distinct-image selection and impossible-duplicate rejection; complete nonoverlapping four-shard coverage; wrong-condition and tampered-result receipt rejection. **Local runtime lacks torch/numpy/PIL**, so actual BF16/FP32 four-mode tensor algebra and real Processor/model/input preflight are mandatory on Ariel before submission. The preflight performs original tensor selftests plus four-condition 3-step base/previous-score tests, actual processor-call-source/input digests, selected mask/image SHA checks, frozen source/plan checks and actual checkpoint/config/source-byte SHA inventory. Workers validate exact frozen input identities, checkpoint metadata and config/source hashes; final verify rehashes checkpoint bytes.
+
+Commands from cast-rebuild after ZIP verification/extraction:
+```bash
+.envs/cast-phi/bin/python -B -u CAST-step69-factorial-pilot/pilot.py selftest
+.envs/cast-phi/bin/python -B -u CAST-step69-factorial-pilot/pilot.py preflight
+.envs/cast-phi/bin/python -B -u CAST-step69-factorial-pilot/pilot.py submit
+squeue -u "$USER" -o "%.18i %.28j %.12T %.24R"
+.envs/cast-phi/bin/python -B -u CAST-step69-factorial-pilot/pilot.py status
+.envs/cast-phi/bin/python -B -u CAST-step69-factorial-pilot/pilot.py verify
+```
+Preflight must pass before submit; checkpoint hashing may take time and emits filenames. Submit uses original Slurm cluster_policy(4), allowed v6..v12 exclusion, --test-only before allocation, gpu:normal:1/8CPUs/32G per worker, batch_ugrad/account ugrad/user QoS, max3day Slurm walltime. No user jobs may be queued/running at submit snapshot; no automatic resource reduction/retry. Frozen manifest and submit lock prevent silent reuse under a changed configuration. Explicit --resume is available only after earlier workers are inactive and errors investigated; ambiguous sbatch response requires inspecting queue/ledger first. Do not overwrite incompatible output or edit preflight-frozen source.
+
+Completion evidence to collect: Slurm all four State/ExitCode, `slurm/<job>_<index>.{out,err}`, `workers/<job>/*.json`, all32 condition receipts, 8 pair receipts, and `verified_metrics.json`. Native conditional cached shadow must match; Neutral full trajectory must equal independent entirely unpatched native greedy; initial Neutral/Temporal and Spatial/Spatial+Temporal tokens must match; previous-base hashes must align. Final marker **STEP69_FACTORIAL_PILOT_GPU_VERIFIED**. Score semantics remain CLOSED substring and OPEN reference-token recall; outputs include token counts/EOS and paired conditional effects/interaction, with n2/cell and no hallucination/population claim. Once GPU/result review succeeds, freeze and publish the exact candidate driver with execution evidence; until then publish documentation only.
+
+
 ## Latest completed analysis — historical ROI-stratified paired scores
 
 Empty ROI (107): CLOSED +6.38 points, OPEN +8.25; mixed +7.43. Nonempty ROI (954): CLOSED +5.15, OPEN -2.92; mixed +0.20. Empty-ROI questions contribute about **80.67% of the overall net mixed-score gain** (arithmetic accounting, not causal attribution).
