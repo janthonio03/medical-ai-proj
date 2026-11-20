@@ -510,3 +510,23 @@ squeue -u "$USER" -o "%.18i %.28j %.12T %.24R"
 ```
 Preflight should emit STEP69_V2_REFERENCE_PREFIX_PASS with derived counts. Collect new Job ID and all4 accounting status/exit rows, slurm logs and final evidence. Additional final marker **STEP69_V3_TOKENIZER_EOS_AND_PREFIX_VERIFIED**. Expected efficiency gain from early termination is not measured yet. Only after GPU review/prefix verification consider publishing frozen new source and expanding the matched study. Do not rerun or rewrite earlier historical1061 metrics under a new stopping rule without a separately labeled analysis.
 
+
+## CURRENT verified — STEP69 v3 Job496912 EOS fix and exact-prefix GPU PASS
+
+User supplied all4 Slurm workers **COMPLETED 0:0**, elapsed **4m48s / 2m31s / 4m03s / 1m51s**, nodes v8/v7/v8/v7. Each worker completed8 conditions; **32/32, errors0**, both markers **STEP69_FACTORIAL_PILOT_GPU_VERIFIED** and **STEP69_V3_TOKENIZER_EOS_AND_PREFIX_VERIFIED**. Selection SHA256 **46f01174097fcde28dec52da441bc36ff215f2cdcd414e427436cb2b61d4b020**.
+
+All32 generated sequences matched their preserved v2 reference exactly through the first tokenizer EOS32000 (inclusive), or through the256-token cap when absent. Actual stops **28 EOS /4 cap**, as predicted. Runtime EOS override/restoration, native greedy control, paired first-token/temporal alignment, FA2/cache/receipt and checkpoint-byte checks passed within the frozen pilot's scope. No32007 stop was added. **The stop-only correction is now GPU verified.**
+
+| Condition | n | Mean generated tokens | EOS stops | Token caps | Mean current score ×100 |
+|---|---:|---:|---:|---:|---:|
+| Neutral |8|62.875|8|0|100|
+| Spatial |8|60.375|8|0|100|
+| Temporal |8|139.250|6|2|100|
+| Spatial+Temporal |8|132.125|6|2|100|
+
+Temporal-only adds76.375 tokens vs Neutral in this pilot; Temporal with Spatial adds71.75 vs Spatial-only. Four cap cases are0004/0025 × Temporal/Spatial+Temporal. These are descriptive paired observations on8 purposively selected technical cases, not population effects or proof of hallucination. All scores remain1 under substring/reference-token-recall metrics; equal scores do not mean equal outputs or no intervention.
+
+**Frozen reviewed source is now published** at [experiments/step69/v3](../experiments/step69/v3), driver SHA256 **a266802b42a3339a325be52a3ebb0e25c3354923f1b6d5431482f16ac089cec2**, distribution ZIP SHA256 **9f1340b07c899c5f382361c37fee6e33a2c4d8ace360f00e325f4844df7e539d**. The exact older v2 adapter/job are archived only as immutable reference dependencies, not as recommended current execution code. See release notes for restoration layout and raw-evidence limits.
+
+**Next gate before scaling:** CPU-only actual Processor/input/decoder-case validation across the full1061 existing question/ROI records, keeping at most one case's tensors in memory. Check real zero/nonzero visual-token partitions, crop/shape restrictions, mask/image/selection hashes and declared Draft/skip mapping. Record failures per sample; no automatic fallback or new GPU inference. Then prepare a separate matched full-cohort evaluator; the current v3 driver deliberately hard-codes8 cases and v2 prefix references and must not be naively pointed at1061 questions. No STEP70/full GPU job submitted.
+
