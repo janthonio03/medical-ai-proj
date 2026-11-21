@@ -1,3 +1,14 @@
+## CURRENT — STEP80 全1061문항 서버 검증 완료, M4 비교 분석 진입 (2026-11-21 KST)
+
+최신 사용자 Ariel verify 출력: Job497286,1061/1061문항, 누락0,9549/9549결과,4worker GPU_PASS, Slurm 전부 COMPLETED0:0, FULL_COMPARISON_VERIFIED. 계획 SHA e73250456c8de9cd37dba05ce67ff3e70ea8761d706de23344bf950c773b6818.
+
+**STEP80 실행 대기는 종료됐다.** 현재는 M3 전체 실행/서버 verify 완료 → M4 요소별·endpoint 분석 단계다. 아래에 남은 STEP80 미실행/제출 대기 표기는 당시 과거 기록이며 이 항목으로 갱신한다. 완료한 STEP79/STEP80을 재제출하지 않는다. 과제 전체와 M4/M5는 아직 완료하지 않았다.
+
+현재 증거는 사용자 제공 서버 stdout이다. [전체 집계·분석 계획](STEP80_RESULTS_STATUS.md)과 [출력 근거 receipt](../evidence/step80/user_reported_full_verification.json)에 정확한 수치/경로/SHA를 기록했다. summary ZIP results/step80-comparison-summary-497286.zip (SHA62c23c5438955c7146fb97a549dd58ce6d74786db549e6509d17ab36a9cdd86a)은 아직 로컬 수신/독립 검토 전이다. 다음은 ZIP을 받아 paired_case_metrics와 실행 source를 검증하고, 짝지은 대비/영상 cluster 불확실성을 분석하는 것이다. 새 실행 소스는 그 검토 후 게시한다.
+
+제공된 공식 집계상 CLOSED 최고는 Draft/bias/ON73.7981, OPEN 최고는 Draft/public_B1/OFF45.1401이다. 공개 기본 채널 endpoint 대비 Draft/bias/ON은 CLOSED+5.5288점, OPEN−2.9572점이다. 이 값만으로 통계적 유의성, 의미적 정답성/환각 감소 또는 전반적인 논문 우월을 주장하지 않는다.
+
+
 ## CURRENT — STEP79 ZIP independently verified; STEP80 1,061-case candidate prepared (2026-11-21 KST)
 
 The user-provided `step79-comparison-pilot-497276(1).zip` was opened and independently checked: SHA256 `1c7e8f4c79d2ee1b0758396d60338eefdb82c468dc560af7cbd640f9f7040cd9`, ZIP CRC PASS, exact frozen plan SHA `49417e9fdff5f5dac520b406cf98d703bb24faa3db391e725d1566593ab83a4e`, source bytes equal plan source hashes, all 72 report evidence hashes and 8 complete receipts/member hashes PASS. Four worker reports `GPU_PASS` (two questions each), four stdout GPU_PASS markers; Slurm `COMPLETED 0:0` was user reported, raw sacct result not independently archived in the ZIP. Independently reviewed summary: `evidence/step79/independent_zip_review.json`.

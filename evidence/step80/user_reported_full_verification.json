@@ -1,0 +1,134 @@
+{
+  "step": "STEP80",
+  "reported_status": "FULL_COMPARISON_VERIFIED",
+  "evidence_origin": "User-pasted output of Ariel full.py verify; result summary ZIP not yet locally received or independently checked",
+  "plan_sha256": "e73250456c8de9cd37dba05ce67ff3e70ea8761d706de23344bf950c773b6818",
+  "job_id": "497286",
+  "questions": 1061,
+  "missing": 0,
+  "outputs": 9549,
+  "cells_per_question": 9,
+  "workers": [
+    {
+      "worker": 0,
+      "status": "GPU_PASS",
+      "completed": 266,
+      "reused": 0,
+      "slurm_state": "COMPLETED",
+      "exit_code": "0:0"
+    },
+    {
+      "worker": 1,
+      "status": "GPU_PASS",
+      "completed": 265,
+      "reused": 0,
+      "slurm_state": "COMPLETED",
+      "exit_code": "0:0"
+    },
+    {
+      "worker": 2,
+      "status": "GPU_PASS",
+      "completed": 265,
+      "reused": 0,
+      "slurm_state": "COMPLETED",
+      "exit_code": "0:0"
+    },
+    {
+      "worker": 3,
+      "status": "GPU_PASS",
+      "completed": 265,
+      "reused": 0,
+      "slurm_state": "COMPLETED",
+      "exit_code": "0:0"
+    }
+  ],
+  "full_metrics": {
+    "Draft__public_B1__OFF/CLOSED": {
+      "n": 416,
+      "official_score_x100": 66.10576923076923
+    },
+    "Draft__public_B1__OFF/OPEN": {
+      "n": 645,
+      "official_score_x100": 45.140055035403826
+    },
+    "Draft__public_B1__ON/CLOSED": {
+      "n": 416,
+      "official_score_x100": 71.875
+    },
+    "Draft__public_B1__ON/OPEN": {
+      "n": 645,
+      "official_score_x100": 39.60000335581733
+    },
+    "Draft__bias__OFF/CLOSED": {
+      "n": 416,
+      "official_score_x100": 68.02884615384616
+    },
+    "Draft__bias__OFF/OPEN": {
+      "n": 645,
+      "official_score_x100": 44.118712037316676
+    },
+    "Draft__bias__ON/CLOSED": {
+      "n": 416,
+      "official_score_x100": 73.79807692307692
+    },
+    "Draft__bias__ON/OPEN": {
+      "n": 645,
+      "official_score_x100": 41.38700963119568
+    },
+    "GT__public_B1__OFF/CLOSED": {
+      "n": 416,
+      "official_score_x100": 66.82692307692308
+    },
+    "GT__public_B1__OFF/OPEN": {
+      "n": 645,
+      "official_score_x100": 44.81188966072683
+    },
+    "GT__public_B1__ON/CLOSED": {
+      "n": 416,
+      "official_score_x100": 71.875
+    },
+    "GT__public_B1__ON/OPEN": {
+      "n": 645,
+      "official_score_x100": 40.473757508641235
+    },
+    "GT__bias__OFF/CLOSED": {
+      "n": 416,
+      "official_score_x100": 68.75
+    },
+    "GT__bias__OFF/OPEN": {
+      "n": 645,
+      "official_score_x100": 43.324692103761855
+    },
+    "GT__bias__ON/CLOSED": {
+      "n": 416,
+      "official_score_x100": 72.59615384615384
+    },
+    "GT__bias__ON/OPEN": {
+      "n": 645,
+      "official_score_x100": 41.57372730628544
+    },
+    "GT__public_defaults_B1__OFF/CLOSED": {
+      "n": 416,
+      "official_score_x100": 68.26923076923077
+    },
+    "GT__public_defaults_B1__OFF/OPEN": {
+      "n": 645,
+      "official_score_x100": 44.3441894023289
+    }
+  },
+  "full_benchmark_completed": true,
+  "public_B0_performance_available": false,
+  "public_B1_guard_only_repair": true,
+  "official_CAST_reproduction": false,
+  "paired_case_metrics_sha256": "68d97340ec368caefefd92c53ffa548d9767926d8f15f225110b3f60c1af93e2",
+  "summary_zip": "results/step80-comparison-summary-497286.zip",
+  "summary_zip_sha256": "62c23c5438955c7146fb97a549dd58ce6d74786db549e6509d17ab36a9cdd86a",
+  "summary_zip_independently_reviewed": false,
+  "interpretation_limits": [
+    "Public B1 positive weights dropped by native FA2; positions/text scope differ from actual bias",
+    "Temporal ON is an authored candidate, not authenticated unpublished author implementation",
+    "CLOSED substring and OPEN reference-token recall do not establish semantic correctness or hallucination reduction",
+    "Aggregate differences have no paired uncertainty estimates until paired-case data are inspected"
+  ],
+  "recorded_date_KST": "2026-11-21"
+}

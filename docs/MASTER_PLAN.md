@@ -1,3 +1,14 @@
+## CURRENT — STEP80 全1061문항 서버 검증 완료, M4 비교 분석 진입 (2026-11-21 KST)
+
+최신 사용자 Ariel verify 출력: Job497286,1061/1061문항, 누락0,9549/9549결과,4worker GPU_PASS, Slurm 전부 COMPLETED0:0, FULL_COMPARISON_VERIFIED. 계획 SHA e73250456c8de9cd37dba05ce67ff3e70ea8761d706de23344bf950c773b6818.
+
+**STEP80 실행 대기는 종료됐다.** 현재는 M3 전체 실행/서버 verify 완료 → M4 요소별·endpoint 분석 단계다. 아래에 남은 STEP80 미실행/제출 대기 표기는 당시 과거 기록이며 이 항목으로 갱신한다. 완료한 STEP79/STEP80을 재제출하지 않는다. 과제 전체와 M4/M5는 아직 완료하지 않았다.
+
+현재 증거는 사용자 제공 서버 stdout이다. [전체 집계·분석 계획](STEP80_RESULTS_STATUS.md)과 [출력 근거 receipt](../evidence/step80/user_reported_full_verification.json)에 정확한 수치/경로/SHA를 기록했다. summary ZIP results/step80-comparison-summary-497286.zip (SHA62c23c5438955c7146fb97a549dd58ce6d74786db549e6509d17ab36a9cdd86a)은 아직 로컬 수신/독립 검토 전이다. 다음은 ZIP을 받아 paired_case_metrics와 실행 source를 검증하고, 짝지은 대비/영상 cluster 불확실성을 분석하는 것이다. 새 실행 소스는 그 검토 후 게시한다.
+
+제공된 공식 집계상 CLOSED 최고는 Draft/bias/ON73.7981, OPEN 최고는 Draft/public_B1/OFF45.1401이다. 공개 기본 채널 endpoint 대비 Draft/bias/ON은 CLOSED+5.5288점, OPEN−2.9572점이다. 이 값만으로 통계적 유의성, 의미적 정답성/환각 감소 또는 전반적인 논문 우월을 주장하지 않는다.
+
+
 ## CURRENT — STEP79 ZIP independently verified; STEP80 1,061-case candidate prepared (2026-11-21 KST)
 
 The user-provided `step79-comparison-pilot-497276(1).zip` was opened and independently checked: SHA256 `1c7e8f4c79d2ee1b0758396d60338eefdb82c468dc560af7cbd640f9f7040cd9`, ZIP CRC PASS, exact frozen plan SHA `49417e9fdff5f5dac520b406cf98d703bb24faa3db391e725d1566593ab83a4e`, source bytes equal plan source hashes, all 72 report evidence hashes and 8 complete receipts/member hashes PASS. Four worker reports `GPU_PASS` (two questions each), four stdout GPU_PASS markers; Slurm `COMPLETED 0:0` was user reported, raw sacct result not independently archived in the ZIP. Independently reviewed summary: `evidence/step79/independent_zip_review.json`.
@@ -50,8 +61,8 @@ STEP79 갱신: STEP78 fixture 실제 수신/로컬60파일 검증 완료. GT/Dra
 | M0 목표 복원 |원래 목표·완료 조건·상태표 고정|이 문서, 운영 규칙, 인수인계 최신화|이번 갱신으로 완료|
 | M1 비교 계약·실행 기준선·선택기 연결 |현재 public evaluator/selector/producer 소스 확보, 원형 실행 문제와 최소 호환/수리 경계 결정, 동일 후보 GT/Draft 연결|소스 SHA, 변경 목록, 입력 채널 계약, 비교 cell 목록, 재사용 가능 결과 목록|**STEP79 완료 범위에서 검증**|
 | M2 작은 paired pilot |새 ROI 선택·public spatial·Temporal 조합을 소규모로 연결 검증|empty/nonempty 및 CLOSED/OPEN 포함, target/mask/hash/실제 backend/stop/native/control 확인, 필요한 GPU 결과 통과|**완료: STEP79 Job497276, ZIP 독립 검증**|
-| M3 전체 조건 평가 |검증된 cell을1061문항에 확장|셀별 완전한 동일 ID·receipt, 실패/누락0, 병렬 실행·재개·검증 기록|**STEP80 후보 작성/CPU 일부 검사; Ariel 전체 GPU 미실행**|
-| M4 요소·endpoint 성능 비교 |GT/Draft, public/bias, Temporal ON/OFF 및 공개/논문 endpoint 비교|짝지은 비교표, answer type 분리, 영상 단위 불확실성, metric 한계, 재현/수리 범위 명시|일부 후보 내부 비교만 완료|
+| M3 전체 조건 평가 |검증된 cell을1061문항에 확장|셀별 완전한 동일 ID·receipt, 실패/누락0, 병렬 실행·재개·검증 기록|**STEP80 Job497286 전체 실행·서버 verify 완료; summary ZIP 독립 검토 대기**|
+| M4 요소·endpoint 성능 비교 |GT/Draft, public/bias, Temporal ON/OFF 및 공개/논문 endpoint 비교|짝지은 비교표, answer type 분리, 영상 단위 불확실성, metric 한계, 재현/수리 범위 명시|**STEP80 전체 집계 확보; 문항별 paired/영상 cluster 분석 진입**|
 | M5 최종 과제 보고 |차이→변경→실험→결과를 연결|두 핵심 질문에 답변하거나 특정 비교 불가능 사유를 증거로 설명, 남은 한계와 전체 실행 근거 기록|아직 진입하지 않음|
 
 STEP77 갱신: source snapshot 검증 완료. 공개4파일 upstream AST 일치와 선택 계약을 확인했다. STEP60B nested producer는 snapshot 미포함이며 새 paired 선택은 고정 후보와 공개 selector 계약으로 검증한다. 다음 STEP78 CPU fixture 준비는 실제 Ariel 실행 전이고, M1 전체/M2/GPU 성능 검증은 아직 미완료다.
