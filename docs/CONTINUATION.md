@@ -1,5 +1,16 @@
 # Continuation / New-chat runbook — CAST paper vs open source
 
+## STEP78 재실행 안내 — ROI 배열/NPY 파일 해시 구분 수정
+
+첫 Ariel 준비 실행은 SELFTEST 통과 후 slake-en-test-0004에서 "Existing ROI changed"로 중단됐다. 원인은 준비 코드가 STEP60C strict_roi_sha256(배열 바이트)과 STEP71 cases.roi_sha256(NPY 파일 전체 바이트)을 같다고 비교한 오류다. STEP69v3 verified_loader가 sha(strict_roi_file)==case.roi_sha256을 검증함을 실제 소스에서 확인했다. 이 예외는 실제 ROI 변경의 증거가 아니다.
+
+수정 준비물 revision2는 배열 SHA와 NPY 파일 SHA를 각각 검증·기록하고 원래 NPY 파일을 byte-copy한다. 두 해시가 다른 실제 NPY fixture를 사용하는 selftest와 합성1061문항 통합 테스트가 통과했다. 기존 테스트가 두 필드에 모두 배열 SHA를 넣어 오류를 놓친 점도 수정했다. Ariel 실제 준비 완료는 아직 확인되지 않았다. 기존 실패 디렉터리/실험 파일은 보존한다.
+
+수정 ZIP SHA256: ae33190df65c5e0183d01b1d98856a215f3204a41ee0292067cb899aaefe005a
+prepare.py SHA256: a04b5cdf8fa4d216082f07f02b0854dc959053b974901242e17a1fcb07f2fc30
+
+새 ZIP 전송 후 반드시 unzip -o로 step78-prepare/prepare.py를 갱신하고 selftest → prepare → verify를 실행한다. 성공 시 preparer_revision2 및 STEP78_FIXTURE_VERIFY_PASS를 확인한다. 새 추론/GPU 제출/성능 결과 없음. 다음은 준비물 확인 후 원래 GT/Draft × public/bias × Temporal M2 연결 파일럿이다. 아직 오류가 없는 실제 실행 결과로 새 실험 코드를 게시하지 않는다.
+
 ## CURRENT — STEP77 소스 검증 완료, M1 연결 준비 계속
 
 2026-11-21 KST: 실제 업로드된 source snapshot233경로/33고유 소스의 ZIP CRC·inventory SHA 통과. 공개 evaluator/selector/provider/guidance는 upstream 고정 commit9f709e4dce7aa1812a1dc292ed527766b609199f와 AST가 같다. [STEP77 소스 계약](STEP77_SOURCE_CONTRACT.md)과 [검증 기록](../evidence/step77/source_verification.json)을 먼저 읽는다.
