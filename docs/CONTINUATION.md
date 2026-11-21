@@ -1,5 +1,33 @@
 # Continuation / New-chat runbook — CAST paper vs open source
 
+## NEXT — STEP74 paired openings and blinded review package prepared, CPU PENDING
+
+User authorized proceeding after completed STEP73 full literal audit. Candidate `step74_review_pack.py`, source SHA256 **25f4fd610e36f5cf20299815166193ecc14564285f57141c3dbf74f771e9a6a1**, Library **libfile_2fd01106302081918d6adf4123ff2897**. Local tests passed: equal aggregate correct-opening counts can conceal opposite individual flips; reproducible stratified sampling with overlaps; per-case complete four-way mappings; image deduplication; public schema excludes condition/score/stratum/original IDs; embedded JSON/script escaping and literal placeholder safety; JavaScript syntax; mocked-DOM rating/navigation/local-storage/export/import and wrong-pack rejection. These are **local synthetic/mock tests, not actual browser-rendering or Ariel full-data/human-review validation**. New candidate source remains unpublished pending actual CPU output review.
+
+Dependencies unchanged `step72_analyze.py` SHA e2761ebe..., `step73_full_audit.py` SHA97112360...; STEP71 frozen1061 results and parent plan. Full parent sample/log/receipt checks are repeated; STEP73 latest full audit/provenance and diagnostic values are validated. Question text and original image paths are taken directly from the frozen model plan `samples[sid].question/original_image_file` (confirmed against published frozen loader), images must match existing SHA, private labels joined only locally for retrospective review. No images, proposals, model inputs, scores or generation settings are changed. CPU-only tokenizer decoding; no model inference/GPU request.
+
+Paired leading Yes/No transition tables use both pair-specific and common-four recognized subsets, including correct→incorrect, incorrect→correct, unchanged states and recognition coverage transitions. These resolve whether equal190 opening-correct totals hide swaps; **actual transition counts are not known yet**.
+
+Review selection: all CLOSED questions whose official literal score changes for T−N or ST−N, plus independently sampled6 questions in each empty/nonempty ROI × CLOSED/OPEN cell, seed74. Random sampling is from full cells before union; overlaps retained with both tags in private key. Diagnostic union is not representative. Small balanced24-question random cohort is not population weighted and supports only limited descriptive review.
+
+Public reviewer files show generated Rxxxx IDs, actual question, reference answer, original image and A–D responses. Case order and response order are seeded/permuted; conditions, scores, ROI strata, sampling tags and original IDs absent from the public schema. Per-case mappings and sampling tags remain in **private_key.json on Ariel, excluded from reviewer ZIP**. Blinding is imperfect because style/content can reveal interventions. Rubric separates core reference agreement, question relevance, repetition and additional claims needing verification; includes unsure/insufficient-context and notes. Reference agreement is not image-grounded clinical correctness. No manual ratings are claimed complete.
+
+Execution from cast-rebuild after transfer:
+```bash
+(
+set -euo pipefail
+export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+.envs/cast-phi/bin/python -B -u step74_review_pack.py selftest
+mkdir -p results/step74-review-pack
+.envs/cast-phi/bin/python -B -u step74_review_pack.py build \
+  --audit results/step73-score-semantics/audit-1795224508269666951 \
+  2>&1 | tee "results/step74-review-pack/console-$(date +%Y%m%d-%H%M%S).log"
+)
+```
+
+New output `results/step74-review-pack/pack-<ns>/` contains `opening_transitions.json`, `summary.json`, `review.html`, `cases_for_review.json`, `private_key.json`, `provenance.json`, `README.txt`. Sibling `pack-<ns>-reviewer.zip` contains **only review.html/cases_for_review.json/README.txt**; ZIP CRC and contents checked. Final marker **STEP74_CPU_REVIEW_PACK_PREPARED**. Collect console transition counts/path/hash first; then transfer reviewer ZIP for offline viewing or the blinded review JSON for assisted inspection. Prior outputs stay read-only. Keep key on Ariel until ratings are fixed; offline HTML saves temporary browser state and exports pack-bound ratings JSON, with mismatch rejection on import. Do not publish private GT/image/raw review package to public GitHub by default. After actual CPU run review, archive exact new source and actual transition findings; human adjudication remains a separate later milestone.
+
+
 ## CURRENT VERIFIED — STEP73 full CLOSED literal audit complete (two consistent runs)
 
 User supplied selftest PASS, all1061 parent evidence checks,416 CLOSED progress, status **FULL_CLOSED_LITERAL_AUDIT_COMPLETE**, **1664 outputs**, final **STEP73_FULL_CLOSED_LITERAL_AUDIT_COMPLETE**. Latest report `results/step73-score-semantics/audit-1795224508269666951/report.json`; earlier `audit-1795222542059092877/report.json` has the same displayed aggregates. This is repeat analysis of the same frozen outputs, not independent replication. Parent plan **01ab8ca1011ed39fd2c728ea0039f3e3925a3244c7c2b6c3e11103920fef5975**. Original official scores remain unchanged. No new GPU allocation.
