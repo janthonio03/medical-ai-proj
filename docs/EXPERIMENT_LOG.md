@@ -1,5 +1,17 @@
 # Experiment log and research decisions
 
+## CURRENT — STEP78 revision2 Ariel CPU 준비·검증 통과; fixture ZIP 수신 후 M2 연결 구현
+
+사용자가 전달한 실제 Ariel 출력에서 STEP78_ROI_HASH_SELFTEST_PASS, STEP78_SELFTEST_PASS, 전체1061문항 준비, STEP78_FIXTURE_VERIFY_PASS가 확인됐다. 후보 캐시96개, 기존8 canary는 empty/nonempty×CLOSED/OPEN 각2개, K16. 배열/NPY 파일 해시 구분 수정 후 준비가 완료됐다. 이전의 “Ariel 준비 미실행/실패/재실행 대기”는 이 항목으로 갱신한다.
+
+실제 실행 source SHA a04b5cdf8fa4d216082f07f02b0854dc959053b974901242e17a1fcb07f2fc30와 로컬 수정본이 일치하여 [준비 코드](../experiments/step78/prepare.py)를 이 검증 milestone에서 게시했다. [Ariel stdout 근거 receipt](../evidence/step78/preparation_receipt.json)는 사용자가 붙여넣은 출력의 기록이며 생성 ZIP 자체를 독립 검증한 기록은 아니다.
+
+- 생성 ZIP: results/step78-comparison-inputs/fixture-1795229949060204042.zip
+- ZIP SHA: bc724989c35a0f8322c55f6979de3beee4fee1d044cb76b492c8ebd8ca5c7287
+- fixture SHA: 8815498d0a4ac6cb8b7cc5fea68478c772e3a1c8cf397cddcb16f2d92613e90c
+
+다음은 이 ZIP을 수신하여 inventory/파일 해시와 runtime 소스를 확인한 뒤, GT/Draft 동일 후보 선택 및 public 원형/명시적 수리 spatial 경로와 Temporal 조합의 작은 paired GPU pilot을 구현하는 것이다. STEP78 준비 재실행/추가 채점 감사는 기본 다음 행동이 아니다. GPU 제출·모델 추론·GT/Draft 재선택·새 factorial 성능·baseline repair 검증은 모두 아직 false다. 과제 전체 및 M1 연결 기준선/M2–M5는 미완료다.
+
 ## STEP78 재실행 안내 — ROI 배열/NPY 파일 해시 구분 수정
 
 첫 Ariel 준비 실행은 SELFTEST 통과 후 slake-en-test-0004에서 "Existing ROI changed"로 중단됐다. 원인은 준비 코드가 STEP60C strict_roi_sha256(배열 바이트)과 STEP71 cases.roi_sha256(NPY 파일 전체 바이트)을 같다고 비교한 오류다. STEP69v3 verified_loader가 sha(strict_roi_file)==case.roi_sha256을 검증함을 실제 소스에서 확인했다. 이 예외는 실제 ROI 변경의 증거가 아니다.

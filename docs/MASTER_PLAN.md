@@ -31,6 +31,8 @@ Processor 호환 수정은 공통 기반으로 명시하고, 임의의 성능 �
 
 ROI 선택용 Draft는 별도 공개 계약을 따른다: native greedy32토큰, 명시적 EOS override 없음. checkpoint native 설정을 기록하고 최종 답변 EOS32000 패치를 자동 전파하지 않는다. [STEP77 검증된 소스 계약](STEP77_SOURCE_CONTRACT.md)을 참조한다.
 
+STEP78 revision2 갱신: 실제 Ariel stdout에서 CPU 준비/verify PASS,1061문항/96후보캐시/균형8canary가 확인됐다. 준비 단계 완료이며 새 ROI 선택·public 기준선 수리·새 GPU 성능은 미완료다. 생성 fixture ZIP 수신 후 M2 연결 코드를 구현한다. 상세 경로·SHA·출력 근거는 CONTINUATION 및 evidence/step78/preparation_receipt.json을 따른다.
+
 ## 4. 단계별 계획과 완료 기준
 
 | 단계 | 작업 | 완료 기준 / 산출물 | 현재 상태 |

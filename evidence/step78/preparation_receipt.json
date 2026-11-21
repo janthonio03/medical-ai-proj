@@ -1,0 +1,34 @@
+{
+  "step": "STEP78",
+  "preparer_revision": 2,
+  "status": "COMPARISON_INPUTS_PREPARED",
+  "parent_plan_sha256": "01ab8ca1011ed39fd2c728ea0039f3e3925a3244c7c2b6c3e11103920fef5975",
+  "model_plan_sha256": "7de204c98ccfbb41cbd10d73ae0c0e7af42c94127d09822649b564dfc8e84403",
+  "cohort_questions": 1061,
+  "pilot_questions": 8,
+  "K": 16,
+  "pilot_strata": {
+    "empty/CLOSED": 2,
+    "empty/OPEN": 2,
+    "nonempty/CLOSED": 2,
+    "nonempty/OPEN": 2
+  },
+  "unique_candidate_caches_checked": 96,
+  "source_sha256": "a04b5cdf8fa4d216082f07f02b0854dc959053b974901242e17a1fcb07f2fc30",
+  "GPU_submitted": false,
+  "inference_executed": false,
+  "GT_Draft_selection_completed": false,
+  "baseline_repair_verified": false,
+  "new_factorial_performance_measured": false,
+  "fixture_sha256": "8815498d0a4ac6cb8b7cc5fea68478c772e3a1c8cf397cddcb16f2d92613e90c",
+  "fixture_zip": "results/step78-comparison-inputs/fixture-1795229949060204042.zip",
+  "fixture_zip_sha256": "bc724989c35a0f8322c55f6979de3beee4fee1d044cb76b492c8ebd8ca5c7287",
+  "checks_reported": [
+    "STEP78_ROI_HASH_SELFTEST_PASS",
+    "STEP78_SELFTEST_PASS",
+    "STEP78_COMPARISON_INPUTS_PREPARED",
+    "STEP78_FIXTURE_VERIFY_PASS"
+  ],
+  "evidence_origin": "User-provided Ariel terminal stdout; generated fixture ZIP not yet received or independently inspected locally.",
+  "recorded_date_KST": "2026-11-21"
+}
