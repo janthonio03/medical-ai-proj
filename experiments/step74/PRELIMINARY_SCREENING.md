@@ -1,0 +1,20 @@
+# STEP74 preliminary reviewer-package screening
+
+## CURRENT — STEP74 reviewer package received; preliminary blinded screening, reference-quality gate
+
+Received `pack-1795225918749887736-reviewer.zip` (Library `libfile_d5066c001cd88191b4a0e6efb46d2ff5`,8340859 bytes). Verified ZIP SHA256 **f46e203fe1967d832b22fc84b4004df858c9efa654d81a880e6f6d4628e8d446**, CRC and exact three-file inventory (HTML/JSON/README), no private key; blinded payload SHA256 **e58f9c50faafcfba57ef3c0168d09677a1f65245044f524aa3d4aaf5814a519c**,73 cases/54 images. No raw images/labels/reviewer pack uploaded to public GitHub.
+
+Scope actually examined: all73 question/reference pairs and A–D answer openings screened; full response text inspected for R0002,R0009,R0021,R0025,R0032,R0054,R0066,R0067; original embedded images I022,I009,I019,I024 viewed. This is **AI-assisted preliminary screening**, not independent blinded human/clinical evaluation and not completed ratings of all292 responses. Condition key remains unavailable/unopened; previous conversation already exposed some recognizable texts, so model review cannot be advertised as fully independent blinded assessment. No condition-wise manual score computed.
+
+**New high-priority reference inconsistency candidate:** R0025 asks **'Which is bigger in this image, kidney or spleen?'**, but reference answer is **'Liver'**. All four responses primarily answer spleen. B/D later mention liver diseases in an explanatory disease list; this is the same contextual-score issue as the earlier selected0196 example, but the newly available question additionally shows GT is outside the two named options. Mark this reference/question pair **unclear / lineage audit required**, not automatically all four clinically wrong or the source dataset definitively erroneous. Cannot yet distinguish original annotation problem from an internal question/label join/export problem. Original file hashes/input receipts validate consistency of frozen project artifacts, not correctness of their original pairing. **Hold aggregate semantic/human-accuracy conclusions until source linkage is checked.** Do not alter original official scores.
+
+Other observed text-level diagnostics:
+- R0032 asks abnormal organ heart or lung; reference Lung. All four responses' core answer is heart. Incidental lung mentions/normal descriptions cannot establish a corrected core answer.
+- R0009-B asserts supportive care for2 weeks and detailed clinical improvements not supplied by its question/reference, then repeats fine-tactile fingerprints. This is an unsupported-by-provided-context narrative; no clinical outcome is independently verified.
+- R0054-A includes spinal cord alongside a long list of organs/tissues and repeats terms, while B directly answers spinal cord. Reference-token inclusion does not discriminate response quality. No numerical human-quality score assigned.
+- R0002-D starts with No but then calls heart the organ that senses light: leading-polarity agreement alone does not ensure coherent explanation.
+- R0021 reference Top vs answers upper left/left,top is ambiguous under the question's explicit alternatives; do not declare equivalence solely by word inclusion.
+- R0066 reference Transverse Plane vs axial answers is a potential synonym-sensitivity case requiring an explicit adjudication rule; no secondary score changed.
+- R0067-D combines brain-coronal wording and pancreatic/MRCP narrative; additional-claim consistency requires separate review.
+
+**Next CPU read-only gate:** identify R0025's original sample ID internally (read only that field from private_key, do not reveal A–D condition mapping), inspect frozen plan sample metadata, private-label loader/source and the relevant private raw record schema. Then compare question/answer/image and stable source question ID against original evaluation annotation, avoiding positional joins. Inspect all1061 pairings once source metadata is resolved, including explicit-choice questions with out-of-choice answers. No GPU inference, no relabeling, no rescore as “corrected accuracy” yet. Human ratings remain incomplete. Keep current package fixed; do not rebuild mappings.
