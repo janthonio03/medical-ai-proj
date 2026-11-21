@@ -1,0 +1,49 @@
+{
+  "step": "STEP79",
+  "reported_status": "GPU_INTEGRATION_PASS",
+  "job_id": "497276",
+  "plan_sha256": "49417e9fdff5f5dac520b406cf98d703bb24faa3db391e725d1566593ab83a4e",
+  "questions": 8,
+  "outputs": 72,
+  "worker_states": [
+    {
+      "worker": 0,
+      "reported_status": "GPU_PASS",
+      "completed": 2,
+      "reused": 0,
+      "slurm_state": "COMPLETED",
+      "exit_code": "0:0"
+    },
+    {
+      "worker": 1,
+      "reported_status": "GPU_PASS",
+      "completed": 2,
+      "reused": 0,
+      "slurm_state": "COMPLETED",
+      "exit_code": "0:0"
+    },
+    {
+      "worker": 2,
+      "reported_status": "GPU_PASS",
+      "completed": 2,
+      "reused": 0,
+      "slurm_state": "COMPLETED",
+      "exit_code": "0:0"
+    },
+    {
+      "worker": 3,
+      "reported_status": "GPU_PASS",
+      "completed": 2,
+      "reused": 0,
+      "slurm_state": "COMPLETED",
+      "exit_code": "0:0"
+    }
+  ],
+  "pilot_metric_scope": "4 CLOSED and4 OPEN; every reported cell official_score_x100=100.0. Integration subset only, no population or semantic superiority claim.",
+  "fixture_result_zip": "results/step79-comparison-pilot-497276.zip",
+  "zip_sha256": "1c7e8f4c79d2ee1b0758396d60338eefdb82c468dc560af7cbd640f9f7040cd9",
+  "evidence_origin": "User-pasted Ariel verify stdout",
+  "zip_locally_received_and_verified": false,
+  "full_benchmark_completed": false,
+  "performance_generalization_allowed": false
+}

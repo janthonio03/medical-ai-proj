@@ -1,5 +1,15 @@
 # Experiment log and research decisions
 
+## CURRENT — STEP79 Job497276 사용자 출력상 GPU_INTEGRATION_PASS; 결과 ZIP 검토 대기
+
+Ariel verify 출력: 완료8/8문항,72/72결과,4worker GPU_PASS(각2문항), Slurm497276_0..3 전부 COMPLETED0:0. Plan SHA 49417e9fdff5f5dac520b406cf98d703bb24faa3db391e725d1566593ab83a4e. EOS/processor 경고만 제시됐고 최종 검증은 통과했다. 보고된 CLOSED/OPEN 지표는 각4문항에서 모든 cell100점이다. 이는 작은 통합 표본의 공식 lexical 점수이며 전체 성능/정답 의미/우열 결론이 아니다.
+
+결과 ZIP: results/step79-comparison-pilot-497276.zip
+ZIP SHA256: 1c7e8f4c79d2ee1b0758396d60338eefdb82c468dc560af7cbd640f9f7040cd9
+현재 근거는 사용자가 붙여넣은 출력이고 ZIP 자체는 아직 로컬 수신/검토 전이다. 다음 행동은 ZIP을 받아 선택/ROI/stop/rawB0/B1 control/FA2/기존 token parity/prediction을 확인하는 것이다. 그 뒤 검증된 STEP79 소스를 게시하고 M3 전체1061 확장으로 진행한다. 완료한 파일럿을 재실행하지 않는다.
+
+사용자 신규 규칙: 진행 확인 시 예상 잔여 시간을 표시한다. [읽기 전용 ETA 도구](../tools/step79_progress.py)는 CPU 테스트를 통과했다. 실험 plan/source를 변경하지 않으며 ETA를 HH:MM:SS/시간과 KST 예상 완료 시각으로 표시한다. 현재 배치 실측 처리율 사용, 재사용 결과·큐 대기시간 제외, 첫 완료 전이나 worker 오류 시 산출 대기. 다음 전체 runner의 status에도 이 요구를 반영한다.
+
 ## CURRENT — STEP78 fixture local verification PASS; STEP79 GPU candidate ready for Ariel execution
 
 Generated fixture ZIP has been received: CRC, manifest identity and all60file SHA checks PASS. Native Draft checkpoint EOS2 was confirmed. [STEP79 candidate contract](STEP79_PILOT_CONTRACT.md) records72planned outputs (8questions×8controlled cells plus one source-default endpoint), explicit B0 failure/B1 guard-only repair and all scientific limits.
