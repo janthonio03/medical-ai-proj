@@ -704,3 +704,28 @@ Other observed text-level diagnostics:
 - R0067-D combines brain-coronal wording and pancreatic/MRCP narrative; additional-claim consistency requires separate review.
 
 **Next CPU read-only gate:** identify R0025's original sample ID internally (read only that field from private_key, do not reveal A–D condition mapping), inspect frozen plan sample metadata, private-label loader/source and the relevant private raw record schema. Then compare question/answer/image and stable source question ID against original evaluation annotation, avoiding positional joins. Inspect all1061 pairings once source metadata is resolved, including explicit-choice questions with out-of-choice answers. No GPU inference, no relabeling, no rescore as “corrected accuracy” yet. Human ratings remain incomplete. Keep current package fixed; do not rebuild mappings.
+
+
+## CURRENT VERIFIED — STEP75 schema inspection: qid12130 already flagged in frozen original annotation
+
+User supplied **STEP75_LINEAGE_SCHEMA_INSPECTED**. R0025 maps to **slake-en-test-0196, english_index196, qid12130, img_id234, xmlab234/source.jpg**, image SHA496ff5cf0f118c63393935045d6142c137701de73f954ead61e8eb3759344766. Both frozen plan item and private label have **original_GT_annotation_issue=true**. Plan question and private label.question and private original_annotation.question agree: 'Which is bigger in this image, kidney or spleen?'. Private answer and original_annotation.answer both Liver, CLOSED, q_lang=en. Frozen original_annotation SHA recorded4e61dd4d8209891bbecbc897b87b18a68fff30d5eb9ff7b735ed22c159b10a14. Thus this question/reference issue was **already flagged**, not a newly discovered original-source annotation defect.
+
+Inspected private_labels source only verifies file SHA and returns read(path), with lru_cache; it does not independently join or substitute answers. The inconsistent reference is present before that loader. **This resolves the loader-stage hypothesis, but not the fidelity of the earlier copied original_annotation to actual local SLAKE test.json.** Do not claim original public dataset confirmed or all upstream joins validated yet. Existing frozen file hashes prove preservation, not semantic validity or upstream origin.
+
+Plan keys include slake_root and samples; private root is dict keyed slake-en-test-NNNN. Private records retain qid/question/answer/answer_type/img_name/image_id and complete original_annotation. These stable metadata permit direct qid-based full-cohort verification. Mini-record path is original_records/slake-en-test-0196/original.json, but it has not been separately inspected. No data/score/GT edits.
+
+Next candidate **step75_lineage_audit.py**, source SHA256 **42f2059116e1176727c0d728a55837f91113320f6a82dd31d027e8a62b2280cf**, Library **libfile_bb430dd9c93081919a371b1ee511c64c**. Local selftests passed for valid/invalid explicit options, whitespace, multi-option tails, exact source label/question preservation, qid linkage and index drift. **Actual full source audit pending; candidate source not published as verified.**
+
+CPU-only script reads frozen full/model plans and private labels with hashes, then exact local `slake_root/test.json`, filters q_lang=en with expected1061 entries, rejects duplicate qids, and requires full qid coverage. Compares source qid, exact question/answer/type, entire original_annotation, English index, image name/ID/path/bytes and already-known issue flag preservation for every sample. Records source-file SHA and all checked image hashes; no fuzzy fallback or positional remapping. Narrow explicit comma-separated-or option parser only flags possible reference issues, not a comprehensive annotation audit. A lineage PASS does **not** mean all annotations are correct, nor authenticate an external official dataset revision. Current original official score stays unchanged; if original local source matches, retain the known issue as an evaluation limitation rather than silently correcting it.
+
+From Ariel cast-rebuild after transfer:
+```bash
+(
+set -euo pipefail
+.envs/cast-phi/bin/python -B -u step75_lineage_audit.py selftest
+mkdir -p results/step75-question-lineage
+.envs/cast-phi/bin/python -B -u step75_lineage_audit.py audit \
+  2>&1 | tee "results/step75-question-lineage/console-$(date +%Y%m%d-%H%M%S).log"
+)
+```
+Output new timestamped `results/step75-question-lineage/audit-<ns>/{report.json,per_case_lineage.json,provenance.json}`; progress every100, marker **STEP75_LOCAL_SOURCE_LINEAGE_VERIFIED** only if all pairings pass. Failures preserve report where per-case comparisons are reached; malformed/missing source prerequisites stop early without silent substitution. No imports of model/processor/GPU libraries, no inference, no relabeling. Next human semantic assessment remains pending; previous preliminary screening findings and blind key separation stay in force.
