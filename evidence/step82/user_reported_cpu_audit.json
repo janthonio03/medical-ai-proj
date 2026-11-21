@@ -1,0 +1,313 @@
+{
+  "evidence_level": "USER_PROVIDED_ARIEL_CONSOLE_REPORT; RAW_AUDIT_ZIP_NOT_RECEIVED",
+  "source_console_library_file_id": "libfile_ba9efba69eb48191a3fbd888ce015977",
+  "console_sha256": "ed5f9cd8200ac9a9acc5af05a31c24f19b4f846af527f8ad562e864eea0c152c",
+  "report": {
+    "step": "STEP82",
+    "status": "CPU_AUDIT_COMPLETE",
+    "closed_by_cell": {
+      "Draft__public_B1__OFF": {
+        "n": 416,
+        "official_literal_passes": 275,
+        "whole_word_matches": 266,
+        "first_sentence_whole_word_matches": 235,
+        "recognized_leading_equals_GT": 188,
+        "recognized_leading_opposes_GT": 127,
+        "pass_categories": {
+          "other_literal_pass": 235,
+          "literal_fail": 141,
+          "whole_word_only_after_first_sentence": 21,
+          "substring_only": 9,
+          "whole_word_with_opposite_opening": 10
+        }
+      },
+      "Draft__public_B1__ON": {
+        "n": 416,
+        "official_literal_passes": 299,
+        "whole_word_matches": 255,
+        "first_sentence_whole_word_matches": 230,
+        "recognized_leading_equals_GT": 188,
+        "recognized_leading_opposes_GT": 127,
+        "pass_categories": {
+          "other_literal_pass": 226,
+          "literal_fail": 117,
+          "whole_word_only_after_first_sentence": 17,
+          "substring_only": 44,
+          "whole_word_with_opposite_opening": 12
+        }
+      },
+      "Draft__bias__OFF": {
+        "n": 416,
+        "official_literal_passes": 283,
+        "whole_word_matches": 267,
+        "first_sentence_whole_word_matches": 229,
+        "recognized_leading_equals_GT": 188,
+        "recognized_leading_opposes_GT": 132,
+        "pass_categories": {
+          "other_literal_pass": 229,
+          "literal_fail": 133,
+          "whole_word_only_after_first_sentence": 24,
+          "substring_only": 16,
+          "whole_word_with_opposite_opening": 14
+        }
+      },
+      "Draft__bias__ON": {
+        "n": 416,
+        "official_literal_passes": 307,
+        "whole_word_matches": 258,
+        "first_sentence_whole_word_matches": 231,
+        "recognized_leading_equals_GT": 188,
+        "recognized_leading_opposes_GT": 132,
+        "pass_categories": {
+          "other_literal_pass": 227,
+          "substring_only": 49,
+          "whole_word_only_after_first_sentence": 14,
+          "literal_fail": 109,
+          "whole_word_with_opposite_opening": 17
+        }
+      },
+      "GT__public_B1__OFF": {
+        "n": 416,
+        "official_literal_passes": 278,
+        "whole_word_matches": 266,
+        "first_sentence_whole_word_matches": 235,
+        "recognized_leading_equals_GT": 188,
+        "recognized_leading_opposes_GT": 128,
+        "pass_categories": {
+          "other_literal_pass": 235,
+          "literal_fail": 138,
+          "whole_word_only_after_first_sentence": 21,
+          "substring_only": 12,
+          "whole_word_with_opposite_opening": 10
+        }
+      },
+      "GT__public_B1__ON": {
+        "n": 416,
+        "official_literal_passes": 299,
+        "whole_word_matches": 257,
+        "first_sentence_whole_word_matches": 230,
+        "recognized_leading_equals_GT": 188,
+        "recognized_leading_opposes_GT": 128,
+        "pass_categories": {
+          "other_literal_pass": 227,
+          "literal_fail": 117,
+          "whole_word_only_after_first_sentence": 15,
+          "substring_only": 42,
+          "whole_word_with_opposite_opening": 15
+        }
+      },
+      "GT__bias__OFF": {
+        "n": 416,
+        "official_literal_passes": 286,
+        "whole_word_matches": 270,
+        "first_sentence_whole_word_matches": 230,
+        "recognized_leading_equals_GT": 189,
+        "recognized_leading_opposes_GT": 131,
+        "pass_categories": {
+          "other_literal_pass": 230,
+          "literal_fail": 130,
+          "whole_word_only_after_first_sentence": 26,
+          "substring_only": 16,
+          "whole_word_with_opposite_opening": 14
+        }
+      },
+      "GT__bias__ON": {
+        "n": 416,
+        "official_literal_passes": 302,
+        "whole_word_matches": 258,
+        "first_sentence_whole_word_matches": 232,
+        "recognized_leading_equals_GT": 189,
+        "recognized_leading_opposes_GT": 131,
+        "pass_categories": {
+          "other_literal_pass": 228,
+          "substring_only": 44,
+          "whole_word_only_after_first_sentence": 12,
+          "literal_fail": 114,
+          "whole_word_with_opposite_opening": 18
+        }
+      },
+      "GT__public_defaults_B1__OFF": {
+        "n": 416,
+        "official_literal_passes": 284,
+        "whole_word_matches": 267,
+        "first_sentence_whole_word_matches": 229,
+        "recognized_leading_equals_GT": 188,
+        "recognized_leading_opposes_GT": 130,
+        "pass_categories": {
+          "other_literal_pass": 229,
+          "literal_fail": 132,
+          "whole_word_only_after_first_sentence": 23,
+          "substring_only": 17,
+          "whole_word_with_opposite_opening": 15
+        }
+      }
+    },
+    "closed_paired_literal_decomposition": {
+      "endpoint_paper_minus_source": {
+        "n": 416,
+        "gains": 35,
+        "losses": 12,
+        "ties": 369,
+        "delta_literal_points": 5.528846153846154,
+        "categories": {
+          "substring_only": {
+            "gains": 15,
+            "losses": 1,
+            "net_literal_points": 3.3653846153846154
+          },
+          "other_literal_pass": {
+            "gains": 13,
+            "losses": 8,
+            "net_literal_points": 1.2019230769230769
+          },
+          "whole_word_only_after_first_sentence": {
+            "gains": 1,
+            "losses": 1,
+            "net_literal_points": 0.0
+          },
+          "whole_word_with_opposite_opening": {
+            "gains": 6,
+            "losses": 2,
+            "net_literal_points": 0.9615384615384616
+          }
+        },
+        "category_meaning": "lexical accounting of passing side, not corrected semantic accuracy"
+      },
+      "Draft_bias_Temporal_ON_minus_OFF": {
+        "n": 416,
+        "gains": 32,
+        "losses": 8,
+        "ties": 376,
+        "delta_literal_points": 5.769230769230769,
+        "categories": {
+          "substring_only": {
+            "gains": 17,
+            "losses": 4,
+            "net_literal_points": 3.125
+          },
+          "other_literal_pass": {
+            "gains": 6,
+            "losses": 4,
+            "net_literal_points": 0.4807692307692308
+          },
+          "whole_word_only_after_first_sentence": {
+            "gains": 2,
+            "losses": 0,
+            "net_literal_points": 0.4807692307692308
+          },
+          "whole_word_with_opposite_opening": {
+            "gains": 7,
+            "losses": 0,
+            "net_literal_points": 1.6826923076923077
+          }
+        },
+        "category_meaning": "lexical accounting of passing side, not corrected semantic accuracy"
+      }
+    },
+    "known_flagged_0196_excluded_endpoint_sensitivity": {
+      "n": 415,
+      "gains": 34,
+      "losses": 12,
+      "ties": 369,
+      "delta_literal_points": 5.301204819277109,
+      "categories": {
+        "substring_only": {
+          "gains": 15,
+          "losses": 1,
+          "net_literal_points": 3.3734939759036147
+        },
+        "other_literal_pass": {
+          "gains": 13,
+          "losses": 8,
+          "net_literal_points": 1.2048192771084338
+        },
+        "whole_word_with_opposite_opening": {
+          "gains": 6,
+          "losses": 2,
+          "net_literal_points": 0.963855421686747
+        },
+        "whole_word_only_after_first_sentence": {
+          "gains": 0,
+          "losses": 1,
+          "net_literal_points": -0.24096385542168675
+        }
+      },
+      "category_meaning": "lexical accounting of passing side, not corrected semantic accuracy"
+    },
+    "public_position_summary": {
+      "Draft__public_B1__OFF": {
+        "n": 1061,
+        "normal_short_public_long_prefill": 1061,
+        "public_regime_changed_during_generation": 0
+      },
+      "Draft__public_B1__ON": {
+        "n": 1061,
+        "normal_short_public_long_prefill": 1061,
+        "public_regime_changed_during_generation": 0
+      },
+      "GT__public_B1__OFF": {
+        "n": 1061,
+        "normal_short_public_long_prefill": 1061,
+        "public_regime_changed_during_generation": 0
+      },
+      "GT__public_B1__ON": {
+        "n": 1061,
+        "normal_short_public_long_prefill": 1061,
+        "public_regime_changed_during_generation": 0
+      },
+      "GT__public_defaults_B1__OFF": {
+        "n": 1061,
+        "normal_short_public_long_prefill": 356,
+        "public_regime_changed_during_generation": 0
+      }
+    },
+    "conditional_input_match_counts": {
+      "Draft/match": 1061,
+      "GT/match": 1061
+    },
+    "clinical_adjudication_completed": false,
+    "spatial_GPU_control_completed": false,
+    "whole_project_completed": false,
+    "next_work": "Validate common-position/text-scope GPU control on original eight canaries; historical control reuse requires that gate.",
+    "limits": [
+      "Official scores/labels unchanged; new lexical fields are diagnostics.",
+      "First-sentence and leading Yes/No parsing are heuristics.",
+      "Substring-only can include meaningful negation, not automatically a false positive.",
+      "Shared RoPE regime is source-derived; no new actual RoPE tensor instrumentation here.",
+      "CPU input matches alone do not authorize cross-run GPU result reuse."
+    ],
+    "validation": {
+      "STEP80_plan_sha256": "e73250456c8de9cd37dba05ce67ff3e70ea8761d706de23344bf950c773b6818",
+      "STEP71_plan_sha256": "01ab8ca1011ed39fd2c728ea0039f3e3925a3244c7c2b6c3e11103920fef5975",
+      "STEP80_paired_metrics_sha256": "68d97340ec368caefefd92c53ffa548d9767926d8f15f225110b3f60c1af93e2",
+      "raw_files_SHA_checked": 11213,
+      "raw_CLOSED_outputs_re_scored": 3744,
+      "public_position_outputs": 5305,
+      "historical_control_outputs_exported": 2122,
+      "historical_controls_reuse_gate": "CPU identity candidate only; common-position GPU parity pending",
+      "model_source_sha256": "b223be7d7e9f01903dd8704e5da45c6030824134441aa2734c40c36597c3b41c",
+      "processor_source_sha256": "dabaa9abcfff37bad990f1c0b805da32632f1e774eea181672f83334c8da790a"
+    }
+  },
+  "manifest_summary": {
+    "step": "STEP82",
+    "status": "CPU_AUDIT_COMPLETE",
+    "source_plan_sha256": "e73250456c8de9cd37dba05ce67ff3e70ea8761d706de23344bf950c773b6818",
+    "questions": 1061,
+    "CLOSED_questions": 416,
+    "collector_sha256": "f35cac26b7c298f8abbe93ae5715fb082337b74f8ad1f9176fb0c2554433780c",
+    "GPU_submitted": false,
+    "model_inference_executed": false,
+    "spatial_GPU_control_completed": false,
+    "whole_project_completed": false,
+    "manifest_sha256": "7259222488014ddbd26a73ce45313a1b2d15f64fd508c327e0276262c8bd7164"
+  },
+  "reported_result_zip": "results/step82-completion-audit/audit-1795277275848846760.zip",
+  "reported_result_zip_sha256": "04b7c63e4e498a5ebd159c2f08e2fb9b0125501f2fc0395b9e4ff62d88936a5c",
+  "independent_console_checks": {
+    "CLOSED_counts_and_categories_balanced": true,
+    "paired_gain_loss_decomposition_balanced": true,
+    "collector_SHA_matches_local_tested_source": true
+  },
+  "raw_ZIP_independently_verified": false
+}

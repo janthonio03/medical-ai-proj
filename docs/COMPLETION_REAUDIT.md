@@ -1,3 +1,11 @@
+## CURRENT — STEP82 전체 CPU 감사 서버 검증 완료; 결과 ZIP 독립 검토 대기 (2026-11-22 KST)
+
+수신한 실제 Ariel 출력:1061/1061, CPU_AUDIT_COMPLETE 및 STEP82_EXPORT_VERIFY_PASS. Raw11213파일 SHA 검사, 현재 CLOSED3744답변 재채점 일치, Public5305위치 기록, 과거 Neutral/Temporal2122출력 export. GT/Draft core conditional 입력은 각각1061/1061 STEP71과 일치. Source SHA와 console 집계/증감 회계는 여기서 확인했다. 실제 실행한 감사 source를 experiments/step82에 보존했다. **원본 감사 ZIP은 아직 미수신/독립 검토 전**이므로 “모든 원본 증거를 독립 검증했다”는 주장은 하지 않는다.
+
+주요 발견: endpoint 공식 passes284→307(+5.528846점,35gain/12loss). 그 순증가23중14는 substring-only 범주의 순증가(lexical accounting이며 의미적 오답/인과 기여가 아님). Whole-word267→258. Public 통제4조건4244출력 모두에서 recorded positions+pinned source로 normal-short/public-joint-long RoPE가 도출되고, source-default는356/1061이다. 실제 factor tensor hook 결과는 아니다.
+
+[STEP82 결과·해석·다음 작업](STEP82_RESULTS.md), [수신 console 근거](../evidence/step82/user_reported_cpu_audit.json). 이전 “Ariel CPU 감사 미실행/collect 대기”는 종료했다. STEP82를 반복 실행하지 않는다. 다음은 결과 ZIP 수신/독립 검토→STEP83 작은 common-position/text-scope GPU control→근거에 따른 기존 control 재사용/필요 셀 추가→최종 비교 해석 갱신이다. **전체 과제 미완료**, 이번 턴 새 GPU 제출 없음.
+
 # 완료 판정 재검토 — STEP81 이후 필요한 추가 검증
 
 2026-11-21 KST. 사용자가 “추가 실험/미완성 부분이 없는지 다시 확인”을 요청해 목표·검증 범위·실제 source/파일럿 위치 기록을 재검토했다.
