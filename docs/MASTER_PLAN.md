@@ -1,3 +1,14 @@
+## CURRENT — 완료 판정 재검토: 수치 비교 완료, 추가 해석 검증 필요
+
+2026-11-21 KST 사용자 재확인 요청에 따라 앞선 “제출 정리만 남았다”는 안내를 수정한다. **STEP80/81의 9조건 공식 점수와 통계 분석은 유효하게 완료됐지만, 전체 연구의 추가 검증이 없다고 단정할 수 없다.**
+
+[완료 판정 재검토와 최소 추가 계획](COMPLETION_REAUDIT.md), [실제 위치 기록 근거](../evidence/completion_reaudit/evidence.json)를 우선 읽는다. 기존 STEP79의 Public B1 통제32출력 모두에서 기록된 weighted 위치와 실제 모델 source를 대입하면 conditional-alone short와 public batch long RoPE 구간 차이가 도출된다(실제 factor tensor를 새로 hook한 결과는 아님). 따라서 attention-bias 효과와 위치/RoPE/branch 효과의 세부 원인 분리는 아직 미완료다.
+
+또한 현재 STEP80 CLOSED endpoint gain35/loss12의 실제 답변을 새로 lexical 감사하지 않았다. 과거 STEP73은 현재 출력과 다른 cohort이며 summary에 raw prediction/GT가 없다. 공식 지표 비교는 성립하지만 그 상승을 답변 의미 개선으로 해석하려면 최신 답변 검증이 필요하다.
+
+다음: STEP82 CPU 산출물 감사 → 공통 위치/text-scope의 작은 GPU control → 동일성 확인 시 기존 Neutral/Temporal 재사용, 불일치 시 필요한 control만 추가 → M4/M5 해석 확정. 기존9조건의 전체 실험은 재실행하지 않는다. M3 완료는 유지하며 M4 표적 검증과 M5 최종 귀인은 보류한다. 아래 “M3–M5 모두 완료/필수 작업 없음”은 이전 수치 비교 범위의 기록이며 이번 항목으로 전체 완료 해석을 정정한다. 이번에는 새 GPU 제출 없음.
+
+
 ## CURRENT — STEP81 분석·최종 9조건 비교 보고 완료 (2026-11-21 KST)
 
 **현재 합의한 세 요소·9조건의 공식 지표 비교(M3–M5)를 완료했다.** 이는 수리된 공개 기준선과 작성한 논문 지향 후보의 고정 SLAKE test 비교이며, 수정 없는 저자 구현/논문 숫자 재현이나 의미적·임상적 정확성 입증을 뜻하지 않는다. 아래에 남은 “M4 진입/분석 대기/ZIP 미수신”은 과거 기록이다. STEP79/80을 기본 다음 작업으로 재실행하지 않는다.
@@ -80,8 +91,8 @@ STEP79 갱신: STEP78 fixture 실제 수신/로컬60파일 검증 완료. GT/Dra
 | M1 비교 계약·실행 기준선·선택기 연결 |현재 public evaluator/selector/producer 소스 확보, 원형 실행 문제와 최소 호환/수리 경계 결정, 동일 후보 GT/Draft 연결|소스 SHA, 변경 목록, 입력 채널 계약, 비교 cell 목록, 재사용 가능 결과 목록|**STEP79 완료 범위에서 검증**|
 | M2 작은 paired pilot |새 ROI 선택·public spatial·Temporal 조합을 소규모로 연결 검증|empty/nonempty 및 CLOSED/OPEN 포함, target/mask/hash/실제 backend/stop/native/control 확인, 필요한 GPU 결과 통과|**완료: STEP79 Job497276, ZIP 독립 검증**|
 | M3 전체 조건 평가 |검증된 cell을1061문항에 확장|셀별 완전한 동일 ID·receipt, 실패/누락0, 병렬 실행·재개·검증 기록|**완료: STEP80 Job497286, 서버 verify 및 STEP81 요약 독립 검토**|
-| M4 요소·endpoint 성능 비교 |GT/Draft, public/bias, Temporal ON/OFF 및 공개/논문 endpoint 비교|짝지은 비교표, answer type 분리, 영상 단위 불확실성, metric 한계, 재현/수리 범위 명시|**완료: STEP81 1061 paired,96이미지 cluster10000회 분석**|
-| M5 최종 과제 보고 |차이→변경→실험→결과를 연결|두 핵심 질문에 답변하거나 특정 비교 불가능 사유를 증거로 설명, 남은 한계와 전체 실행 근거 기록|**완료: COMPARISON_FINAL_REPORT.md, B1/논문 후보·지표 해석 범위 명시**|
+| M4 요소·endpoint 성능 비교 |GT/Draft, public/bias, Temporal ON/OFF 및 공개/논문 endpoint 비교|짝지은 비교표, answer type 분리, 영상 단위 불확실성, metric 한계, 재현/수리 범위 명시|**수치 분석 완료; 위치/RoPE control·STEP80 답변 감사 추가 검증 대기**|
+| M5 최종 과제 보고 |차이→변경→실험→결과를 연결|두 핵심 질문에 답변하거나 특정 비교 불가능 사유를 증거로 설명, 남은 한계와 전체 실행 근거 기록|**단계적 보고서 작성; 추가 해석 검증 후 최종 귀인 확정**|
 
 STEP77 갱신: source snapshot 검증 완료. 공개4파일 upstream AST 일치와 선택 계약을 확인했다. STEP60B nested producer는 snapshot 미포함이며 새 paired 선택은 고정 후보와 공개 selector 계약으로 검증한다. 다음 STEP78 CPU fixture 준비는 실제 Ariel 실행 전이고, M1 전체/M2/GPU 성능 검증은 아직 미완료다.
 
@@ -127,3 +138,8 @@ Public B0 원형은 padding guard 오류로 성능 미제공이다. B1은 그 �
 - 재개 가능한 코드·계획·해시·job/보고서 경로·미완료 항목이 GitHub에 있는가?
 
 STEP81 기준 현재 합의한 9조건 공식 지표 비교의 완료 기준은 충족했다. 최종 보고서와 재현 소스/근거를 기록했다. 미공개 저자 구현 동일성, B0의 실행 가능한 숫자, 임상·의미적 정확성은 미입증으로 명시한다. 추가 확장은 사용자 요청 시 별도 계획으로 시작한다.
+
+
+## 8. 완료 재검토에 따른 표적 검증 gate
+
+사용자2026-11-21 재확인 요청과 실제 source/파일럿 위치 증거에 따른 계획 수정이다. docs/COMPLETION_REAUDIT.md의 A/B 범위와 종료 기준을 따른다. 기존9조건 공식 점수 비교 완료는 유지하되 순수 spatial 효과 귀인과 최신 CLOSED 답변의 의미 해석은 미완료로 구분한다. CPU 기존 산출물 감사와 작은 공통 위치 control부터 진행하며, 기존 Neutral/T 결과는 입력/모델/stop/backend/parity 동일성 확인 후에만 재사용한다. 조건이 충족되면 M4/M5로 복귀하고 새 데이터·모델·광범위 가중치 탐색으로 임의 확장하지 않는다.

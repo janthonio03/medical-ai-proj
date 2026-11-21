@@ -1,0 +1,535 @@
+{
+  "audit_date_KST": "2026-11-21",
+  "status": "COMPLETION_REOPENED_FOR_TARGETED_VALIDATION",
+  "preserved_completed_work": "STEP80 nine-cell lexical score benchmark and STEP81 stored-score paired analysis remain complete and unchanged.",
+  "new_finding": {
+    "description": "Weighted public position IDs can change shared RoPE scaling regime, including conditional row, rather than only attention masking.",
+    "proof_scope": "Derived from actual STEP79 recorded position IDs and exact loaded model source; RoPE factor tensors were not directly hooked in this audit.",
+    "model_source_sha256": "b223be7d7e9f01903dd8704e5da45c6030824134441aa2734c40c36597c3b41c",
+    "rope_type": "su",
+    "original_max_position_embeddings": 4096,
+    "controlled_cells_checked": 32,
+    "controlled_regime_crossings": 32,
+    "source_default_cells_checked": 8,
+    "source_default_regime_crossings": 2,
+    "records": [
+      {
+        "sample_id": "slake-en-test-0004",
+        "cell": "Draft__public_B1__OFF",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          7580
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 7581,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0004",
+        "cell": "Draft__public_B1__ON",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          7580
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 7581,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0004",
+        "cell": "GT__public_B1__OFF",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          7580
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 7581,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0004",
+        "cell": "GT__public_B1__ON",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          7580
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 7581,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0004",
+        "cell": "GT__public_defaults_B1__OFF",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          236
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 2528,
+        "conditional_alone_short_but_public_batch_long": false
+      },
+      {
+        "sample_id": "slake-en-test-0015",
+        "cell": "Draft__public_B1__OFF",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          7142
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 7143,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0015",
+        "cell": "Draft__public_B1__ON",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          7142
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 7143,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0015",
+        "cell": "GT__public_B1__OFF",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          7142
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 7143,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0015",
+        "cell": "GT__public_B1__ON",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          7142
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 7143,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0015",
+        "cell": "GT__public_defaults_B1__OFF",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          7142
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 7143,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0025",
+        "cell": "Draft__public_B1__OFF",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          7193
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 7194,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0025",
+        "cell": "Draft__public_B1__ON",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          7193
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 7194,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0025",
+        "cell": "GT__public_B1__OFF",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          7193
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 7194,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0025",
+        "cell": "GT__public_B1__ON",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          7193
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 7194,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0025",
+        "cell": "GT__public_defaults_B1__OFF",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          7193
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 7194,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0031",
+        "cell": "Draft__public_B1__OFF",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          6905
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 6906,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0031",
+        "cell": "Draft__public_B1__ON",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          6905
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 6906,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0031",
+        "cell": "GT__public_B1__OFF",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          7202
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 7203,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0031",
+        "cell": "GT__public_B1__ON",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          7202
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 7203,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0031",
+        "cell": "GT__public_defaults_B1__OFF",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          632
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 2531,
+        "conditional_alone_short_but_public_batch_long": false
+      },
+      {
+        "sample_id": "slake-en-test-0038",
+        "cell": "Draft__public_B1__OFF",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          7130
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 7131,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0038",
+        "cell": "Draft__public_B1__ON",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          7130
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 7131,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0038",
+        "cell": "GT__public_B1__OFF",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          7109
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 7110,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0038",
+        "cell": "GT__public_B1__ON",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          7109
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 7110,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0038",
+        "cell": "GT__public_defaults_B1__OFF",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          725
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 2531,
+        "conditional_alone_short_but_public_batch_long": false
+      },
+      {
+        "sample_id": "slake-en-test-0175",
+        "cell": "Draft__public_B1__OFF",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          7580
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 7581,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0175",
+        "cell": "Draft__public_B1__ON",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          7580
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 7581,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0175",
+        "cell": "GT__public_B1__OFF",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          7580
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 7581,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0175",
+        "cell": "GT__public_B1__ON",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          7580
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 7581,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0175",
+        "cell": "GT__public_defaults_B1__OFF",
+        "prefix_length": 2527,
+        "last_positions": [
+          2526,
+          236
+        ],
+        "normal_conditional_rotary_seq_len": 2528,
+        "batched_public_rotary_seq_len": 2528,
+        "conditional_alone_short_but_public_batch_long": false
+      },
+      {
+        "sample_id": "slake-en-test-0236",
+        "cell": "Draft__public_B1__OFF",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          7589
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 7590,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0236",
+        "cell": "Draft__public_B1__ON",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          7589
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 7590,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0236",
+        "cell": "GT__public_B1__OFF",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          7589
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 7590,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0236",
+        "cell": "GT__public_B1__ON",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          7589
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 7590,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0236",
+        "cell": "GT__public_defaults_B1__OFF",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          245
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 2531,
+        "conditional_alone_short_but_public_batch_long": false
+      },
+      {
+        "sample_id": "slake-en-test-0287",
+        "cell": "Draft__public_B1__OFF",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          7589
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 7590,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0287",
+        "cell": "Draft__public_B1__ON",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          7589
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 7590,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0287",
+        "cell": "GT__public_B1__OFF",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          7589
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 7590,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0287",
+        "cell": "GT__public_B1__ON",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          7589
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 7590,
+        "conditional_alone_short_but_public_batch_long": true
+      },
+      {
+        "sample_id": "slake-en-test-0287",
+        "cell": "GT__public_defaults_B1__OFF",
+        "prefix_length": 2530,
+        "last_positions": [
+          2529,
+          245
+        ],
+        "normal_conditional_rotary_seq_len": 2531,
+        "batched_public_rotary_seq_len": 2531,
+        "conditional_alone_short_but_public_batch_long": false
+      }
+    ]
+  },
+  "remaining_validation": [
+    {
+      "id": "A",
+      "priority": "needed_before_pure_spatial_causal_attribution",
+      "task": "Common-position/text-scope control; establish whether B1-vs-bias change is position/RoPE/branch execution versus actual attention bias. Start eight-case pilot; reuse equivalent existing Neutral/Temporal controls only after input/backend/stop/parity checks."
+    },
+    {
+      "id": "B",
+      "priority": "needed_before_semantic_interpretation_of_current_CLOSED_gain",
+      "task": "CPU audit of STEP80 actual answer texts for endpoint/Temporal gains. Quantify substring-only and contradictory-opening cases; distinguish lexical diagnostics from adjudicated semantic accuracy."
+    }
+  ],
+  "negative_checks": {
+    "pilot_32007_seen_outputs": 66,
+    "pilot_tokens_after_32007": [
+      {
+        "token_ids": [
+          29871,
+          13,
+          32000
+        ],
+        "count": 66
+      }
+    ],
+    "pilot_tail_interpretation": "66 terminated pilot outputs have only space,newline,endoftext after chat-end; no observed new substantive content after chat-end in these cases. Six cap outputs did not contain32007. This alone does not justify an EOS rerun.",
+    "full_normal_prefix_length_range": [
+      2525,
+      2544
+    ],
+    "normal_prefix_plus_cap_below_rope_threshold": true
+  },
+  "actions_not_required_now": [
+    "Do not rerun STEP79/80 unchanged",
+    "Do not invalidate existing official scores",
+    "Do not add model/dataset/seed/weight sweeps without a specific scope justification"
+  ],
+  "new_GPU_submitted": false
+}
