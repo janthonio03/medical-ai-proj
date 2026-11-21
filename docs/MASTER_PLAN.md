@@ -48,9 +48,9 @@ STEP79 갱신: STEP78 fixture 실제 수신/로컬60파일 검증 완료. GT/Dra
 | 단계 | 작업 | 완료 기준 / 산출물 | 현재 상태 |
 |---|---|---|---|
 | M0 목표 복원 |원래 목표·완료 조건·상태표 고정|이 문서, 운영 규칙, 인수인계 최신화|이번 갱신으로 완료|
-| M1 비교 계약·실행 기준선·선택기 연결 |현재 public evaluator/selector/producer 소스 확보, 원형 실행 문제와 최소 호환/수리 경계 결정, 동일 후보 GT/Draft 연결|소스 SHA, 변경 목록, 입력 채널 계약, 비교 cell 목록, 재사용 가능 결과 목록|**현재 진행 단계**|
-| M2 작은 paired pilot |새 ROI 선택·public spatial·Temporal 조합을 소규모로 연결 검증|empty/nonempty 및 CLOSED/OPEN 포함, target/mask/hash/실제 backend/stop/native/control 확인, 필요한 GPU 결과 통과|미완료|
-| M3 전체 조건 평가 |검증된 cell을1061문항에 확장|셀별 완전한 동일 ID·receipt, 실패/누락0, 병렬 실행·재개·검증 기록|미완료|
+| M1 비교 계약·실행 기준선·선택기 연결 |현재 public evaluator/selector/producer 소스 확보, 원형 실행 문제와 최소 호환/수리 경계 결정, 동일 후보 GT/Draft 연결|소스 SHA, 변경 목록, 입력 채널 계약, 비교 cell 목록, 재사용 가능 결과 목록|**STEP79 완료 범위에서 검증**|
+| M2 작은 paired pilot |새 ROI 선택·public spatial·Temporal 조합을 소규모로 연결 검증|empty/nonempty 및 CLOSED/OPEN 포함, target/mask/hash/실제 backend/stop/native/control 확인, 필요한 GPU 결과 통과|**완료: STEP79 Job497276, ZIP 독립 검증**|
+| M3 전체 조건 평가 |검증된 cell을1061문항에 확장|셀별 완전한 동일 ID·receipt, 실패/누락0, 병렬 실행·재개·검증 기록|**STEP80 후보 작성/CPU 일부 검사; Ariel 전체 GPU 미실행**|
 | M4 요소·endpoint 성능 비교 |GT/Draft, public/bias, Temporal ON/OFF 및 공개/논문 endpoint 비교|짝지은 비교표, answer type 분리, 영상 단위 불확실성, metric 한계, 재현/수리 범위 명시|일부 후보 내부 비교만 완료|
 | M5 최종 과제 보고 |차이→변경→실험→결과를 연결|두 핵심 질문에 답변하거나 특정 비교 불가능 사유를 증거로 설명, 남은 한계와 전체 실행 근거 기록|아직 진입하지 않음|
 
