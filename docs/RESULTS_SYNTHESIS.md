@@ -1,5 +1,7 @@
 # CAST matched candidate evaluation — results synthesis
 
+> **Scope correction:** This is an interim analysis of the fixed-ROI candidate. The original paper-vs-open-source configuration/endpoints comparison remains incomplete. Neutral is not the original public baseline. See [remaining comparison plan](COMPARISON_PLAN_STATUS.md). Final-report work is paused pending those comparisons.
+
 Scope: STEP71–76;1061 English SLAKE questions,96 images, four matched candidate decoding conditions. This document summarizes verified user-supplied execution evidence and explicitly distinguishes exploratory AI review from official metric results. It is not a claim of unmodified official CAST reproduction.
 
 ## Controlled setup and completed execution

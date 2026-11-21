@@ -1,5 +1,15 @@
 # Continuation / New-chat runbook — CAST paper vs open source
 
+## CURRENT SCOPE CORRECTION — original paper-vs-open-source assignment is NOT COMPLETE
+
+User clarified the original objective remains: determine how the planned paper/source settings affect performance and compare the official-source-style pipeline against the paper-aligned candidate. **Do not treat STEP71–76 candidate analysis or scoring diagnostics as completion of that assignment.** The assistant prematurely proposed a final report; final-report work is paused. This corrects any earlier overall-completion implication while preserving verified experiments.
+
+Completed:1061×4 matched **within-candidate** Neutral/Spatial/Temporal/ST under fixed stored strict ROI, plus technical, metric, lineage and exploratory AI review. **Neutral is not an executed original public-source baseline.** Spatial OFF conditional-only selection is not automatically equivalent to running the original public2D-mask/CFG/position-generation path. No fair final “paper beats source” or “source beats paper” conclusion is established.
+
+Still required: paired GT-answer vs Draft-answer ROI selection on identical cached proposals; controlled public2D-mask handling vs validated actual score-bias candidate; OFF/ON Temporal across those settings where meaningful; combined source-style and paper-aligned endpoint comparison with documented common compatibility changes. Original public generation can fail in the installed FA2/nonbinary-mask path: first establish runnable behavior and distinguish raw failure from any explicitly repaired source baseline. A repaired baseline must never be called unmodified author code.
+
+See [comparison scope and remaining matrix](COMPARISON_PLAN_STATUS.md). Primary next implementation gate is a source-baseline/ROI-selector integration and paired small GPU pilot before full expansion, retaining checkpoint/BF16/actual FA2/processor/proposals/question/split/EOS/cap/metrics and up to4 concurrent GPUs. No new GPU submitted. Existing results may be reused only after exact ROI/input/config equivalence; do not claim four of eight final factor cells are already complete. Scoring anomalies remain interpretation safeguards, not a substitute for the missing comparisons or a reason to terminate them.
+
 ## CURRENT VERIFIED — STEP76 frozen AI reference review aggregated
 
 Actual user output **STEP76_INSTALL_PASS**, **STEP76_SELFTEST_PASS**, status **AI_REFERENCE_REVIEW_AGGREGATED**, final **STEP76_AI_REFERENCE_REVIEW_AGGREGATION_COMPLETE**. Report `results/step76-ai-reference-review/analysis-1795227489463032021/report.json`. human_ratings_completed=false. Frozen AI labels were fixed before key access, SHA **ddae831db28f2b764abbdadbdc999490b74c731e7ea8b1b16081877b41d1300c**, tied to fixed pack **e58f9c50faafcfba57ef3c0168d09677a1f65245044f524aa3d4aaf5814a519c**. No GPU/inference or official-metric edits.
