@@ -1,5 +1,11 @@
 # Experiment log and research decisions
 
+## CURRENT — STEP78 fixture local verification PASS; STEP79 GPU candidate ready for Ariel execution
+
+Generated fixture ZIP has been received: CRC, manifest identity and all60file SHA checks PASS. Native Draft checkpoint EOS2 was confirmed. [STEP79 candidate contract](STEP79_PILOT_CONTRACT.md) records72planned outputs (8questions×8controlled cells plus one source-default endpoint), explicit B0 failure/B1 guard-only repair and all scientific limits.
+
+The new candidate has CPU source/tensor/boundary checks only; GPU selection/native generation/FA2 results are pending and no new GPU has been submitted here. Candidate source hashes are recorded, but the experiment is not published as validated code. Next user action is install/selftest/prepare/submit STEP79, with status and completion-verify commands supplied together. Return GPU evidence, then validate and expand M3. Do not repeat STEP78 preparation or substitute further metric audits for the original comparison.
+
 ## CURRENT — STEP78 revision2 Ariel CPU 준비·검증 통과; fixture ZIP 수신 후 M2 연결 구현
 
 사용자가 전달한 실제 Ariel 출력에서 STEP78_ROI_HASH_SELFTEST_PASS, STEP78_SELFTEST_PASS, 전체1061문항 준비, STEP78_FIXTURE_VERIFY_PASS가 확인됐다. 후보 캐시96개, 기존8 canary는 empty/nonempty×CLOSED/OPEN 각2개, K16. 배열/NPY 파일 해시 구분 수정 후 준비가 완료됐다. 이전의 “Ariel 준비 미실행/실패/재실행 대기”는 이 항목으로 갱신한다.

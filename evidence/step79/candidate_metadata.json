@@ -1,0 +1,15 @@
+{
+  "package_sha256": "62bbb43e64d678fd51577e5994a9e01607fb81f84aff09670e79ed6a8b20320d",
+  "bytes": 22006,
+  "sources": {
+    "common.py": "4a7ebfadcf1226898a0733f2d3b75ea4f0949bc463f1ec89caf1039949468c8c",
+    "runtime.py": "d3270ae7c4b100a858d4d3d5278dc7ee2fd8e75c491f4db92847a30e14d4f364",
+    "pilot.py": "ee5c531406546ee98207efffdfc7316f0a93119e71f0e03e2005e2fef2413dfe",
+    "job.sh": "ffd6bd493fa21aa4f27c264ea3f3bf288051fb7d5996ce015096e5bab1c010b3",
+    "test_offline.py": "fac106ca5f796e89b33d6932b5a1e5729f358f1eb85b2dd3bdcf68c628f9734b",
+    "README.md": "70d35add97b4f5da713bb834f686b0fa826618e4fe3923d8c17c3a0641c54570"
+  },
+  "GPU_verified": false,
+  "status": "CPU_TESTED_GPU_UNVERIFIED",
+  "full_factorial_performance_measured": false
+}

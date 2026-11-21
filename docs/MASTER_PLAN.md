@@ -33,6 +33,8 @@ ROI 선택용 Draft는 별도 공개 계약을 따른다: native greedy32토큰,
 
 STEP78 revision2 갱신: 실제 Ariel stdout에서 CPU 준비/verify PASS,1061문항/96후보캐시/균형8canary가 확인됐다. 준비 단계 완료이며 새 ROI 선택·public 기준선 수리·새 GPU 성능은 미완료다. 생성 fixture ZIP 수신 후 M2 연결 코드를 구현한다. 상세 경로·SHA·출력 근거는 CONTINUATION 및 evidence/step78/preparation_receipt.json을 따른다.
 
+STEP79 갱신: STEP78 fixture 실제 수신/로컬60파일 검증 완료. GT/Draft·public/actual-bias·Temporal 새 조합의 GPU candidate를 구현했고 CPU 경계 검사를 통과했다. 기본8셀+공개 추가채널 endpoint1개, 총72pilot출력. B1은 native 위치 계산을 보존하는 padding guard 한 곳 수정이며, spatial 비교는 전체 경로 차이다. 상세 계약은 STEP79_PILOT_CONTRACT.md. 실제 GPU 통과와 전체1061 비교는 여전히 미완료다.
+
 ## 4. 단계별 계획과 완료 기준
 
 | 단계 | 작업 | 완료 기준 / 산출물 | 현재 상태 |

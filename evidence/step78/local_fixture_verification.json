@@ -1,0 +1,14 @@
+{
+  "step": "STEP78",
+  "status": "LOCAL_FIXTURE_VERIFIED",
+  "zip": "fixture-1795229949060204042.zip",
+  "zip_sha256": "bc724989c35a0f8322c55f6979de3beee4fee1d044cb76b492c8ebd8ca5c7287",
+  "fixture_sha256": "8815498d0a4ac6cb8b7cc5fea68478c772e3a1c8cf397cddcb16f2d92613e90c",
+  "ZIP_CRC_PASS": true,
+  "manifest_digest_PASS": true,
+  "all_60_fixture_file_SHA256_PASS": true,
+  "native_checkpoint_generation_EOS": 2,
+  "selection_vs_final_EOS_distinguished": true,
+  "scope": "Local fixture contains original8 pilot inputs/runtime sources. Full1061/96cache preparation was verified on Ariel by STEP78; local check does not rehash uncopied original full cohort.",
+  "GPU_submitted": false
+}
