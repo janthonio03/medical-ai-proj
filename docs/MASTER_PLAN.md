@@ -22,12 +22,14 @@ Processor 호환 수정은 공통 기반으로 명시하고, 임의의 성능 �
 
 ## 3. 공통 실험 계약
 
-- 고정할 것: 모델/LoRA/체크포인트 해시, BF16 및 실제 FA2, processor, 질문·영상·split, 동일 캐시 후보 마스크, generation prompt, 토큰 상한256, tokenizer EOS32000, 평가 코드 및 샘플 ID.
+- 고정할 것: 모델/LoRA/체크포인트 해시, BF16 및 실제 FA2, processor, 질문·영상·split, 동일 캐시 후보 마스크, 최종 답변 generation prompt, 최종 답변 토큰 상한256 및 tokenizer EOS32000, 평가 코드 및 샘플 ID.
 - ROI 선택의 GT/Draft target 차이는 명시적으로 통제한다. Draft 경로의 생성/선택에는 GT 답변·GT ROI 등 미허용 주석을 넣지 않는다. zero-candidate 질문은 버리지 않고 정책을 양쪽에 일관되게 적용한다.
 - Temporal 가중치1/0.5와 t0 current-base-only는 현재 후보의 명시적 설정이다. 공개되지 않은 저자 구현과의 동일성이나 모든 가중치 중 최적을 주장하지 않는다.
 - CLOSED 공식 substring과 OPEN reference-token recall을 각각 보고한다. AI 검토는 부차적 진단이며 공식 지표·독립 인간 평가를 대체하지 않는다. 점수 결함을 발견했다고 원래 성능 비교를 중단하지 않는다.
 - 기존 결과는 모델/입력/ROI/config/실행 경계가 동일하다고 검증된 경우에만 재사용한다. 기존 네 조건을 최종8개 조합 중4개 완료로 세지 않는다.
 - 성능의 '더 좋음'은 이 실험에서 시험한 설정·지표·정보 사용 조건 안에서 판단한다. test 결과만으로 일반적인 최적 설정을 주장하지 않는다.
+
+ROI 선택용 Draft는 별도 공개 계약을 따른다: native greedy32토큰, 명시적 EOS override 없음. checkpoint native 설정을 기록하고 최종 답변 EOS32000 패치를 자동 전파하지 않는다. [STEP77 검증된 소스 계약](STEP77_SOURCE_CONTRACT.md)을 참조한다.
 
 ## 4. 단계별 계획과 완료 기준
 
@@ -39,6 +41,8 @@ Processor 호환 수정은 공통 기반으로 명시하고, 임의의 성능 �
 | M3 전체 조건 평가 |검증된 cell을1061문항에 확장|셀별 완전한 동일 ID·receipt, 실패/누락0, 병렬 실행·재개·검증 기록|미완료|
 | M4 요소·endpoint 성능 비교 |GT/Draft, public/bias, Temporal ON/OFF 및 공개/논문 endpoint 비교|짝지은 비교표, answer type 분리, 영상 단위 불확실성, metric 한계, 재현/수리 범위 명시|일부 후보 내부 비교만 완료|
 | M5 최종 과제 보고 |차이→변경→실험→결과를 연결|두 핵심 질문에 답변하거나 특정 비교 불가능 사유를 증거로 설명, 남은 한계와 전체 실행 근거 기록|아직 진입하지 않음|
+
+STEP77 갱신: source snapshot 검증 완료. 공개4파일 upstream AST 일치와 선택 계약을 확인했다. STEP60B nested producer는 snapshot 미포함이며 새 paired 선택은 고정 후보와 공개 selector 계약으로 검증한다. 다음 STEP78 CPU fixture 준비는 실제 Ariel 실행 전이고, M1 전체/M2/GPU 성능 검증은 아직 미완료다.
 
 M1의 첫 행동은 Ariel에 실제 존재하는 공개 evaluator/ROI selector와 STEP60B/52 선택 producer 및 관련 runner 소스를 **한 번에 읽기 전용으로 확보**하는 것이다. 서버 파일 경로가 문서에 있다는 이유로 파일 내용을 읽었다고 가정하지 않는다. 추가 CPU 성능/채점 감사를 기본 다음 단계로 삼지 않는다. 확보 후 즉시 baseline/selector adapter 계약과 M2 구현으로 복귀한다.
 

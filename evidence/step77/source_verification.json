@@ -1,0 +1,40 @@
+{
+  "step": "STEP77",
+  "status": "SOURCE_CONTRACT_VERIFIED",
+  "files": [
+    {
+      "path": "CAST-repro/evaluate_slake.py",
+      "sha256": "e373b6ce64c38bb2b9835c1f37cd5a4cecdabcfef786e43aa3382199f50e4a00",
+      "upstream_commit": "9f709e4dce7aa1812a1dc292ed527766b609199f",
+      "AST_equal": true,
+      "text_equal_after_rstrip": true
+    },
+    {
+      "path": "CAST-repro/cast/roi_selection.py",
+      "sha256": "c25050c6a0b7d7f03088c0725b86c9f86645a0071d047794f953c8951add2749",
+      "upstream_commit": "9f709e4dce7aa1812a1dc292ed527766b609199f",
+      "AST_equal": true,
+      "text_equal_after_rstrip": true
+    },
+    {
+      "path": "CAST-repro/cast/mask_provider.py",
+      "sha256": "fd24e76166d5bf28ffcb0b4e7140d94e056f409e0d01d6701e2c9fea0071792e",
+      "upstream_commit": "9f709e4dce7aa1812a1dc292ed527766b609199f",
+      "AST_equal": true,
+      "text_equal_after_rstrip": true
+    },
+    {
+      "path": "CAST-repro/cast/guidance.py",
+      "sha256": "1a8f20c880d2010239ec476053825fb1bb13e05a72d3f27009065b888c4fd155",
+      "upstream_commit": "9f709e4dce7aa1812a1dc292ed527766b609199f",
+      "AST_equal": true,
+      "text_equal_after_rstrip": true
+    }
+  ],
+  "GPU_submitted": false,
+  "snapshot_sha256": "a0f1c3ccc3fc0e613696129502c5b44d1dff9c4ae50ab5c39ec2708e9e1ae105",
+  "inventory_paths": 233,
+  "unique_source_blobs": 33,
+  "inventory_hashes_verified": true,
+  "ZIP_CRC_PASS": true
+}

@@ -1,5 +1,15 @@
 # Experiment log and research decisions
 
+## 2026-11-21 — STEP77 source contract verified; original comparison continues
+
+Uploaded source-1795228348852541198.zip SHA a0f1c3ccc3fc0e613696129502c5b44d1dff9c4ae50ab5c39ec2708e9e1ae105: CRC plus233inventory hashes PASS,33unique blobs. Four public core files match pinned upstream AST (trailing blank-line differences in fetched text); no byte-identical upstream claim. See [source contract](STEP77_SOURCE_CONTRACT.md) and [evidence](../evidence/step77/source_verification.json).
+
+Confirmed selector target uses provided answer for CLOSED and OPEN; Draft32 uses native checkpoint stopping configuration with no explicit EOS override; final evaluation256/EOS32000 is separate. Selection score/prefilter/postprocess and extra bbox/highlight/empty-mask semantics are documented. Source of historical STEP60B producer was not included; do not claim it was inspected.
+
+M1 remains active: source/raw-baseline vs any explicit repair, paired same-proposal GT/Draft selector, then M2 small new-cell GPU pilot. A CPU-only STEP78 fixture preparer was locally checked (selftest, pinned prefilter incl K reduction/duplicate arrays, synthetic1061-record/eight-case integration and corrupt-cache rejection). Actual Ariel preparation is pending. New experiment source is not published as validated before intended execution passes. No new GPU jobs, ROI reselection, corrected labels, or performance numbers. Task completion and endpoint superiority remain unestablished.
+
+Plan adjustment evidence: source reveals distinct selection/generation stop contracts and added annotation channels; necessary scope is the original eight-case fixture with native model/processor source and isolated private labels, not another scoring study. Exit CPU preparation on verified fixture hashes, then return directly to M2 adapter/native-baseline integration. Existing STEP71 S/ST only reusable after exact ROI/input/config matching.
+
 **Recorded as of 2026-11-20 KST.** Actual JSON/log output and source live in Ariel; unless explicitly uploaded, this GitHub repository contains **descriptions rather than executable copies**. Never invent missing reports. See [README](../README.md) and [CONTINUATION](CONTINUATION.md).
 
 ## Scope, source, and environment

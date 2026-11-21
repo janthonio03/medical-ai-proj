@@ -1,5 +1,13 @@
 # Continuation / New-chat runbook — CAST paper vs open source
 
+## CURRENT — STEP77 소스 검증 완료, M1 연결 준비 계속
+
+2026-11-21 KST: 실제 업로드된 source snapshot233경로/33고유 소스의 ZIP CRC·inventory SHA 통과. 공개 evaluator/selector/provider/guidance는 upstream 고정 commit9f709e4dce7aa1812a1dc292ed527766b609199f와 AST가 같다. [STEP77 소스 계약](STEP77_SOURCE_CONTRACT.md)과 [검증 기록](../evidence/step77/source_verification.json)을 먼저 읽는다.
+
+**다음 행동:** STEP78 CPU 준비 코드로 원래8 canary와 동일 캐시 후보의 실제 파일럿 fixture를 확보한 뒤, GT/Draft paired selector 및 공개 원형/수리 기준선을 포함한 M2 GPU 연결 실험을 구현한다. 준비 코드는 로컬 selftest/합성1061문항 통합 검증을 통과했지만 Ariel 실제 입력에서는 아직 실행되지 않았다. 신규 실험 코드는 아직 검증 완료 소스로 게시하지 않았다. GPU 제출/새 성능 측정 없음.
+
+선택 Draft는 공개 native greedy32토큰이며 명시적 EOS override가 없다. 최종 답변 cap256/EOS32000 설정과 구분한다. STEP60B 실제 nested producer는 이번 snapshot 미포함이다. 고정 후보 SHA를 검증하고 같은 공개 selector 수식으로 새 paired 선택을 실행한다. 기존 ROI/STEP71 S/ST 재사용은 새 ROI와 입력 동일성 확인 후에만 허용한다. 과제는 여전히 미완료이며 MASTER_PLAN M1–M5를 따른다.
+
 ## CURRENT — 최종 목표 고정, M1 비교 기준선·ROI 선택 연결 진행
 
 사용자2026-11-21 지시: **최종 목표를 기억하고 세부 계획대로 진행하되, 실제 이상/추가 확인/실험 필요 시 근거를 남겨 유동적으로 수정한다.** 중간 분석 완료를 과제 종료로 바꾸지 않는다. 최상위 [실행 계획](MASTER_PLAN.md)의 M0–M5와 완료 기준을 따른다.
