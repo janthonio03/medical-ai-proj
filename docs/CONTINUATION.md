@@ -1,5 +1,18 @@
 # Continuation / New-chat runbook — CAST paper vs open source
 
+## CURRENT — STEP72 qualitative text review completed; CLOSED substring audit required
+
+Read all18 selected cases in user attachment `붙여넣은 텍스트(1)(20261121-004827).txt`, Library `libfile_78738b925cd48191a873ce3f135c03b9`. These are deterministic score-extreme ST−S and first-cap diagnostics, not a representative sample. Question wording, GT answers and actual images were not provided in this text attachment; clinical correctness/hallucination and population prevalence cannot be adjudicated.
+
+Observed repetition/degeneration:0017 Temporal repeatedly emits ulcerative colitis and ST repeatedly Behcet's until256;0007 ST repeats CXC+ to256;0006 Temporal cycles innominate artery/vein;0004 Temporal repeats pneumoretroperitoneum. Both0004 Temporal/ST retain score1 while verbose/repetitive tocap, showing generic VQA score does not penalize this behavior. Some examples change answer-bearing content (0074 lung→heart;1039 liver→left ventricle), others add unsupported-by-the-provided-evidence disease assertions (0044 hydronephrosis/ascites;0109 long disease lists). No image-based determination that these diagnoses are false is made.0017 Spatial also invents a100-patient composite description in generated text; problems are not unique to Temporal.0180 right/left changes may involve image/patient coordinate conventions and must not be called definite errors without question/image context.
+
+**High-priority metric artifact candidate:**0006/0179/0290/0044 have Yes-starting answers with score flips despite similar answer polarity. Published CLOSED scorer is case-insensitive substring inclusion. The string 'normal' contains 'no' without a standalone No token. Thus if GT is No, adding normal/abnormalities/diagnosis/etc may change a scored failure into success without correcting the initial answer. **GT was not in this attachment: actual GT and match locations must be checked before confirming any particular score flip or quantifying attribution.** This is a limitation of the official scoring semantics, not yet an implementation bug. STEP71/72 reported scores and bootstrap CIs remain correct as statistics of that metric, but must not be promoted to semantic accuracy gains.
+
+Next CPU-only read-only audit: all416 CLOSED questions ×4 outputs, independently reproduce scores from existing labels/tokenizer, compare literal substring to whole-word matches and explicit leading Yes/No when GT is Yes/No, report match contexts, then decompose Temporal/ST literal-score gains by diagnostic flags. Word-boundary and leading-answer checks are diagnostic alternatives, not a replacement official benchmark and not a complete semantic judge (negation/correction require context). Preserve original metrics/receipts. No GPU job or rerun.
+
+Detailed review: [STEP72 qualitative findings](../experiments/step72/QUALITATIVE_REVIEW.md).
+
+
 ## CURRENT VERIFIED — STEP72 CPU image-cluster analysis complete
 
 User supplied **STEP72_SELFTEST_PASS**, evidence progress through1061, bootstrap10000/10000, status **CPU_ANALYSIS_COMPLETE**, and final **STEP72_CPU_ANALYSIS_COMPLETE**. Actual output `results/step72-output-analysis/analysis-1795221923614346845/report.json`; review cases alongside it. **96 unique image-SHA clusters**,1061 questions; all displayed group contrasts have10000 valid replicates. Seed721; resample entire image clusters, preserving all questions and using question-weighted ratio-of-sums. No new GPU inference.
