@@ -1,5 +1,28 @@
 # Continuation / New-chat runbook — CAST paper vs open source
 
+## NEXT — STEP72 CPU analysis candidate prepared; Ariel results PENDING
+
+STEP71 Job496921 remains the latest verified GPU milestone. New CPU-only `step72_analyze.py` reads existing STEP71 outputs, checks full plan/source/sample/log/receipt identities and reproduces published score/length aggregates before derived analysis. No inference or GPU submission.
+
+Distribution source SHA256 **e2761ebe44ed77e821e34622362e911c819baa2562470f79465a66084076e5ce**; Library **libfile_b9512cdb93ec81919f872829fa74868f**. Local selftests and synthetic end-to-end analysis passed (constant/null paired effects, question-weighted rather than equal-image estimand, repeated-seed reproducibility, multiple questions per image, ROI/type strata, token-cap and output files). Actual1061-question analysis has NOT been run here; no computed CIs or new empirical counts are claimed. New analysis source publication waits for Ariel execution/results review.
+
+Analysis: 10000 shared image-SHA cluster bootstrap replicates, seed721, retain all questions in each sampled image and compute ratio of sums. Six paired contrasts: S−N,T−N,ST−N,ST−S,ST−T,interaction; separate CLOSED/OPEN and ROI×type groups. Marginal percentile95% intervals are exploratory, without multiplicity correction or p-values. Also mean/median/p90/p95 lengths, paired length changes, exact token-sequence changes despite tied scores, and cap-conditioned descriptive score deltas (post-intervention selection, not causal estimates). Diagnostic score-extreme examples and first cap cases may be decoded CPU-only using local tokenizer; never infer prevalence from the selected examples. No GT answers or images are exported by this script.
+
+From Ariel cast-rebuild after transferring the distributed source:
+```bash
+(
+set -euo pipefail
+export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+.envs/cast-phi/bin/python -B -u step72_analyze.py selftest
+mkdir -p results/step72-output-analysis
+.envs/cast-phi/bin/python -B -u step72_analyze.py analyze --decode \
+  2>&1 | tee "results/step72-output-analysis/console-$(date +%Y%m%d-%H%M%S).log"
+)
+```
+
+Reports are placed in a NEW timestamped `results/step72-output-analysis/analysis-<ns>/`: `report.json`, `review_cases.json`, `provenance.json`. Final marker **STEP72_CPU_ANALYSIS_COMPLETE**. Progress markers every100 evidence records/every2000 bootstrap replicates. Existing STEP71 files are read-only. Collect console output first; review_cases is optional for qualitative inspection and contains selected predictions/token IDs. Preserve input/output SHA provenance. A failure before completion must not be reported as completed analysis. After actual result review, archive the exact analysis source and update verified handoff.
+
+
 ## CURRENT VERIFIED — STEP71 full matched factorial, Job496921
 
 Actual user-supplied completion output was read in full from `붙여넣은 텍스트(1)(20261121-003557).txt` (Library `libfile_ff685961bf948191acb9a749a80c68d4`). Four array workers **COMPLETED 0:0**, elapsed **05:39:50 /05:39:43 /05:39:50 /05:39:43**, nodes **v8/v6/v8/v6**. All four log tails end **STEP71_WORKER_STATUS=GPU_PASS**. Final report **FULL_GPU_VERIFIED**, marker **STEP71_FULL_FACTORIAL_GPU_VERIFIED**, **1061 samples /4244 condition outputs**. Plan SHA256 **01ab8ca1011ed39fd2c728ea0039f3e3925a3244c7c2b6c3e11103920fef5975**. Model-loading FA2 warnings occurred, but no traceback in the supplied completion output; actual final checks passed. No further GPU job submitted.
