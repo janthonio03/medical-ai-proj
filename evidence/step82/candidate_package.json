@@ -1,0 +1,23 @@
+{
+  "filename": "CAST_STEP82_CPU_Audit.zip",
+  "sha256": "c91dfd994d739a62a69da4c93c165074d780d430b6a4c4d4e547b3fcf963c160",
+  "bytes": 15037,
+  "sources": {
+    "collect.py": "f35cac26b7c298f8abbe93ae5715fb082337b74f8ad1f9176fb0c2554433780c",
+    "test_offline.py": "5d6dc52e19afd6345a5192092c5df0d41864d4023ef7da9d0577bc44c51fe37b",
+    "test_end_to_end.py": "b31ba3d07b15b1d8625595dea260ac58195c4d28ebd93e01fa344bd89e1d4814",
+    "README.md": "54decc226ba18ada6fd3ad54e5af9852adc815f7f9c88c7a9a76c276dae67ca6"
+  },
+  "local_tests_passed": [
+    "selftest",
+    "original_72_output_replay",
+    "synthetic_end_to_end"
+  ],
+  "Ariel_full_audit_completed": false,
+  "GPU_submitted": false,
+  "whole_project_completed": false,
+  "date_KST": "2026-11-22",
+  "package_delivery_completed": true,
+  "classification": "LOCAL_TESTED_CANDIDATE_NOT_ARIEL_FULL_AUDIT_PASS",
+  "library_file_id": "libfile_dea0559d330481919b259773b80618f9"
+}

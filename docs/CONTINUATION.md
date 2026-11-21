@@ -1,3 +1,11 @@
+## CURRENT — STEP82 실행 ZIP 제공 완료, Ariel CPU 감사 대기 (2026-11-22 KST)
+
+작업공간 재연결 후 준비 source를 확인하고 기본 검사·기존 STEP79 실제72출력 replay·합성 filesystem 통합 검사를 모두 다시 통과했다. `CAST_STEP82_CPU_Audit.zip` **15037bytes / SHA256 c91dfd994d739a62a69da4c93c165074d780d430b6a4c4d4e547b3fcf963c160**, Python3파일+README4개, CRC검사 통과. 사용자의 Mac 프로젝트 폴더에 생성하고 다운로드 가능한 파일로 저장했다. 이전 3파일 ZIP(cd4e30d18d84ee81c0aeec3bae433af53eac5215ae07ae78c51227ecf8b907b6)은 이전 버전으로 보존했다. 새 버전은 초기 progress 표시와 README를 추가했으며 감사/평가 계산 방식은 유지한다.
+
+**아래 과거 “환경 unavailable/ZIP 제공 미완료/직접3파일 패키징” 안내는 종료됐다.** 새 ZIP을 전송한 뒤 [STEP82 실행·완료 검증 명령](STEP82_CPU_AUDIT.md)을 따른다. 기존 `step82-audit/`가 있으면 새 ZIP의 네 파일만 `unzip -o`로 갱신한다. 원본 STEP71/80 실험 소스·산출물은 수정하지 않는다. [후보 패키지 식별자](../evidence/step82/candidate_package.json)는 후보 상태이며 미검증 전체 CPU 실행 완료나 검증 소스 게시를 뜻하지 않는다.
+
+전체 완료 판정: **미완료**. STEP80/81 수치 비교 완료는 유지한다. 다음은 실제 Ariel CPU 감사→반환 ZIP 독립 검토→작은 common-position GPU control→재사용/추가 범위 결정→최종 해석 갱신이다. 이번 턴 GPU 제출 없음. 매 분석 후 운영 규칙9의 완료 범위·남은 목표·전체 완료 여부·다음 행동을 계속 기록한다.
+
 ## CURRENT — STEP82 CPU 감사 후보 준비, 실제 전체 실행 대기 (2026-11-21 KST)
 
 사용자 신규 지시: **매 결과 분석 후 완료 범위·남은 목표/실험·전체 완료 여부·다음 행동을 반드시 확인하고 기록한다.** [운영 규칙9](OPERATING_RULES.md)를 추가했다.
