@@ -1,3 +1,21 @@
+## CURRENT — STEP81 분석·최종 9조건 비교 보고 완료 (2026-11-21 KST)
+
+**현재 합의한 세 요소·9조건의 공식 지표 비교(M3–M5)를 완료했다.** 이는 수리된 공개 기준선과 작성한 논문 지향 후보의 고정 SLAKE test 비교이며, 수정 없는 저자 구현/논문 숫자 재현이나 의미적·임상적 정확성 입증을 뜻하지 않는다. 아래에 남은 “M4 진입/분석 대기/ZIP 미수신”은 과거 기록이다. STEP79/80을 기본 다음 작업으로 재실행하지 않는다.
+
+[최종 비교 보고서](COMPARISON_FINAL_REPORT.md)부터 읽는다. STEP80 요약 ZIP SHA62c23c5438955c7146fb97a549dd58ce6d74786db549e6509d17ab36a9cdd86a를 수신했고 CRC/계획/paired metrics/6실행 source SHA/4worker 기록을 독립 확인했다. 저장된1061문항×9셀 점수에서18개 집계 평균을 재현하고,96이미지 cluster10,000회 bootstrap(seed20261121)으로 단순 효과/주효과/상호작용/endpoint 대비를 계산했다. Raw9549예측·private GT·전체 sample receipt는 요약 ZIP에 없으므로 그 원본을 여기서 독립 재채점/검증했다고 주장하지 않는다.
+
+주요 결론:
+- 관측 최고: CLOSED Draft/bias/ON73.7981, OPEN Draft/public_B1/OFF45.1401.
+- Temporal 평균 효과: CLOSED+5.108점 CI[3.289,6.990], OPEN−3.590점 CI[−5.706,−1.418].
+- GT target 평균 효과와 actual-bias 평균 효과는 각각의 CLOSED/OPEN CI가0을 포함한다. 일괄 우월성은 확인되지 않았다.
+- 논문 지향−공개 기본 endpoint: CLOSED+5.529점 CI[2.457,8.736], OPEN−2.957점 CI[−5.589,−0.176]. Pointwise CI이며 OPEN은54대비 근사 동시 band에서0을 포함한다. 두 지표 혼합 차이+0.370점 CI[−1.836,2.647]도0을 포함하며 accuracy가 아니다.
+- GT/Draft 최종 ROI가 다른566문항; 동일 ROI495문항에서는 네 대응 조건의 예측 해시 모두 일치. Temporal ON 길이/256cap 증가는 별도 기록. 점수 변화의 의미적 원인·환각 감소로 일반화하지 않는다.
+
+[전체 분석 JSON](../evidence/step81/analysis.json), [대비 CSV](../evidence/step81/contrasts.csv), [문항별 점수/길이 CSV](../evidence/step81/case_scores_lengths.csv), [독립 검토 범위](../evidence/step81/independent_summary_review.json). 검증 실행6소스는 experiments/step80/, 재현 분석은 experiments/step81/에 게시했다. 보고서/표/그림/재현 source 묶음 CAST_STEP81_Comparison_Analysis.zip SHA6d8cfe13783ac5cbc41a323e4f8816039161afb5fcfff9df0af44bcb94091b8d.
+
+남은 필수 GPU 작업은 없다. 사용자 검토 또는 별도로 요청하는 확장(의미적 평가/다른 데이터·모델/가중치 탐색 등)은 새 범위로 기록한다. 최종 목표·운영 규칙/4GPU/ETA 규칙은 유지한다.
+
+
 ## CURRENT — STEP80 全1061문항 서버 검증 완료, M4 비교 분석 진입 (2026-11-21 KST)
 
 최신 사용자 Ariel verify 출력: Job497286,1061/1061문항, 누락0,9549/9549결과,4worker GPU_PASS, Slurm 전부 COMPLETED0:0, FULL_COMPARISON_VERIFIED. 계획 SHA e73250456c8de9cd37dba05ce67ff3e70ea8761d706de23344bf950c773b6818.
@@ -61,9 +79,9 @@ STEP79 갱신: STEP78 fixture 실제 수신/로컬60파일 검증 완료. GT/Dra
 | M0 목표 복원 |원래 목표·완료 조건·상태표 고정|이 문서, 운영 규칙, 인수인계 최신화|이번 갱신으로 완료|
 | M1 비교 계약·실행 기준선·선택기 연결 |현재 public evaluator/selector/producer 소스 확보, 원형 실행 문제와 최소 호환/수리 경계 결정, 동일 후보 GT/Draft 연결|소스 SHA, 변경 목록, 입력 채널 계약, 비교 cell 목록, 재사용 가능 결과 목록|**STEP79 완료 범위에서 검증**|
 | M2 작은 paired pilot |새 ROI 선택·public spatial·Temporal 조합을 소규모로 연결 검증|empty/nonempty 및 CLOSED/OPEN 포함, target/mask/hash/실제 backend/stop/native/control 확인, 필요한 GPU 결과 통과|**완료: STEP79 Job497276, ZIP 독립 검증**|
-| M3 전체 조건 평가 |검증된 cell을1061문항에 확장|셀별 완전한 동일 ID·receipt, 실패/누락0, 병렬 실행·재개·검증 기록|**STEP80 Job497286 전체 실행·서버 verify 완료; summary ZIP 독립 검토 대기**|
-| M4 요소·endpoint 성능 비교 |GT/Draft, public/bias, Temporal ON/OFF 및 공개/논문 endpoint 비교|짝지은 비교표, answer type 분리, 영상 단위 불확실성, metric 한계, 재현/수리 범위 명시|**STEP80 전체 집계 확보; 문항별 paired/영상 cluster 분석 진입**|
-| M5 최종 과제 보고 |차이→변경→실험→결과를 연결|두 핵심 질문에 답변하거나 특정 비교 불가능 사유를 증거로 설명, 남은 한계와 전체 실행 근거 기록|아직 진입하지 않음|
+| M3 전체 조건 평가 |검증된 cell을1061문항에 확장|셀별 완전한 동일 ID·receipt, 실패/누락0, 병렬 실행·재개·검증 기록|**완료: STEP80 Job497286, 서버 verify 및 STEP81 요약 독립 검토**|
+| M4 요소·endpoint 성능 비교 |GT/Draft, public/bias, Temporal ON/OFF 및 공개/논문 endpoint 비교|짝지은 비교표, answer type 분리, 영상 단위 불확실성, metric 한계, 재현/수리 범위 명시|**완료: STEP81 1061 paired,96이미지 cluster10000회 분석**|
+| M5 최종 과제 보고 |차이→변경→실험→결과를 연결|두 핵심 질문에 답변하거나 특정 비교 불가능 사유를 증거로 설명, 남은 한계와 전체 실행 근거 기록|**완료: COMPARISON_FINAL_REPORT.md, B1/논문 후보·지표 해석 범위 명시**|
 
 STEP77 갱신: source snapshot 검증 완료. 공개4파일 upstream AST 일치와 선택 계약을 확인했다. STEP60B nested producer는 snapshot 미포함이며 새 paired 선택은 고정 후보와 공개 selector 계약으로 검증한다. 다음 STEP78 CPU fixture 준비는 실제 Ariel 실행 전이고, M1 전체/M2/GPU 성능 검증은 아직 미완료다.
 
@@ -71,22 +89,21 @@ M1의 첫 행동은 Ariel에 실제 존재하는 공개 evaluator/ROI selector�
 
 M2 GPU 제출 시 항상 진행·완료 확인 명령을 함께 제공한다. 긴 작업은 총4GPU 이내 병렬 실행, 유효 결과 재사용, 원자적 claim/재개/완료 검증을 유지한다. 자원/정책 한계를 확인하며 임의의 사용자 실행시간 제한을 만들지 않는다.
 
-## 5. 비교 cell 목록
+## 5. 비교 cell 목록 — STEP80에서 전부 측정 완료
 
-ROI target2 × spatial2 × temporal2 = 최대8개의 기본 통제 조합. 공개/논문 endpoint에 부가 입력 채널 차이가 실제로 존재하면 별도 endpoint가 추가될 수 있다. 불필요한 셀/동일한 endpoint는 검증 후 중복 실행하지 않는다.
-
-| ROI target |Spatial|Temporal|상태|
+| ROI target | Spatial | Temporal | 측정 상태 |
 |---|---|---|---|
-|GT|public2D|OFF|source-style endpoint 후보, M1에서 실행 계약 확정 필요|
-|GT|public2D|ON|미완료|
-|GT|actual bias|OFF|미완료|
-|GT|actual bias|ON|미완료|
-|Draft|public2D|OFF|미완료|
-|Draft|public2D|ON|미완료|
-|Draft|actual bias|OFF|STEP71 Spatial 결과 있음; 동일 ROI/입력/설정이면 재사용 가능|
-|Draft|actual bias|ON|STEP71 ST 결과 있음; 동일 ROI/입력/설정이면 재사용 가능|
+|GT|Public B1|OFF|1061/1061 완료|
+|GT|Public B1|ON|1061/1061 완료|
+|GT|actual bias|OFF|1061/1061 완료|
+|GT|actual bias|ON|1061/1061 완료|
+|Draft|Public B1|OFF|1061/1061 완료|
+|Draft|Public B1|ON|1061/1061 완료|
+|Draft|actual bias|OFF|1061/1061 완료|
+|Draft|actual bias|ON|1061/1061 완료|
+|GT|Public B1 + source-default annotation channels|OFF|추가 endpoint1061/1061 완료|
 
-STEP71 Neutral/Temporal-only는 별도 conditional-only control이다. public2D의 동작·position 처리·CFG가 일치한다고 입증하지 않으면 대체 baseline이 아니다.
+Public B0 원형은 padding guard 오류로 성능 미제공이다. B1은 그 검사 한 곳을 수리한 명시적 비교 기준선이며 native 위치/양수 mask 전달 방식은 유지한다. STEP71 conditional-only Neutral을 공개 기준선으로 대체한 것이 아니다. 세 요소/두 endpoint/원형 실패의 비교 질문은 이 범위에서 답했고, 저자 미공개 구현/임상·의미적 정확성은 본 완료 범위로 주장하지 않는다.
 
 ## 6. 계획을 바꾸는 규칙
 
@@ -109,4 +126,4 @@ STEP71 Neutral/Temporal-only는 별도 conditional-only control이다. public2D�
 - raw 공식 점수, 해석 한계, 보조 검토를 혼동하지 않는가?
 - 재개 가능한 코드·계획·해시·job/보고서 경로·미완료 항목이 GitHub에 있는가?
 
-현재는 이 조건들을 모두 만족하지 않는다. 과제 전체는 **진행 중**이다.
+STEP81 기준 현재 합의한 9조건 공식 지표 비교의 완료 기준은 충족했다. 최종 보고서와 재현 소스/근거를 기록했다. 미공개 저자 구현 동일성, B0의 실행 가능한 숫자, 임상·의미적 정확성은 미입증으로 명시한다. 추가 확장은 사용자 요청 시 별도 계획으로 시작한다.

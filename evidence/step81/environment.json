@@ -1,0 +1,8 @@
+{
+  "python": "3.10.18 (main, Jun  5 2025, 08:37:47) [Clang 14.0.6 ]",
+  "numpy": "2.2.5",
+  "matplotlib": "3.10.1",
+  "bootstrap_replicates": 10000,
+  "seed": 20261121,
+  "GPU_used": false
+}

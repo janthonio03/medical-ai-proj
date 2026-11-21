@@ -1,0 +1,17 @@
+{
+  "status": "STEP80_SUMMARY_INDEPENDENT_REVIEW_PASS",
+  "ZIP_SHA256": "62c23c5438955c7146fb97a549dd58ce6d74786db549e6509d17ab36a9cdd86a",
+  "plan_sha256": "e73250456c8de9cd37dba05ce67ff3e70ea8761d706de23344bf950c773b6818",
+  "paired_metrics_sha256": "68d97340ec368caefefd92c53ffa548d9767926d8f15f225110b3f60c1af93e2",
+  "archive_members": 23,
+  "source_files_verified": 6,
+  "case_metadata_and_score_schema_verified": 1061,
+  "stored_score_means_reproduced": 18,
+  "worker_reports_verified": 4,
+  "source_reference_result_hash_index_entries": 9549,
+  "raw_prediction_files_in_summary": false,
+  "raw_private_labels_in_summary": false,
+  "full_sample_receipts_in_summary": false,
+  "raw_sacct_snapshot_in_summary": false,
+  "limit": "Recomputed means from stored per-case scores; no independent rescore of absent raw predictions/GT. Full sample SHA validation and Slurm COMPLETED were performed by Ariel verify; stdout was user supplied."
+}

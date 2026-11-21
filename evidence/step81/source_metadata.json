@@ -1,0 +1,14 @@
+{
+  "archive": "step80-comparison-summary-497286.zip",
+  "sha256": "62c23c5438955c7146fb97a549dd58ce6d74786db549e6509d17ab36a9cdd86a",
+  "plan_sha256": "e73250456c8de9cd37dba05ce67ff3e70ea8761d706de23344bf950c773b6818",
+  "analysis_source_sha256": "a445c3ec7cf3691758bc7d96f7addda7646750b986aaba24fe6d7acda12f984d",
+  "sources": {
+    "common.py": "76dbbb36e40ce467b07c21d6c5093d7569b8e31f9ee4ce30828744418dac5cf4",
+    "runtime.py": "d3270ae7c4b100a858d4d3d5278dc7ee2fd8e75c491f4db92847a30e14d4f364",
+    "full.py": "88944cfd0d935ea27473625a039528b2d65dfd44e052b1aeb3eaa88339984ef4",
+    "job.sh": "7d29bfee27b16b5fa4ea520f9bb0312e59f8690b0c2f43d3d18e9e74540bdad5",
+    "test_offline.py": "fac106ca5f796e89b33d6932b5a1e5729f358f1eb85b2dd3bdcf68c628f9734b",
+    "prepare_full_fixture.py": "d8d41b851ed446f74952ea2b5c124e430e3c7e4ed104fca47061c01f4ee15b2e"
+  }
+}
