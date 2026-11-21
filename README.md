@@ -1,5 +1,12 @@
 # CAST: Paper vs Open Source — Fidelity Audit & Controlled Ablation
 
+## CURRENT — 최종 목표 고정, M1 비교 기준선·ROI 선택 연결 진행
+
+사용자2026-11-21 지시: **최종 목표를 기억하고 세부 계획대로 진행하되, 실제 이상/추가 확인/실험 필요 시 근거를 남겨 유동적으로 수정한다.** 중간 분석 완료를 과제 종료로 바꾸지 않는다. 최상위 [실행 계획](docs/MASTER_PLAN.md)의 M0–M5와 완료 기준을 따른다.
+
+과제는 아직 미완료다. 현재 M1: 실행 가능한 공개 기준선(원형/호환 수정/수리된 기준선 구분)과 동일 후보 GT/Draft ROI 선택을 연결한다. 다음은 실제 서버 source snapshot 확보→입력/수리 계약 확정→새 조합 paired GPU pilot이다. 추가 채점 감사나 최종 보고서 작성이 기본 다음 단계가 아니다. 현재 파일럿/전체 셀/endpoint 성능 결과는 추가로 필요하며, 신규 GPU는 아직 제출하지 않았다.
+
+
 ## CURRENT SCOPE CORRECTION — original paper-vs-open-source assignment is NOT COMPLETE
 
 User clarified the original objective remains: determine how the planned paper/source settings affect performance and compare the official-source-style pipeline against the paper-aligned candidate. **Do not treat STEP71–76 candidate analysis or scoring diagnostics as completion of that assignment.** The assistant prematurely proposed a final report; final-report work is paused. This corrects any earlier overall-completion implication while preserving verified experiments.
