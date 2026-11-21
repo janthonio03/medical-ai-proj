@@ -1,5 +1,31 @@
 # Continuation / New-chat runbook — CAST paper vs open source
 
+## NEXT — STEP76 all73 AI core labels frozen before condition-key access; CPU aggregation PENDING
+
+User authorized the next analysis. AI-assisted **core-reference consistency screening now covers73 questions/292 responses** of the fixed STEP74 pack; **70 consistent,204 inconsistent,18 unclear**, not a model accuracy estimate. Ratings fixed before any private condition-key access; key remains only on Ariel. Prior recognizable texts in conversation prevent claiming independent/perfect blind assessment.
+
+Scope: all questions/references and answer-bearing openings screened, correction-cue continuation sentences inspected, selected full responses reviewed. **Not exhaustive medical validation of every explanation or54 images.** Only original six-case pilot retains other rubric dimensions (24 responses); other268 have relevance/repetition/extra_claims unreviewed. completed_human_review=false, clinical_adjudication=false. No new generation/GPU.
+
+Ambiguities are retained: R0025 all4 unclear because known source annotation is outside choices; R0021 all4 unclear due explicit Top/upper-left choice interpretation; R0053 all4 unclear due undefined damage scale/reference Much without scan/dose context; R0065 B/C unclear because responses discuss DWI without selecting T1/T2; R0002-D and R0031-A internally conflicting continuations; R0054 A/C overinclusive organ sets. R0066 C/D axial-vs-transverse accepted as core synonym per NIH/NCI SEER official terminology (https://training.seer.cancer.gov/anatomy/body/terminology.html), without confirming actual image plane. Labels reflect reference alignment, not clinical truth. The six-case pilot labels are preserved in the new file.
+
+Frozen `step76_AI_core_ratings_frozen.json` SHA256 **ddae831db28f2b764abbdadbdc999490b74c731e7ea8b1b16081877b41d1300c**, bound to pack **e58f9c50faafcfba57ef3c0168d09677a1f65245044f524aa3d4aaf5814a519c**. Do not revise these labels after viewing condition results; corrections require a separately labeled secondary analysis. No condition-specific totals have been computed here.
+
+New CPU candidate `step76_aggregate_review.py`, SHA256 **f6c6023ad03186203eb1cb379776f38c136437431a2b026ac731a9e361a6326d**. Local selftests and full synthetic73-case end-to-end run passed: mode permutation mapping, label coverage, paired swaps despite equal totals, unclear retention, cohort overlap and6-per-cell random groups. Actual Ariel private-key aggregation **not run**, source not promoted as verified.
+
+Distribution **CAST_STEP76_AI_Reference_Review.zip**, ZIP SHA256 **02d57d859027afe0307f755b17a54e0231f138b4a1a3c93f70a276b98413805e**,15384 bytes, Library **libfile_a4993fd40db0819193959dcc3dba1003**. Contains frozen AI JSON, aggregation script and README. Private labels/images/condition key absent. New script checks exact ratings bytes, original pack payload hash and provenance pins of private_key/summary/payload before joining Rxxxx/A–D to conditions. It separately reports all-selected73, diagnostic53, random24, answer-type random12/12 and four random cells6 each. Four diagnostic/random overlaps remain explicit; no population prevalence, clinical accuracy, percentages or p-values calculated. Shared-decidable paired counts are a conditional descriptive subset; all unclear transitions retained.
+
+After verified extraction into cast-rebuild:
+```bash
+(
+set -euo pipefail
+.envs/cast-phi/bin/python -B -u step76_aggregate_review.py selftest
+mkdir -p results/step76-ai-reference-review
+.envs/cast-phi/bin/python -B -u step76_aggregate_review.py aggregate \
+  2>&1 | tee "results/step76-ai-reference-review/console-$(date +%Y%m%d-%H%M%S).log"
+)
+```
+Default key/pack directory `results/step74-review-pack/pack-1795225918749887736`. New timestamped `results/step76-ai-reference-review/analysis-<ns>/{report.json,per_case_unblinded.json,provenance.json}`; marker **STEP76_AI_REFERENCE_REVIEW_AGGREGATION_COMPLETE**. Console includes only three main cohorts and T−N/ST−N/ST−S pairs; full report includes additional pairs/subgroups. Original STEP71 scores/artifacts and fixed review package remain unchanged. Collect actual report before claims or source promotion. Human-independent evaluation is still separate and must not start from AI-prefilled labels if independence is desired.
+
 ## CURRENT VERIFIED — STEP75 full local-source lineage PASS; reference quality separated from joining
 
 Actual user completion **STEP75_SELFTEST_PASS**, all1061 source comparisons, **LOCAL_SOURCE_LINEAGE_PASS**, final **STEP75_LOCAL_SOURCE_LINEAGE_VERIFIED**. Report `results/step75-question-lineage/audit-1795226769695226725/report.json`. Local source `/nas2/data/janthonio03/maip/cast-rebuild/data/slake/test.json`, SHA256 **6be8f7b4c5a46cdbc713a5210a25b6ed5aa1fd1574c83cefb4f998131f17c2c3**. Source2094 records,1061 English questions,96 images, checked1061, **failure_count0**.
