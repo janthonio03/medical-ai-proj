@@ -1,3 +1,11 @@
+## CURRENT — STEP82 ZIP 독립 검토 통과; STEP83 위치/RoPE GPU 대조 후보 준비 (2026-11-22 KST)
+
+STEP82 audit-1795277275848846760.zip SHA04b7c63e4e498a5ebd159c2f08e2fb9b0125501f2fc0395b9e4ff62d88936a5c,1,706,728bytes를 수신했다. CRC/manifest/member9SHA/collectorSHA 통과. CLOSED3744 raw prediction 재채점·예측SHA·원본 STEP80 결과SHA index 일치, 집계재현,5305 compact 위치summary·2122 conditional입력identity·2122 historical token/stop을 확인했다. [독립검토범위](evidence/step82/independent_zip_review.json). 원본 모든 per-step trace와 STEP71전체 result JSON/전체 private label 파일은 export에 없으므로 그 원본을 여기서 모두 재검증했다고 주장하지 않는다. 이전 “원본ZIP미수신” 상태는 종료했다.
+
+다음 **STEP83: 원래8canary×11조건=88출력,4GPU** diagnostic 후보를 작성했다. N/T·B1 hook·공통위치B2·actual-bias replay, 실제 첫decoder Su inv_freq/cosine 측정 및 원본 fulltoken parity를 포함한다. 로컬 native source FP32/BF16/position/rotary 테스트·합성question/receipt·scheduler/resume/변조거부 검사 통과. **Ariel CPU/자원검사 및 GPU실행은 미실행**. [계약·전체실행/ETA/완료명령](docs/STEP83_POSITION_CONTROL.md), [후보SHA](evidence/step83/candidate_package.json). 새GPUsource는 실검증전 검증코드로 게시하지 않는다.
+
+전체과제 **미완료**. 기존9조건수치비교완료 유지; 다음GPU대조결과로 control재사용/필요fullcohort추가범위를결정하고 최종비교해석으로복귀한다. CPU감사나8문항기술PASS를전체과제완료로대체하지않는다. 이번턴GPU제출없음.
+
 ## CURRENT — STEP82 전체 CPU 감사 서버 검증 완료; 결과 ZIP 독립 검토 대기 (2026-11-22 KST)
 
 수신한 실제 Ariel 출력:1061/1061, CPU_AUDIT_COMPLETE 및 STEP82_EXPORT_VERIFY_PASS. Raw11213파일 SHA 검사, 현재 CLOSED3744답변 재채점 일치, Public5305위치 기록, 과거 Neutral/Temporal2122출력 export. GT/Draft core conditional 입력은 각각1061/1061 STEP71과 일치. Source SHA와 console 집계/증감 회계는 여기서 확인했다. 실제 실행한 감사 source를 experiments/step82에 보존했다. **원본 감사 ZIP은 아직 미수신/독립 검토 전**이므로 “모든 원본 증거를 독립 검증했다”는 주장은 하지 않는다.

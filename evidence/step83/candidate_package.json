@@ -1,0 +1,32 @@
+{
+  "filename": "CAST_STEP83_Position_Control.zip",
+  "bytes": 29688,
+  "sha256": "56264c739e05337e97b54a03d3ddc0736741da376413de0dcf1f000e19772d47",
+  "sources": {
+    "common.py": "8a638315113f39f403c62a1fc488cb7eabe9a40c1e85428327394ddfd0eca368",
+    "baseline_runtime.py": "d3270ae7c4b100a858d4d3d5278dc7ee2fd8e75c491f4db92847a30e14d4f364",
+    "runtime.py": "18ca2efb41b7f86ad4f50488897553e6dcd4a88485d6e5a5a657fd498398ce87",
+    "control.py": "b82a912f779f2182ff12bc719d90612bd8627df72f317575ceed5a6ff69b3520",
+    "job.sh": "6067a6af0873f24d4aa30914f30775a21b46a50874961bca884d243b59319bd2",
+    "test_offline.py": "c187da7ca661c6440e2479fb9edeca2e1300154059d68bf76bf086d1f4d2f705",
+    "test_runner.py": "df2f8f650e8627dc63163d2756f6890f55fe46db2650d469541b346f7200a53c",
+    "README.md": "626f44c76310a14d9274081b5a678b9654dfa11bb02ae7eb15947718467d3d37"
+  },
+  "questions": 8,
+  "cells": 11,
+  "planned_outputs": 88,
+  "workers": 4,
+  "status": "LOCAL_CPU_TESTED_GPU_UNVERIFIED_CANDIDATE",
+  "GPU_submitted": false,
+  "whole_project_completed": false,
+  "library_file_id": "libfile_1c8a88cc293c81918939aed13d2a4116",
+  "library_version": 1,
+  "local_checks": [
+    "native Su inv_freq CPU",
+    "FP32/BF16 native CFG/Temporal",
+    "cached position override",
+    "synthetic eleven-cell receipt",
+    "scheduler/resume/corruption",
+    "Python compile and bash syntax"
+  ]
+}

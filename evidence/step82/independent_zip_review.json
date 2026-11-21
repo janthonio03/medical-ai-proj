@@ -1,0 +1,21 @@
+{
+  "status": "STEP82_EXPORTED_ZIP_INDEPENDENT_REVIEW_PASS",
+  "zip_sha256": "04b7c63e4e498a5ebd159c2f08e2fb9b0125501f2fc0395b9e4ff62d88936a5c",
+  "manifest_sha256": "7259222488014ddbd26a73ce45313a1b2d15f64fd508c327e0276262c8bd7164",
+  "manifest_members_checked": 9,
+  "CLOSED_predictions_re_scored": 3744,
+  "CLOSED_prediction_hashes_match_STEP80_paired": 3744,
+  "CLOSED_source_result_hashes_match_STEP80_report": 3744,
+  "public_compact_position_records_checked": 5305,
+  "conditional_input_identities_match_STEP80_plan": 2122,
+  "historical_token_sequences_exported_and_stop_checked": 2122,
+  "aggregate_report_reproduced": true,
+  "GPU_control_completed": false,
+  "whole_project_completed": false,
+  "limits": [
+    "ZIP carries CLOSED raw predictions but compact position summaries, not all original per-step public traces.",
+    "Historical controls are exported token/score records; original STEP71 full result JSON files are not in this ZIP.",
+    "Original full private label file is not in this ZIP; label source hash is recorded, source-to-export verification was performed on Ariel.",
+    "No clinical adjudication or new GPU execution occurred."
+  ]
+}
