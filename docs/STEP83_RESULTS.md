@@ -1,5 +1,7 @@
 # STEP83 위치/RoPE 대조 결과
 
+**2026-11-22 KST 갱신: 원본 ZIP 독립 검토 완료.** Mac에서 결과 ZIP의 SHA-256과 CRC, 소스 7개 해시, 8개 완료 영수증의 파일 해시, Slurm 4 task COMPLETED 0:0, 4 worker `GPU_PASS`를 확인했다. 문항별 trace 파일에서 아래 표의 다섯 수치를 모두 다시 계산했고 콘솔 보고와 일치했다. B1의 첫 층 RoPE는 8/8 long 구간, N은 8/8 short 구간이었고, B2는 32셀 모두 short 구간이었다. 실행 소스는 [experiments/step83](../experiments/step83/README.md)에 보존했다. [ZIP 검토 근거](../evidence/step83/independent_zip_review.json). 아래 "독립 검토 대기"와 다음 작업 문단은 검토 전 기록이며, 이후 B2 전체 생성은 [STEP84](STEP84_FINAL_COMPARISON.md)에서 수행했다.
+
 2026-11-22 KST. 사용자 제공 콘솔 기준 Ariel Job **497838**이 `GPU_POSITION_CONTROL_COMPLETE`를 출력했다. 8문항과 88출력을 완료했고 4개 worker가 각각 2문항을 검증했다. 원본 ZIP과 Slurm accounting 원문은 독립 검토 대기 중이다. [콘솔 집계와 계획 해시](../evidence/step83/user_reported_completion.json)
 
 | 항목 | 보고된 결과 |

@@ -1,0 +1,40 @@
+{
+ "step": "STEP83",
+ "job_id": "497838",
+ "status": "STEP83_INDEPENDENT_ZIP_REVIEW_PASS",
+ "review_date_kst": "2026-11-22",
+ "zip": "step83-position-control-497838.zip",
+ "zip_sha256": "346ee59aa74cd5431402ede8f18dcb7c7811e6f46afaab33450475e5f51a01fb",
+ "zip_crc_test": "pass",
+ "zip_members": 146,
+ "plan_sha256": "5367ac6162155e2900153466d8fa4229ed9b7ad95ae237569d4c8f2e41d54fc8",
+ "source_hashes_match_candidate_package": 7,
+ "source_note": "README.md of the candidate package is not in the result ZIP; the other 7 files match evidence/step83/candidate_package.json",
+ "slurm_accounting": "4 array tasks COMPLETED 0:0",
+ "workers": {
+  "count": 4,
+  "status": "GPU_PASS",
+  "node": "ariel-v7",
+  "dtype": "torch.bfloat16",
+  "backend": "flash_attention_2",
+  "completed_each": 2,
+  "reused": 0,
+  "model_source_sha256": "b223be7d7e9f01903dd8704e5da45c6030824134441aa2734c40c36597c3b41c"
+ },
+ "receipts": 8,
+ "receipt_file_hash_mismatches": 0,
+ "recomputed_from_sample_files": {
+  "historical_N_T_replay_matches": "16/16",
+  "B1_instrumented_replay_matches": "8/8",
+  "bias_instrumented_replay_matches": "32/32",
+  "B2_vs_N_full_token_matches": "14/32",
+  "same_conditional_prefill_position_B1_vs_N": "8/8",
+  "different_actual_inv_freq_B1_vs_N": "8/8",
+  "different_last_conditional_cos_B1_vs_N": "8/8",
+  "B1_first_layer_factor": "long in 8/8",
+  "N_first_layer_factor": "short in 8/8",
+  "B2_first_layer_factor": "short in 32/32 cells"
+ },
+ "matches_user_reported_console": true,
+ "scope": "Local review of the full result ZIP (receipts, per-cell sample traces, Slurm logs). Actual RoPE instrumentation covers the first decoder layer only. Eight canaries are technical controls, not a performance benchmark."
+}
