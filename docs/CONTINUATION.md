@@ -20,7 +20,7 @@ STEP82 audit-1795277275848846760.zip SHA04b7c63e4e498a5ebd159c2f08e2fb9b0125501f
 
 - 기준 브랜치는 `paper_vs_open-source`다. 기존 Mac 연구 폴더를 GitHub에 연결했을 때 기준 커밋은 `3d909c16e312edb8cc972dbc496ddcbade5d32cf`였다. 새 세션에서는 실제 HEAD와 작업 트리 상태를 확인한다.
 - Mac에서 Claude Code와 Codex에 같은 저장소 루트를 지정한다. 기존 Worktree 유무는 `git worktree list`로 확인한다. 병렬로 수정하는 경우 변경 범위와 기반 커밋을 공유하고, 검토와 통합 검증 후 이 문서를 갱신한다. [운영 규칙](OPERATING_RULES.md)
-- 2026-11-22 KST 갱신: STEP84 전체 B2 평가와 요약 ZIP 검토로 현재 범위의 공식 SLAKE 비교를 마쳤다. 다음 작업은 검증된 기록의 GitHub 반영이며, 사용자 승인 후 진행한다. 아래 항목은 STEP83 시점의 기록이다. STEP83 원본 ZIP은 이후 Mac 저장소 루트에 수신되었고 SHA-256 `346ee59a…01fb`와 CRC가 보고값과 일치했다.
+- 2026-11-22 KST 갱신: STEP84 전체 B2 평가와 요약 ZIP 검토로 현재 범위의 공식 SLAKE 비교를 마쳤다. 이 기록은 커밋 `44e9698`로 GitHub에 반영했고, 이어서 M4/M5 완료와 최종 보고서 확정을 기록했다. 현재 합의한 과제에 남은 필수 작업은 없다. 의미적·임상적 평가나 다른 데이터·모델 같은 확장은 사용자가 요청하면 새 계획으로 시작한다. 아래 항목은 STEP83 시점의 기록이다. STEP83 원본 ZIP은 이후 Mac 저장소 루트에 수신되었고 SHA-256 `346ee59a…01fb`와 CRC가 보고값과 일치했다.
 - (STEP83 시점) 다음 연구 작업은 STEP83 Job 497838 원본 ZIP 검토다. Ariel의 `results/step83-position-control-497838.zip` 직접 수신을 시도했으나 2026-11-22 KST에 SSH 인증이 거부됐다. ZIP을 받은 뒤 해시·CRC와 실행 근거를 확인하고, OFF/ON 최초 분기와 GT/Draft 동일성을 검토해 추가 B2 실험의 범위를 판단한다. [STEP83 결과와 근거 범위](STEP83_RESULTS.md)
 
 ## CURRENT — STEP82 전체 CPU 감사 서버 검증 완료; 결과 ZIP 독립 검토 대기 (2026-11-22 KST)

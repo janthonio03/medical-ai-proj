@@ -133,8 +133,8 @@ STEP79 갱신: STEP78 fixture 실제 수신/로컬60파일 검증 완료. GT/Dra
 | M1 비교 계약·실행 기준선·선택기 연결 |현재 public evaluator/selector/producer 소스 확보, 원형 실행 문제와 최소 호환/수리 경계 결정, 동일 후보 GT/Draft 연결|소스 SHA, 변경 목록, 입력 채널 계약, 비교 cell 목록, 재사용 가능 결과 목록|**STEP79 완료 범위에서 검증**|
 | M2 작은 paired pilot |새 ROI 선택·public spatial·Temporal 조합을 소규모로 연결 검증|empty/nonempty 및 CLOSED/OPEN 포함, target/mask/hash/실제 backend/stop/native/control 확인, 필요한 GPU 결과 통과|**완료: STEP79 Job497276, ZIP 독립 검증**|
 | M3 전체 조건 평가 |검증된 cell을1061문항에 확장|셀별 완전한 동일 ID·receipt, 실패/누락0, 병렬 실행·재개·검증 기록|**완료: STEP80 Job497286, 서버 verify 및 STEP81 요약 독립 검토**|
-| M4 요소·endpoint 성능 비교 |GT/Draft, public/bias, Temporal ON/OFF 및 공개/논문 endpoint 비교|짝지은 비교표, answer type 분리, 영상 단위 불확실성, metric 한계, 재현/수리 범위 명시|**수치 분석 완료; 위치/RoPE control·STEP80 답변 감사 추가 검증 대기**|
-| M5 최종 과제 보고 |차이→변경→실험→결과를 연결|두 핵심 질문에 답변하거나 특정 비교 불가능 사유를 증거로 설명, 남은 한계와 전체 실행 근거 기록|**단계적 보고서 작성; 추가 해석 검증 후 최종 귀인 확정**|
+| M4 요소·endpoint 성능 비교 |GT/Draft, public/bias, Temporal ON/OFF 및 공개/논문 endpoint 비교|짝지은 비교표, answer type 분리, 영상 단위 불확실성, metric 한계, 재현/수리 범위 명시|**완료: STEP81 수치 분석, STEP82 답변 감사, STEP83·84 위치/RoPE 대조(2026-11-22)**|
+| M5 최종 과제 보고 |차이→변경→실험→결과를 연결|두 핵심 질문에 답변하거나 특정 비교 불가능 사유를 증거로 설명, 남은 한계와 전체 실행 근거 기록|**완료: 최종 보고서 확정(2026-11-22), [COMPARISON_FINAL_REPORT](COMPARISON_FINAL_REPORT.md)**|
 
 STEP77 갱신: source snapshot 검증 완료. 공개4파일 upstream AST 일치와 선택 계약을 확인했다. STEP60B nested producer는 snapshot 미포함이며 새 paired 선택은 고정 후보와 공개 selector 계약으로 검증한다. 다음 STEP78 CPU fixture 준비는 실제 Ariel 실행 전이고, M1 전체/M2/GPU 성능 검증은 아직 미완료다.
 
@@ -181,7 +181,11 @@ Public B0 원형은 padding guard 오류로 성능 미제공이다. B1은 그 �
 
 STEP81 기준 현재 합의한 9조건 공식 지표 비교의 완료 기준은 충족했다. 최종 보고서와 재현 소스/근거를 기록했다. 미공개 저자 구현 동일성, B0의 실행 가능한 숫자, 임상·의미적 정확성은 미입증으로 명시한다. 추가 확장은 사용자 요청 시 별도 계획으로 시작한다.
 
+2026-11-22 KST 갱신: 8절의 표적 검증을 STEP82(답변 감사)와 STEP83·84(위치/RoPE 대조)로 마쳤고 최종 보고서에 반영했다. 위 여섯 질문에 모두 답할 수 있으므로 현재 합의한 비교 과제는 완료로 판정한다. 의미적·임상적 평가, 다른 데이터·모델, Temporal 가중치 탐색, 원형 B0와 비공개 저자 구현의 재현은 범위 밖이며 사용자 요청이 있을 때 새 계획으로 시작한다.
+
 
 ## 8. 완료 재검토에 따른 표적 검증 gate
 
 사용자2026-11-21 재확인 요청과 실제 source/파일럿 위치 증거에 따른 계획 수정이다. docs/COMPLETION_REAUDIT.md의 A/B 범위와 종료 기준을 따른다. 기존9조건 공식 점수 비교 완료는 유지하되 순수 spatial 효과 귀인과 최신 CLOSED 답변의 의미 해석은 미완료로 구분한다. CPU 기존 산출물 감사와 작은 공통 위치 control부터 진행하며, 기존 Neutral/T 결과는 입력/모델/stop/backend/parity 동일성 확인 후에만 재사용한다. 조건이 충족되면 M4/M5로 복귀하고 새 데이터·모델·광범위 가중치 탐색으로 임의 확장하지 않는다.
+
+종료(2026-11-22 KST): STEP82 감사와 STEP83·84 대조로 A와 B의 종료 기준을 충족했다. 기존 N/T 출력은 B2와 토큰열이 14/32만 일치해 재사용하지 않았고, B2를 전체 문항에서 직접 생성했다. 판정 근거는 [완료 재검토](COMPLETION_REAUDIT.md)의 종료 절에 있다.

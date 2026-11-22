@@ -23,20 +23,20 @@ Job 498175의 1,061문항·2,122출력과 4 worker 정상 종료를 검증했다
 
 # CAST paper vs open source — 최종 9조건 성능 비교
 
-작성 기준:2026-11-21 KST. STEP80 Job497286 전체1061문항·9조건·9549결과와 STEP81 paired 분석에 근거한다. **현재9조건의 공식 지표 수치 비교와 보고서 초안은 완료했다. 다만 재검토에서 위치/RoPE 분리 대조와 최신 CLOSED 답변 감사가 필요하다고 판단해 최종 귀인은 보류한다.** 아래 결론은 수리된 공개 기준선과 논문 지향 후보, 고정 SLAKE English test split, 시험한 설정에 한정한다.
+작성 기준: 2026-11-21 KST 초안, 2026-11-22 KST 최종 확정. STEP80 Job 497286의 전체 1,061문항·9조건·9,549결과와 STEP81 paired 분석에 근거한다. 재검토에서 추가한 두 검증을 반영해 M5를 확정했다. 하나는 STEP82 CLOSED 답변 문자열 감사이고, 다른 하나는 STEP83·84 위치/RoPE 대조(공통 위치 B2 전체 1,061문항)다. 아래 결론은 수리된 공개 기준선과 논문 지향 후보, 고정 SLAKE English test split, 시험한 설정에 한정한다.
 
 ## 1. 과제 질문에 대한 답
 
 **어떤 요소 설정이 더 좋은가?**
 
 - 관측 평균 기준 CLOSED 최고는 **Draft + actual bias + Temporal ON (73.7981)**, OPEN 최고는 **Draft + Public B1 + Temporal OFF (45.1401)**이다. 최고값 선택은 이 test set의 관측 비교이며 보편적 최적 설정이나 모든 인접 설정보다 확실히 우월하다는 주장이 아니다.
-- 가장 일관된 변화는 Temporal이다. 나머지 요소를 균등 평균하면 CLOSED **+5.108점 [3.289,6.990]**, OPEN **−3.590점 [−5.706,−1.418]**이다. 따라서 answer type에 따른 상충 관계가 있다.
+- 가장 일관된 변화는 Temporal이다. 나머지 요소를 균등 평균하면 CLOSED **+5.108점 [3.289,6.990]**, OPEN **−3.590점 [−5.706,−1.418]**이다. 따라서 answer type에 따른 상충 관계가 있다. 두 분기 위치를 통일한 B2에서도 CLOSED 상승은 +4.33점 [+1.46,+7.41]으로 유지됐다. OPEN은 −1.90점 [−4.32,+0.61]으로 구간이 0을 포함해, OPEN 감소를 모든 구현에 일반화하지 않는다.
 - GT/Draft의 최종 ROI는566/1061문항(53.35%)에서 달랐지만, GT target의 평균 성능 차이는 CLOSED+0.060점, OPEN−0.015점으로 CI가0을 포함한다. GT target이 일관되게 우수하다는 근거를 얻지 못했다. 이는 모든 개별 문항/조건에서 효과가 없다는 뜻이 아니다.
-- actual bias의 평균 차이는 CLOSED+1.623점, OPEN+0.095점이며 둘 다 CI가0을 포함한다. 이 평가만으로 actual bias가 Public B1보다 일관되게 우수하다고 확정할 수 없다.
+- actual bias의 평균 차이는 CLOSED+1.623점, OPEN+0.095점이며 둘 다 CI가0을 포함한다. 이 평가만으로 actual bias가 Public B1보다 일관되게 우수하다고 확정할 수 없다. Public B1은 통제 셀 4,244출력 모두에서 conditional 분기와 다른 RoPE 구간을 사용했다(STEP82 위치 기록, STEP83 첫 층 실측 8/8). 위치를 통일한 B2와 비교한 B2−B1, actual bias−B2 대비도 모두 95% 구간이 0을 포함하거나 경계에 닿았다. 따라서 spatial 차이를 attention bias 하나의 효과로도, 위치/RoPE 하나의 효과로도 귀속하지 않는다.
 
 **논문과 공개 코드 중 어느 쪽이 더 좋은가?**
 
-논문 지향 후보 Draft/bias/ON과 공개 기본 채널 endpoint GT/public_defaults_B1/OFF를 비교하면 CLOSED는 **+5.529점**, OPEN은 **−2.957점**이다. CLOSED에서는 후보가 높고, OPEN에서는 공개 기준선이 높은 관측 결과다. 단일한 전체 우열은 확정하지 않는다. 두 점수 규칙을 혼합한 가중 평균 차이는+0.370점, cluster CI[−1.836,+2.647]로0을 포함하며 accuracy로 부를 수 없다.
+논문 지향 후보 Draft/bias/ON과 공개 기본 채널 endpoint GT/public_defaults_B1/OFF를 비교하면 CLOSED는 **+5.529점**, OPEN은 **−2.957점**이다. CLOSED에서는 후보가 높고, OPEN에서는 공개 기준선이 높은 관측 결과다. 단일한 전체 우열은 확정하지 않는다. 두 점수 규칙을 혼합한 가중 평균 차이는+0.370점, cluster CI[−1.836,+2.647]로0을 포함하며 accuracy로 부를 수 없다. CLOSED 순증가 23건 중 14건은 정답 단어가 부분 문자열로만 포함된 경우였고, 전체 단어 일치는 267건에서 258건으로 줄었다(STEP82). CLOSED 개선은 공식 지표상의 개선이며 핵심 답변 정확성의 개선으로 해석하지 않는다.
 
 이 답은 **수리된 Public B1 vs 작성한 paper-aligned candidate**의 비교다. 공개 원형 B0는 알려진 padding guard 실패로 점수가 없고, 비공개 저자 Temporal 구현의 동일성도 입증하지 않았다. 수정 없는 저자 코드 재현이나 논문 숫자 재현 성공으로 표현하지 않는다.
 
@@ -89,7 +89,7 @@ CLOSED416문항의 지표는 GT substring 포함 판정, OPEN645문항은 정답
 
 Temporal OFF의 평균 길이는 대체로65토큰, ON은122–124토큰이다. Temporal ON 네 셀의256토큰/no-EOS 출력은 각각162,140,151,149개이며 OFF 네 셀은0,0,1,0개다. 공개 기본 endpoint는1개다. 길이 변화는 관측 사실이며 점수 변화의 원인이라고 단독 확정하지 않는다.
 
-기존 STEP73에서 CLOSED substring이 normal/innominate 같은 문맥에서도 GT No를 포함해 통과하는 사례를 확인했다. 새 전체 요약에는 raw prediction이 없으므로 그 결함이 STEP80 개선분의 몇 퍼센트를 설명하는지는 계산하지 않았다. 공식 점수 상승을 의미적 정답성이나 환각 감소로 바꾸지 않는다. 기존 알려진 원본 주석 문제도 수정/재라벨링하지 않았다.
+기존 STEP73에서 CLOSED substring이 normal/innominate 같은 문맥에서도 GT No를 포함해 통과하는 사례를 확인했다. STEP82에서 STEP80 원본 CLOSED 출력 3,744개를 CPU로 재채점해 공식 점수를 그대로 재현했다. 논문 지향 endpoint와 공개 기본 endpoint의 차이(35승·12패, 순증가 23건)를 분해하면 부분 문자열로만 통과한 경우가 순증가 14건(+3.37점), 첫 답변과 반대 극성이지만 전체 단어가 일치한 경우가 순증가 4건이었다. 전체 단어 일치는 267건에서 258건으로, 첫 문장 일치는 229건에서 231건으로 바뀌었다. 이 분해는 집계 방식에 따른 배분이며 오탐률이나 보정 정확도가 아니다. 공식 점수 상승을 의미적 정답성이나 환각 감소로 바꾸지 않는다. 기존 알려진 원본 주석 문제도 수정/재라벨링하지 않았다.
 
 ![Scores and output lengths](../evidence/step81/scores_and_lengths.svg)
 
@@ -97,7 +97,9 @@ Temporal OFF의 평균 길이는 대체로65토큰, ON은122–124토큰이다. 
 
 합의한 비교 범위에서는 **CLOSED 지표를 중시하면 Temporal ON 후보가 유리하고, OPEN 지표에서는 Temporal OFF가 유리한 경향**이 확인됐다. ROI target이나 actual bias의 일괄 우월성은 확인되지 않았다. 공개 기본 endpoint 대비 논문 지향 후보의 결과도 CLOSED 개선/OPEN 저하로 갈리므로 한쪽이 전반적으로 더 좋다고 보고하지 않는다.
 
-M3 전체 실행과 기존 M4 수치 분석은 완료했다. 재검토 후 M4에 작은 위치/RoPE control 및 CPU 답변 감사를 추가했으며 M5는 그 결과를 반영한 뒤 확정한다. 기존9조건을 통째로 재실행하지 않는다. 의미적·임상적 평가, 다른 데이터/모델로의 일반화, 미공개 저자 구현/원형 B0 숫자 재현, Temporal 가중치 탐색은 별도 확장 과제다. 이를 본 실험으로 완료했다고 주장하지 않는다.
+Temporal의 CLOSED 상승은 위치를 통일한 B2에서도 재현됐다. 다만 Draft·bias 기준 순증가 24건 중 13건은 부분 문자열로만 통과한 경우였다. 출력 길이도 함께 늘었으나 길이와 점수 사이의 인과는 시험하지 않았다. Spatial 처리의 차이는 위치/RoPE 차이와 attention 조정이 함께 바뀐 실행 경로의 차이로 보고한다.
+
+M3 전체 실행, M4 수치 분석과 표적 검증(STEP82 답변 감사, STEP83·84 위치/RoPE 대조), M5 최종 보고를 모두 완료했다. 현재 합의한 범위에서 추가로 필요한 GPU 실험은 없다. 공통 위치 B2의 상세 결과는 [STEP84 최종 비교](STEP84_FINAL_COMPARISON.md)에 있다. 의미적·임상적 평가, 다른 데이터/모델로의 일반화, 미공개 저자 구현/원형 B0 숫자 재현, Temporal 가중치 탐색은 별도 확장 과제다. 이를 본 실험으로 완료했다고 주장하지 않는다.
 
 ## 7. 재현 및 인수인계
 
@@ -106,4 +108,5 @@ M3 전체 실행과 기존 M4 수치 분석은 완료했다. 재검토 후 M4에
 - paired metrics SHA:68d97340ec368caefefd92c53ffa548d9767926d8f15f225110b3f60c1af93e2.
 - 분석: analyze.py, write_report.py, analysis.json, contrasts.csv, case_scores_lengths.csv, independent_summary_review.json 및 SVG/PNG/PDF 그림.
 - GitHub에는 검증된 실행6소스, STEP81 분석 소스와 결과, 최신 MASTER_PLAN/CONTINUATION/EXPERIMENT_LOG를 보존한다. checkpoint/data/private GT/9549원본 출력은 Ariel 보존 경로를 따른다.
+- 추가 검증 근거: STEP82 CPU 감사 [결과](STEP82_RESULTS.md)와 [실행 소스](../experiments/step82/README.md), STEP83 Job 497838 [결과](STEP83_RESULTS.md), STEP84 Job 498175 [결과](STEP84_FINAL_COMPARISON.md)와 [실행 소스](../experiments/step84/README.md).
 - 새 채팅에서는 docs/COMPARISON_FINAL_REPORT.md와 docs/CONTINUATION.md를 우선 읽는다. STEP79/80을 기본 다음 작업으로 재실행하지 않는다.
