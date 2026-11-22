@@ -9,6 +9,15 @@ __pycache__/
 venv/
 env/
 envs/
+.envs/
+
+# Local credentials
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
 
 # Model/data artifacts
 checkpoints/
@@ -16,11 +25,13 @@ model_cache/
 data/raw/
 data/processed/
 outputs/
+results/
 logs/
 *.pt
 *.pth
 *.bin
 *.safetensors
+*.zip
 
 # Generated analysis artifacts
 analysis/tables/*.csv

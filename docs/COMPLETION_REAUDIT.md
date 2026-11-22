@@ -1,3 +1,7 @@
+## CURRENT — STEP84 독립 검토 완료, 공식 SLAKE 비교 종료 (2026-11-22 KST)
+
+Job 498175의 1,061문항·2,122출력과 4 worker 정상 종료를 검증했다. B2 Temporal ON−OFF는 CLOSED +4.33점 [1.46,7.41], OPEN −1.90점 [−4.32,0.61]이다. B2−B1 대비의 각 95% 구간이 0을 포함한다. STEP82 문자열 감사와 STEP83 실제 RoPE 검증을 포함해 기존 비교의 해석을 갱신했다. 현재 범위의 추가 GPU 실행은 필요 없다. 아래 과거 CURRENT는 해당 시점 기록이다. [최종 비교 및 STEP84 검증](STEP84_FINAL_COMPARISON.md)
+
 ## CURRENT — STEP82 전체 CPU 감사 서버 검증 완료; 결과 ZIP 독립 검토 대기 (2026-11-22 KST)
 
 수신한 실제 Ariel 출력:1061/1061, CPU_AUDIT_COMPLETE 및 STEP82_EXPORT_VERIFY_PASS. Raw11213파일 SHA 검사, 현재 CLOSED3744답변 재채점 일치, Public5305위치 기록, 과거 Neutral/Temporal2122출력 export. GT/Draft core conditional 입력은 각각1061/1061 STEP71과 일치. Source SHA와 console 집계/증감 회계는 여기서 확인했다. 실제 실행한 감사 source를 experiments/step82에 보존했다. **원본 감사 ZIP은 아직 미수신/독립 검토 전**이므로 “모든 원본 증거를 독립 검증했다”는 주장은 하지 않는다.

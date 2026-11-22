@@ -1,3 +1,16 @@
+## CURRENT — STEP84 독립 검토 완료, 공식 SLAKE 비교 종료 (2026-11-22 KST)
+
+Job 498175의 1,061문항·2,122출력과 4 worker 정상 종료를 검증했다. B2 Temporal ON−OFF는 CLOSED +4.33점 [1.46,7.41], OPEN −1.90점 [−4.32,0.61]이다. B2−B1 대비의 각 95% 구간이 0을 포함한다. STEP82 문자열 감사와 STEP83 실제 RoPE 검증을 포함해 기존 비교의 해석을 갱신했다. 현재 범위의 추가 GPU 실행은 필요 없다. 아래 과거 CURRENT는 해당 시점 기록이다. [최종 비교 및 STEP84 검증](STEP84_FINAL_COMPARISON.md)
+
+STEP84 실행 기록은 다음과 같다.
+
+- 목적: STEP83에서 B1과 N의 실제 RoPE가 달랐으므로, 두 분기에 같은 위치를 공급한 B2를 전체 1,061문항에서 생성해 기존 B1·actual bias 결과와 짝지어 비교한다.
+- 실행: 계획 SHA-256 `bc84e984…905c`, Slurm array 0-3, normal GPU 4개(모두 `ariel-v11`), bf16·flash_attention_2, `max_new_tokens=256`, CFG 1.5, Temporal wp 0.5. 4 task 모두 COMPLETED 0:0, 재사용 0건, worker당 265~266문항.
+- 소스: 실행 소스 8개를 [experiments/step84](../experiments/step84/README.md)에 보존했고 해시는 요약 ZIP 및 [로컬 검토 근거](../evidence/step84/independent_summary_review.json)와 일치한다.
+- 결과 위치: Ariel `results/step84-b2-full/`(원문 출력·Slurm 로그), 요약 `results/step84-b2-summary-498175.zip`(SHA-256 `d7d95dd6…2c9fb3`). Mac 저장소 루트에 같은 요약 ZIP을 보관한다(Git 제외).
+- 로컬 검증(2026-11-22 KST): ZIP SHA-256·CRC, 소스 8개 해시, `paired_scores.json` 1,061행에서 10개 셀 점수와 9개 대비의 점 추정값 및 CLOSED 증감 건수를 다시 계산해 보고값과 모두 일치함을 확인했다. Bootstrap 구간은 서버 계산값을 사용했고 로컬에서 다시 추출하지 않았다.
+- 판정: 현재 합의한 공식 SLAKE 지표 비교는 완료됐다. 원문 출력과 stdout/stderr 본문은 Ariel에만 있고 이번 검토에서는 해시와 경로만 확인했다.
+
 ## CURRENT — STEP83 실행 완료, 원본 결과 검토 대기 (2026-11-22 KST)
 
 사용자 제공 Ariel 출력에서 Job 497838이 8문항·88출력 및 4개 worker의 `GPU_PASS`를 보고했다. B1 8/8, actual bias 32/32, 기존 N/T 16/16 토큰을 재현했다. B1과 N의 conditional prefill 위치는 같았지만 첫 디코더 층의 실제 `inv_freq`와 cosine 해시는 8문항 모두 달랐다. 공통 위치 B2와 순차 N/T의 전체 토큰 일치는 14/32로, 전체 B2 결과를 기존 N/T로 대체할 근거가 부족하다. 이 32건에는 Draft/GT 반복이 포함된다.
@@ -11,6 +24,15 @@ STEP82 audit-1795277275848846760.zip SHA04b7c63e4e498a5ebd159c2f08e2fb9b0125501f
 다음 **STEP83: 원래8canary×11조건=88출력,4GPU** diagnostic 후보를 작성했다. N/T·B1 hook·공통위치B2·actual-bias replay, 실제 첫decoder Su inv_freq/cosine 측정 및 원본 fulltoken parity를 포함한다. 로컬 native source FP32/BF16/position/rotary 테스트·합성question/receipt·scheduler/resume/변조거부 검사 통과. **Ariel CPU/자원검사 및 GPU실행은 미실행**. [계약·전체실행/ETA/완료명령](STEP83_POSITION_CONTROL.md), [후보SHA](../evidence/step83/candidate_package.json). 새GPUsource는 실검증전 검증코드로 게시하지 않는다.
 
 전체과제 **미완료**. 기존9조건수치비교완료 유지; 다음GPU대조결과로 control재사용/필요fullcohort추가범위를결정하고 최종비교해석으로복귀한다. CPU감사나8문항기술PASS를전체과제완료로대체하지않는다. 이번턴GPU제출없음.
+
+## 새 실험 기록에 남길 항목
+
+- 실험 ID, 목적, 날짜와 실행 범위
+- 기준 Git 커밋, 실제 실행 소스·패키지 SHA-256, 모델·LoRA·데이터 분할 및 설정 식별자, dtype·backend, 실행 명령
+- GPU 종류와 수, Slurm Job ID와 확인 가능한 종료 상태, NAS의 결과·로그 경로, 공개 가능한 요약 경로
+- 주요 지표와 비교 기준, 확인한 근거, 실패·수정 내역, 해석 범위와 후속 검증 여부
+
+확인할 수 없는 값은 미확인으로 표시하고, 실행하지 않은 단계는 미실행으로 기록한다. 실험 기록과 [현재 연구 상태](CONTINUATION.md)를 함께 갱신한다.
 
 ## CURRENT — STEP82 전체 CPU 감사 서버 검증 완료; 결과 ZIP 독립 검토 대기 (2026-11-22 KST)
 

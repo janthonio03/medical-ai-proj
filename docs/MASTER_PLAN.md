@@ -1,3 +1,7 @@
+## CURRENT — STEP84 독립 검토 완료, 공식 SLAKE 비교 종료 (2026-11-22 KST)
+
+Job 498175의 1,061문항·2,122출력과 4 worker 정상 종료를 검증했다. B2 Temporal ON−OFF는 CLOSED +4.33점 [1.46,7.41], OPEN −1.90점 [−4.32,0.61]이다. B2−B1 대비의 각 95% 구간이 0을 포함한다. STEP82 문자열 감사와 STEP83 실제 RoPE 검증을 포함해 기존 비교의 해석을 갱신했다. 현재 범위의 추가 GPU 실행은 필요 없다. 아래 과거 CURRENT는 해당 시점 기록이다. [최종 비교 및 STEP84 검증](STEP84_FINAL_COMPARISON.md)
+
 ## CURRENT — STEP83 실행 완료, 원본 결과 검토 대기 (2026-11-22 KST)
 
 사용자 제공 Ariel 출력에서 Job 497838이 8문항·88출력 및 4개 worker의 `GPU_PASS`를 보고했다. B1 8/8, actual bias 32/32, 기존 N/T 16/16 토큰을 재현했다. B1과 N의 conditional prefill 위치는 같았지만 첫 디코더 층의 실제 `inv_freq`와 cosine 해시는 8문항 모두 달랐다. 공통 위치 B2와 순차 N/T의 전체 토큰 일치는 14/32로, 전체 B2 결과를 기존 N/T로 대체할 근거가 부족하다. 이 32건에는 Draft/GT 반복이 포함된다.

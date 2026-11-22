@@ -1,3 +1,7 @@
+## CURRENT — STEP84 독립 검토 완료, 공식 SLAKE 비교 종료 (2026-11-22 KST)
+
+Job 498175의 1,061문항·2,122출력과 4 worker 정상 종료를 검증했다. B2 Temporal ON−OFF는 CLOSED +4.33점 [1.46,7.41], OPEN −1.90점 [−4.32,0.61]이다. B2−B1 대비의 각 95% 구간이 0을 포함한다. STEP82 문자열 감사와 STEP83 실제 RoPE 검증을 포함해 기존 비교의 해석을 갱신했다. 현재 범위의 추가 GPU 실행은 필요 없다. 아래 과거 CURRENT는 해당 시점 기록이다. [최종 비교 및 STEP84 검증](STEP84_FINAL_COMPARISON.md)
+
 ## CURRENT — STEP83 실행 완료, 원본 결과 검토 대기 (2026-11-22 KST)
 
 사용자 제공 Ariel 출력에서 Job 497838이 8문항·88출력 및 4개 worker의 `GPU_PASS`를 보고했다. B1 8/8, actual bias 32/32, 기존 N/T 16/16 토큰을 재현했다. B1과 N의 conditional prefill 위치는 같았지만 첫 디코더 층의 실제 `inv_freq`와 cosine 해시는 8문항 모두 달랐다. 공통 위치 B2와 순차 N/T의 전체 토큰 일치는 14/32로, 전체 B2 결과를 기존 N/T로 대체할 근거가 부족하다. 이 32건에는 Draft/GT 반복이 포함된다.
@@ -11,6 +15,13 @@ STEP82 audit-1795277275848846760.zip SHA04b7c63e4e498a5ebd159c2f08e2fb9b0125501f
 다음 **STEP83: 원래8canary×11조건=88출력,4GPU** diagnostic 후보를 작성했다. N/T·B1 hook·공통위치B2·actual-bias replay, 실제 첫decoder Su inv_freq/cosine 측정 및 원본 fulltoken parity를 포함한다. 로컬 native source FP32/BF16/position/rotary 테스트·합성question/receipt·scheduler/resume/변조거부 검사 통과. **Ariel CPU/자원검사 및 GPU실행은 미실행**. [계약·전체실행/ETA/완료명령](STEP83_POSITION_CONTROL.md), [후보SHA](../evidence/step83/candidate_package.json). 새GPUsource는 실검증전 검증코드로 게시하지 않는다.
 
 전체과제 **미완료**. 기존9조건수치비교완료 유지; 다음GPU대조결과로 control재사용/필요fullcohort추가범위를결정하고 최종비교해석으로복귀한다. CPU감사나8문항기술PASS를전체과제완료로대체하지않는다. 이번턴GPU제출없음.
+
+## Mac 작업 환경과 인수인계 (2026-11-22 KST)
+
+- 기준 브랜치는 `paper_vs_open-source`다. 기존 Mac 연구 폴더를 GitHub에 연결했을 때 기준 커밋은 `3d909c16e312edb8cc972dbc496ddcbade5d32cf`였다. 새 세션에서는 실제 HEAD와 작업 트리 상태를 확인한다.
+- Mac에서 Claude Code와 Codex에 같은 저장소 루트를 지정한다. 기존 Worktree 유무는 `git worktree list`로 확인한다. 병렬로 수정하는 경우 변경 범위와 기반 커밋을 공유하고, 검토와 통합 검증 후 이 문서를 갱신한다. [운영 규칙](OPERATING_RULES.md)
+- 2026-11-22 KST 갱신: STEP84 전체 B2 평가와 요약 ZIP 검토로 현재 범위의 공식 SLAKE 비교를 마쳤다. 다음 작업은 검증된 기록의 GitHub 반영이며, 사용자 승인 후 진행한다. 아래 항목은 STEP83 시점의 기록이다. STEP83 원본 ZIP은 이후 Mac 저장소 루트에 수신되었고 SHA-256 `346ee59a…01fb`와 CRC가 보고값과 일치했다.
+- (STEP83 시점) 다음 연구 작업은 STEP83 Job 497838 원본 ZIP 검토다. Ariel의 `results/step83-position-control-497838.zip` 직접 수신을 시도했으나 2026-11-22 KST에 SSH 인증이 거부됐다. ZIP을 받은 뒤 해시·CRC와 실행 근거를 확인하고, OFF/ON 최초 분기와 GT/Draft 동일성을 검토해 추가 B2 실험의 범위를 판단한다. [STEP83 결과와 근거 범위](STEP83_RESULTS.md)
 
 ## CURRENT — STEP82 전체 CPU 감사 서버 검증 완료; 결과 ZIP 독립 검토 대기 (2026-11-22 KST)
 

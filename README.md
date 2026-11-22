@@ -1,3 +1,7 @@
+## CURRENT — STEP84 독립 검토 완료, 공식 SLAKE 비교 종료 (2026-11-22 KST)
+
+Job 498175의 1,061문항·2,122출력과 4 worker 정상 종료를 검증했다. B2 Temporal ON−OFF는 CLOSED +4.33점 [1.46,7.41], OPEN −1.90점 [−4.32,0.61]이다. B2−B1 대비의 각 95% 구간이 0을 포함한다. STEP82 문자열 감사와 STEP83 실제 RoPE 검증을 포함해 기존 비교의 해석을 갱신했다. 현재 범위의 추가 GPU 실행은 필요 없다. 아래 과거 CURRENT는 해당 시점 기록이다. [최종 비교 및 STEP84 검증](docs/STEP84_FINAL_COMPARISON.md)
+
 ## CURRENT — STEP83 실행 완료, 원본 결과 검토 대기 (2026-11-22 KST)
 
 사용자 제공 Ariel 출력에서 Job 497838이 8문항·88출력 및 4개 worker의 `GPU_PASS`를 보고했다. B1 8/8, actual bias 32/32, 기존 N/T 16/16 토큰을 재현했다. B1과 N의 conditional prefill 위치는 같았지만 첫 디코더 층의 실제 `inv_freq`와 cosine 해시는 8문항 모두 달랐다. 공통 위치 B2와 순차 N/T의 전체 토큰 일치는 14/32로, 전체 B2 결과를 기존 N/T로 대체할 근거가 부족하다. 이 32건에는 Draft/GT 반복이 포함된다.
@@ -11,6 +15,14 @@ STEP82 audit-1795277275848846760.zip SHA04b7c63e4e498a5ebd159c2f08e2fb9b0125501f
 다음 **STEP83: 원래8canary×11조건=88출력,4GPU** diagnostic 후보를 작성했다. N/T·B1 hook·공통위치B2·actual-bias replay, 실제 첫decoder Su inv_freq/cosine 측정 및 원본 fulltoken parity를 포함한다. 로컬 native source FP32/BF16/position/rotary 테스트·합성question/receipt·scheduler/resume/변조거부 검사 통과. **Ariel CPU/자원검사 및 GPU실행은 미실행**. [계약·전체실행/ETA/완료명령](docs/STEP83_POSITION_CONTROL.md), [후보SHA](evidence/step83/candidate_package.json). 새GPUsource는 실검증전 검증코드로 게시하지 않는다.
 
 전체과제 **미완료**. 기존9조건수치비교완료 유지; 다음GPU대조결과로 control재사용/필요fullcohort추가범위를결정하고 최종비교해석으로복귀한다. CPU감사나8문항기술PASS를전체과제완료로대체하지않는다. 이번턴GPU제출없음.
+
+## 저장소 사용과 연구 재개
+
+CAST 논문과 공개 구현을 대조하고, Phi-3.5-vision-instruct 및 Phi-3.5V-Med LoRA로 SLAKE 평가 조건을 통제해 비교한다. ROI Selection, Attention Suppression, Temporal Contrast의 명세와 변경 근거는 [비교 계획](docs/MASTER_PLAN.md)과 [공개 소스 검증](docs/STEP77_SOURCE_CONTRACT.md)에 있다. [MICCAI 2026 논문](https://papers.miccai.org/miccai-2026/0209-Paper4832.html) · [비교에 사용한 공식 코드](https://github.com/csyifan/CAST/tree/9f709e4dce7aa1812a1dc292ed527766b609199f)
+
+- Mac에서 저장소 루트를 Claude Code 또는 Codex의 작업 폴더로 열고 [공통 지침](AGENTS.md), [연구 재개 문서](docs/CONTINUATION.md), [실험 기록](docs/EXPERIMENT_LOG.md)을 확인한다.
+- 실행 근거가 확보된 소스는 `experiments/`, 공개 가능한 검증 자료는 `evidence/`, 진행·비교 문서는 `docs/`, 점검 도구는 `tools/`에 있다. `scripts/`에는 이전 KSC 연구 코드가 있다.
+- 모델 실험은 Ariel의 CAST 작업 디렉터리와 Python 환경에서 수행한다. [Ariel 실행 및 기록 절차](docs/agent-rules/ariel.md)를 읽고 [연구 재개 문서](docs/CONTINUATION.md)가 가리키는 단계 문서에서 사전 검사, 제출, 진행, 완료 검증 명령을 확인한다.
 
 ## CURRENT — STEP82 전체 CPU 감사 서버 검증 완료; 결과 ZIP 독립 검토 대기 (2026-11-22 KST)
 

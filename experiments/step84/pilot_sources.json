@@ -1,0 +1,38 @@
+{
+  "runtime.py": "18ca2efb41b7f86ad4f50488897553e6dcd4a88485d6e5a5a657fd498398ce87",
+  "baseline_runtime.py": "d3270ae7c4b100a858d4d3d5278dc7ee2fd8e75c491f4db92847a30e14d4f364",
+  "canaries": {
+    "slake-en-test-0004": {
+      "B2__OFF": "2c30263ffd98d83a81fd841abfd2997d066b3863a1055243caeb5c00373e888f",
+      "B2__ON": "72940c649d963f243518caa076ae08ae2286253aef18640904e49dca87b0cd3f"
+    },
+    "slake-en-test-0015": {
+      "B2__OFF": "76e143049a1dce6e0a78c3c428ffe6fb8ea944b46388e87154a85cf938b0fd64",
+      "B2__ON": "5670ac9e87b09884e9e777bd6b5529075ec72511b755898bcd1a559b3f570e4e"
+    },
+    "slake-en-test-0025": {
+      "B2__OFF": "f28641d079bcb7b58ef2847e6c56ae4ffaa0e022a0663a5cb73f386943dae9f3",
+      "B2__ON": "e00da63b3846fa4ec28d67476a5d0e284738d35ed0600b164c0a02599918db8b"
+    },
+    "slake-en-test-0031": {
+      "B2__OFF": "98fcc557226bb3858fe7e16b95f5338586ca033cc255fa5a6ca40ffa0c376faa",
+      "B2__ON": "1abeb0553feef5d3127c1d0c6c8ecce28e6ef5f387d796a3d9f09ef56393be30"
+    },
+    "slake-en-test-0038": {
+      "B2__OFF": "981cbcfbe1a66784b6886edab80625dfe37003c7498bdcbebb6fab46883ba4d8",
+      "B2__ON": "0ed8dd8bfc05be18dc0ef16d6daebe29cbd8e8e53ef26803deb5f511b67b3b26"
+    },
+    "slake-en-test-0175": {
+      "B2__OFF": "a7763cd20c44ebec9e8717b926faa1d8c69d675c798634b78977c48f48de89b1",
+      "B2__ON": "95d7944df4c03f5c777d46aa10d939aed2280a85ec657e68058dc5c6a29388d0"
+    },
+    "slake-en-test-0236": {
+      "B2__OFF": "70e4e7f3951bbcdeca4da36095d0e475e1574170f46afa3b551fd4ec89d83a4a",
+      "B2__ON": "cefa0ab66459def58ab13b74f44d24aa7841155eae4cb8f926b702be1afd525a"
+    },
+    "slake-en-test-0287": {
+      "B2__OFF": "0a08fc93d3579ce2cb697576e23fa3429ece0c53b941442c0f5a6efd57dae089",
+      "B2__ON": "914eb588729348591438ae5c075a349fec41ef330b39235a7a7c4a07a49b6ef9"
+    }
+  }
+}

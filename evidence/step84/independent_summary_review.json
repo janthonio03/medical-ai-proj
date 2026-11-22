@@ -1,0 +1,334 @@
+{
+  "zip_sha256": "d7d95dd60f7f7bc92cf9179f3a34beb06754fb82acb5f02b8bdd0571432c9fb3",
+  "job_id": "498175",
+  "verified_summary": true,
+  "checked_source_files": 8,
+  "reconciled_paired_rows": 1061,
+  "receipt_identities": 1061,
+  "slurm_tasks_completed": 4,
+  "results": {
+    "CLOSED": {
+      "questions": 416,
+      "images": 96,
+      "scores_x100": {
+        "B2__OFF": 67.3076923076923,
+        "B2__ON": 71.63461538461539,
+        "Draft__public_B1__OFF": 66.10576923076923,
+        "Draft__public_B1__ON": 71.875,
+        "Draft__bias__OFF": 68.02884615384616,
+        "Draft__bias__ON": 73.79807692307692,
+        "GT__public_B1__OFF": 66.82692307692308,
+        "GT__public_B1__ON": 71.875,
+        "GT__bias__OFF": 68.75,
+        "GT__bias__ON": 72.59615384615384
+      },
+      "contrasts": {
+        "B2__ON_minus_B2__OFF": {
+          "delta_pp": 4.326923076923077,
+          "ci95_pp": [
+            1.459765431223868,
+            7.407628920786812
+          ],
+          "gains": 26,
+          "losses": 8,
+          "ties": 382
+        },
+        "B2__OFF_minus_Draft__public_B1__OFF": {
+          "delta_pp": 1.2019230769230769,
+          "ci95_pp": [
+            -1.6470588235294117,
+            3.9627039627039626
+          ],
+          "gains": 21,
+          "losses": 16,
+          "ties": 379
+        },
+        "Draft__bias__OFF_minus_B2__OFF": {
+          "delta_pp": 0.7211538461538461,
+          "ci95_pp": [
+            -1.4634146341463414,
+            3.0303030303030303
+          ],
+          "gains": 12,
+          "losses": 9,
+          "ties": 395
+        },
+        "B2__OFF_minus_GT__public_B1__OFF": {
+          "delta_pp": 0.4807692307692308,
+          "ci95_pp": [
+            -2.1951219512195124,
+            3.117505995203837
+          ],
+          "gains": 18,
+          "losses": 16,
+          "ties": 382
+        },
+        "GT__bias__OFF_minus_B2__OFF": {
+          "delta_pp": 1.4423076923076923,
+          "ci95_pp": [
+            -0.9852216748768473,
+            3.902439024390244
+          ],
+          "gains": 16,
+          "losses": 10,
+          "ties": 390
+        },
+        "B2__ON_minus_Draft__public_B1__ON": {
+          "delta_pp": -0.2403846153846154,
+          "ci95_pp": [
+            -2.752408544296521,
+            2.358629956733126
+          ],
+          "gains": 19,
+          "losses": 20,
+          "ties": 377
+        },
+        "Draft__bias__ON_minus_B2__ON": {
+          "delta_pp": 2.1634615384615383,
+          "ci95_pp": [
+            0.0,
+            4.337349397590361
+          ],
+          "gains": 19,
+          "losses": 10,
+          "ties": 387
+        },
+        "B2__ON_minus_GT__public_B1__ON": {
+          "delta_pp": -0.2403846153846154,
+          "ci95_pp": [
+            -2.9612756264236904,
+            2.5114155251141552
+          ],
+          "gains": 20,
+          "losses": 21,
+          "ties": 375
+        },
+        "GT__bias__ON_minus_B2__ON": {
+          "delta_pp": 0.9615384615384616,
+          "ci95_pp": [
+            -1.666766109785203,
+            3.4965034965034967
+          ],
+          "gains": 18,
+          "losses": 14,
+          "ties": 384
+        }
+      }
+    },
+    "OPEN": {
+      "questions": 645,
+      "images": 96,
+      "scores_x100": {
+        "B2__OFF": 43.6772207121044,
+        "B2__ON": 41.78173764220275,
+        "Draft__public_B1__OFF": 45.140055035403826,
+        "Draft__public_B1__ON": 39.60000335581733,
+        "Draft__bias__OFF": 44.118712037316676,
+        "Draft__bias__ON": 41.38700963119568,
+        "GT__public_B1__OFF": 44.81188966072683,
+        "GT__public_B1__ON": 40.473757508641235,
+        "GT__bias__OFF": 43.324692103761855,
+        "GT__bias__ON": 41.57372730628544
+      },
+      "contrasts": {
+        "B2__ON_minus_B2__OFF": {
+          "delta_pp": -1.8954830699016751,
+          "ci95_pp": [
+            -4.3167878434302445,
+            0.6122897559914311
+          ],
+          "gains": 65,
+          "losses": 89,
+          "ties": 491
+        },
+        "B2__OFF_minus_Draft__public_B1__OFF": {
+          "delta_pp": -1.4628343232994403,
+          "ci95_pp": [
+            -3.4813566372558733,
+            0.5529452579765147
+          ],
+          "gains": 45,
+          "losses": 63,
+          "ties": 537
+        },
+        "Draft__bias__OFF_minus_B2__OFF": {
+          "delta_pp": 0.44149132521225537,
+          "ci95_pp": [
+            -1.2452546320860838,
+            2.0919970483513888
+          ],
+          "gains": 39,
+          "losses": 32,
+          "ties": 574
+        },
+        "B2__OFF_minus_GT__public_B1__OFF": {
+          "delta_pp": -1.1346689486224375,
+          "ci95_pp": [
+            -3.1631661046627837,
+            0.8636064097267953
+          ],
+          "gains": 47,
+          "losses": 61,
+          "ties": 537
+        },
+        "GT__bias__OFF_minus_B2__OFF": {
+          "delta_pp": -0.35252860834256194,
+          "ci95_pp": [
+            -1.9247233353189794,
+            1.1768884339849848
+          ],
+          "gains": 34,
+          "losses": 34,
+          "ties": 577
+        },
+        "B2__ON_minus_Draft__public_B1__ON": {
+          "delta_pp": 2.1817342863854496,
+          "ci95_pp": [
+            -0.194169787985508,
+            4.637820561353648
+          ],
+          "gains": 65,
+          "losses": 53,
+          "ties": 527
+        },
+        "Draft__bias__ON_minus_B2__ON": {
+          "delta_pp": -0.3947280110070812,
+          "ci95_pp": [
+            -2.4912795933846317,
+            1.6377354396048902
+          ],
+          "gains": 44,
+          "losses": 38,
+          "ties": 563
+        },
+        "B2__ON_minus_GT__public_B1__ON": {
+          "delta_pp": 1.3079801335615289,
+          "ci95_pp": [
+            -1.1926051300341072,
+            3.849005847307295
+          ],
+          "gains": 61,
+          "losses": 58,
+          "ties": 526
+        },
+        "GT__bias__ON_minus_B2__ON": {
+          "delta_pp": -0.20801033591731283,
+          "ci95_pp": [
+            -2.156039799030082,
+            1.7316009740233715
+          ],
+          "gains": 42,
+          "losses": 35,
+          "ties": 568
+        }
+      }
+    }
+  },
+  "scope": "Summary contains receipt hashes and scores. Raw outputs and original logs remain on Ariel.",
+  "step": "STEP84",
+  "status": "STEP84_INDEPENDENT_SUMMARY_REVIEW_PASS",
+  "plan_sha256": "bc84e98480f9ad29308e73c0fc50c964720aa96b115b03f9212528321ad1905c",
+  "canary_token_matches": 16,
+  "server_log_hashes": {
+    "0": {
+      "out": {
+        "path": "results/step84-b2-full/slurm/498175_0.out",
+        "sha256": "bddd976bb1e2be04fbdb0585642fffa0de6a08a30671a2b6f983c6dd1e664040"
+      },
+      "err": {
+        "path": "results/step84-b2-full/slurm/498175_0.err",
+        "sha256": "9f0b27df5f756546b7295c406d0ef5c421f6c51b8b322a725d0528391905b924"
+      }
+    },
+    "1": {
+      "out": {
+        "path": "results/step84-b2-full/slurm/498175_1.out",
+        "sha256": "5981b3ea85136634171ea34bba6e22f65da2e3976a6696d3d2a4dee85abcc220"
+      },
+      "err": {
+        "path": "results/step84-b2-full/slurm/498175_1.err",
+        "sha256": "d7497e2eebbed869c8b414b3f3ff64574d4d49f9efff88105756bc97ba4a6d18"
+      }
+    },
+    "3": {
+      "out": {
+        "path": "results/step84-b2-full/slurm/498175_3.out",
+        "sha256": "559a6a2b1c4e7795af1f5d04fce0bc7eb2abe889a3e39095615b13add3db2416"
+      },
+      "err": {
+        "path": "results/step84-b2-full/slurm/498175_3.err",
+        "sha256": "8346aaa92cebc3920de4c869d1bf9b72171c65188652a059e58a83133f2071c7"
+      }
+    },
+    "2": {
+      "out": {
+        "path": "results/step84-b2-full/slurm/498175_2.out",
+        "sha256": "fbb4b53a8bbcc7be9b7ecad07e4a20403e0567d28c0453a22851dd70b36ca892"
+      },
+      "err": {
+        "path": "results/step84-b2-full/slurm/498175_2.err",
+        "sha256": "9c7a458179ef03d8ee332c1803b9ba11a19a0f74ddb5817bee22a1cdbf5f6092"
+      }
+    }
+  },
+  "sources": {
+    "common.py": "060f88e32441026fbfead63c81fad84db66b5260b76cec9795927e080dc3bb71",
+    "baseline_runtime.py": "d3270ae7c4b100a858d4d3d5278dc7ee2fd8e75c491f4db92847a30e14d4f364",
+    "runtime.py": "18ca2efb41b7f86ad4f50488897553e6dcd4a88485d6e5a5a657fd498398ce87",
+    "control.py": "feec3aab6ca969f5a9b71ef16f87111006e1692b072cc2783d5408124625e908",
+    "job.sh": "da4d06eb15cdf30313399b1a352d709939373bcc8b0c444df4739fd93a17d5a5",
+    "test_offline.py": "0754bdb24097f5b5faeb63e4e9cb3fae901a2bc174bba5e3dddcefb3ba2141a1",
+    "test_runner.py": "3c42aee62a61a19ab5615b1d5ef8b83c19f795aa55261a3f9b9240924f1a59fa",
+    "pilot_sources.json": "d5b12b4ee0ed411efeb12d66c463c0d39734d4ca21242da199b5c10e8c865fc1"
+  },
+  "exploratory_temporal_interactions_and_lengths": {
+    "CLOSED": {
+      "Draft": {
+        "delta_pp": -1.4423076923076923,
+        "ci95_pp": [
+          -4.166666666666667,
+          1.431980906921241
+        ]
+      },
+      "GT": {
+        "delta_pp": -0.7211538461538461,
+        "ci95_pp": [
+          -3.480278422273782,
+          2.1686746987951806
+        ]
+      },
+      "B2__OFF": {
+        "mean_length": 62.60336538461539,
+        "count_at_256": 0
+      },
+      "B2__ON": {
+        "mean_length": 139.11778846153845,
+        "count_at_256": 73
+      }
+    },
+    "OPEN": {
+      "Draft": {
+        "delta_pp": 3.644568609684888,
+        "ci95_pp": [
+          0.7170766936891593,
+          6.644732560837946
+        ]
+      },
+      "GT": {
+        "delta_pp": 2.4426490821839657,
+        "ci95_pp": [
+          -0.4975758392788012,
+          5.5689886452188375
+        ]
+      },
+      "B2__OFF": {
+        "mean_length": 66.0108527131783,
+        "count_at_256": 0
+      },
+      "B2__ON": {
+        "mean_length": 106.76899224806202,
+        "count_at_256": 61
+      }
+    }
+  }
+}
