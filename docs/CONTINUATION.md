@@ -1,3 +1,9 @@
+## CURRENT — STEP83 실행 완료, 원본 결과 검토 대기 (2026-11-22 KST)
+
+사용자 제공 Ariel 출력에서 Job 497838이 8문항·88출력 및 4개 worker의 `GPU_PASS`를 보고했다. B1 8/8, actual bias 32/32, 기존 N/T 16/16 토큰을 재현했다. B1과 N의 conditional prefill 위치는 같았지만 첫 디코더 층의 실제 `inv_freq`와 cosine 해시는 8문항 모두 달랐다. 공통 위치 B2와 순차 N/T의 전체 토큰 일치는 14/32로, 전체 B2 결과를 기존 N/T로 대체할 근거가 부족하다. 이 32건에는 Draft/GT 반복이 포함된다.
+
+9조건의 본 비교와 STEP82 감사, STEP83 GPU 실행은 완료했다. 전체 과제는 STEP83 결과 ZIP 검토와 그에 따른 비교 해석 확정까지 남아 있다. [STEP83 결과와 다음 작업](STEP83_RESULTS.md)
+
 ## CURRENT — STEP82 ZIP 독립 검토 통과; STEP83 위치/RoPE GPU 대조 후보 준비 (2026-11-22 KST)
 
 STEP82 audit-1795277275848846760.zip SHA04b7c63e4e498a5ebd159c2f08e2fb9b0125501f2fc0395b9e4ff62d88936a5c,1,706,728bytes를 수신했다. CRC/manifest/member9SHA/collectorSHA 통과. CLOSED3744 raw prediction 재채점·예측SHA·원본 STEP80 결과SHA index 일치, 집계재현,5305 compact 위치summary·2122 conditional입력identity·2122 historical token/stop을 확인했다. [독립검토범위](../evidence/step82/independent_zip_review.json). 원본 모든 per-step trace와 STEP71전체 result JSON/전체 private label 파일은 export에 없으므로 그 원본을 여기서 모두 재검증했다고 주장하지 않는다. 이전 “원본ZIP미수신” 상태는 종료했다.

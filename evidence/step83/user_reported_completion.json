@@ -1,0 +1,48 @@
+{
+  "step": "STEP83",
+  "status": "GPU_POSITION_CONTROL_COMPLETE",
+  "evidence_scope": "USER_PROVIDED_ARIEL_CONSOLE",
+  "job_id": "497838",
+  "plan_sha256": "5367ac6162155e2900153466d8fa4229ed9b7ad95ae237569d4c8f2e41d54fc8",
+  "questions": 8,
+  "outputs": 88,
+  "workers": [
+    {
+      "index": 0,
+      "status": "GPU_PASS",
+      "completed": 2,
+      "reused": 0
+    },
+    {
+      "index": 1,
+      "status": "GPU_PASS",
+      "completed": 2,
+      "reused": 0
+    },
+    {
+      "index": 2,
+      "status": "GPU_PASS",
+      "completed": 2,
+      "reused": 0
+    },
+    {
+      "index": 3,
+      "status": "GPU_PASS",
+      "completed": 2,
+      "reused": 0
+    }
+  ],
+  "B2_vs_N_full_token_matches": 14,
+  "B2_vs_N_comparisons": 32,
+  "B1_instrumented_replay_matches": 8,
+  "bias_instrumented_replay_matches": 32,
+  "historical_N_T_replay_matches": 16,
+  "same_conditional_prefill_position_but_different_actual_inv_freq": 8,
+  "conditional_prefill_cos_hash_differences": 8,
+  "full_cohort_control_reuse_authorized": false,
+  "whole_project_completed": false,
+  "performance_generalization_allowed": false,
+  "evidence_zip": "results/step83-position-control-497838.zip",
+  "reported_zip_sha256": "346ee59aa74cd5431402ede8f18dcb7c7811e6f46afaab33450475e5f51a01fb",
+  "independent_zip_review_completed": false
+}
